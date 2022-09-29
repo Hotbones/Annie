@@ -40,7 +40,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = []
 
-LOCAL_APPS = ['mainapp','tailwind','theme','django_browser_reload']
+LOCAL_APPS = ['mainapp','tailwind', 'theme','django_browser_reload']
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
