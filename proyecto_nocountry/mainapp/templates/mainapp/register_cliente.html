@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente</title>
+</head>
+<body>
+    <h2>REGISTER DE CLIENTE</h2>
+    <div>
+        {% for message in messages %}
+        {{message}}
+        {% endfor %}
+    </div>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form_cliente.as_p}}
+        <button type="submit">Crear</button>
+    </form>
+    <div>
+        ¿Ya estás registrado? <a href="{% url 'logueo' %}">Inicia Sesión</a>
+    </div>
+</body>
+</html>
