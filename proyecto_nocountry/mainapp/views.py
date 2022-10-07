@@ -125,6 +125,3 @@ def register_cliente(request,user):
             messages.error(request, message='Ha ocurrido un error con los campos a llenar.')
 
     return render(request, 'mainapp/register_cliente.html', {'form_cliente':form})
-
-def is_cliente(user_identification):
-    return Cliente.objects.filter(perfil_cliente=user_identification)
