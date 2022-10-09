@@ -1,3 +1,4 @@
+<a name="beginning"></a>
 [Español](#ES) - [English](#EN)
 
 # Annie app
@@ -8,7 +9,6 @@ La revolucionaria forma de reservar y contratar niñeras de manera on line.
 </p>
 
 <a name="ES"></a>
-
 ## Descripción del proyecto
 
 Como usuario puedo elegir dos roles: Cliente o Niñera. 
@@ -46,11 +46,23 @@ Para las reservas, ambos tipos de usuario aceptarán su conformidad y realizará
 |Laura Quintar              |UX/UI      |[Laux](https://github.com/lau)                |[Link](https://www.linkedin.com/in/lauraquintar/)|
 |Jesus Leal                 |Front-end  |[Jesux](https://github.com/imjesusleal)       |[Link](https://www.linkedin.com/in/jesus-leal-6908291b2/)|
 |Santiago Muñoz             |Back-end   |[Santix](https://github.com/SantiagoEzequielMunioz)|[Link](https://www.linkedin.com/in/santiago-muñoz-b4833a236/)|
-|Mateo Pamasime             |Back-end   |[mateox](https://github.com/pamasime)          ||
+|Mateo Pamasime             |Back-end   |[mateox](https://github.com/pamasime)          |[Link](https://www.linkedin.com/in/mateopamasime/)|
 |Matias Cañadas             |Back-end   |[Matix](https://github.com/Hotbones)           |[Link](https://www.linkedin.com/in/matiascanadas/)|
 
+## Agradecimientos 🎁
+
+
+* Agradecimientos a Wendy Fraile & No Country for Junior Devs 🤓.
+
+--------------------------------------------
 
 <a name="EN"></a>
+# Annie app
+The revolutionary way to book and hire babysitters online.
+
+<p align="center">
+<img src="https://github.com/No-Country/c7-14-t-python/blob/front-develop/proyecto_nocountry/mainapp/static/img/indexhero1.png">
+</p>
 
 ## Project description
 
@@ -88,5 +100,7 @@ For reservations, both types of user will accept their agreement and carry out t
 |Laura Quintar              |UX/UI      |[Laux](https://github.com/lau)                |[Link](https://www.linkedin.com/in/lauraquintar/)|
 |Jesus Leal                 |Front-end  |[Jesux](https://github.com/imjesusleal)       |[Link](https://www.linkedin.com/in/jesus-leal-6908291b2/)|
 |Santiago Muñoz             |Back-end   |[Santix](https://github.com/SantiagoEzequielMunioz)|[Link](https://www.linkedin.com/in/santiago-muñoz-b4833a236/)|
-|Mateo Pamasime             |Back-end   |[mateox](https://github.com/pamasime)          ||
+|Mateo Pamasime             |Back-end   |[mateox](https://github.com/pamasime)          |[Link](https://www.linkedin.com/in/mateopamasime/)|
 |Matias Cañadas             |Back-end   |[Matix](https://github.com/Hotbones)           |[Link](https://www.linkedin.com/in/matiascanadas/)|
+
+[Back to the init](#beginning)
