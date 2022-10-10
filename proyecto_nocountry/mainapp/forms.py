@@ -5,7 +5,7 @@ from .models import Niñera,Cliente
 
 
 class NiñeraForm(forms.ModelForm):
-       
+
     class Meta:
         model = Niñera
         fields = '__all__'
@@ -67,5 +67,5 @@ class RegisterForm(forms.Form):
             return User.objects.create_user(
                 self.cleaned_data.get('username'),
                 self.cleaned_data.get('email'),
-                self.cleaned_data.get('password'),
+                self.cleaned_data.get('password')
             )

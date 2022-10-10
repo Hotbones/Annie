@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -60,6 +61,7 @@ def register_niñera(request,user):
     if not request.user.is_authenticated:
         messages.error(request,'No se puede ir a la direccion')
         return redirect('index')
+<<<<<<< HEAD
     if Niñera.objects.filter(perfil_niñera=request.user).exists() or Cliente.objects.filter(perfil_cliente=request.user).exists():
         
             return redirect('index')
@@ -68,11 +70,22 @@ def register_niñera(request,user):
 
     if request.method == 'POST':
         
+=======
+    if Niñera.objects.filter(perfil_niñera=request.user).exists() or \
+        Cliente.objects.filter(perfil_cliente=request.user).exists():
+        return redirect('index')
+    
+    form = NiñeraForm()
+
+    if request.method == 'POST':
+
+>>>>>>> 2b7cf22324543d9e1c692889b984b213d87136b5
         form = NiñeraForm(request.POST)
         if form.is_valid():
             form = form.save(commit=False)
             user = User.objects.get(username = request.user.username)
             form.perfil_niñera = user
+<<<<<<< HEAD
             if not Cliente.objects.all():
                 if  form.perfil_niñera not in Niñera.objects.all():
                     form.save()
@@ -84,26 +97,52 @@ def register_niñera(request,user):
                 messages.error(request, message='Esta niñera ya se encuentra registrada')
                 return redirect('index')    
             
+=======
+
+            if form.perfil_niñera not in Niñera.objects.all():
+                form.save()
+                messages.success(request, message='Registro como niñera exitoso!')
+                return redirect('index')  # access granted
+            else:
+                messages.error(request, message='Esta niñera ya se encuentra registrado')
+                return redirect('index')
+
+
+>>>>>>> 2b7cf22324543d9e1c692889b984b213d87136b5
         else:
             messages.error(request, message='Ha ocurrido un error con los campos a llenar.')
-    else:
-        form = NiñeraForm()
+
+<<<<<<< HEAD
+
+=======
     return render(request, 'mainapp/register_niñera.html', {'form_niñera':form})
-
-
+>>>>>>> 2b7cf22324543d9e1c692889b984b213d87136b5
 
 
 @login_required(login_url='logueo')
 def register_cliente(request,user):
+<<<<<<< HEAD
+=======
+   
+    if Niñera.objects.filter(perfil_niñera=request.user).exists() or \
+    Cliente.objects.filter(perfil_cliente=request.user).exists():
+        messages.error(request, message='Ya has creado un perfil')
+        return redirect('index')
+>>>>>>> 2b7cf22324543d9e1c692889b984b213d87136b5
 
     if not request.user.is_authenticated:
         messages.error(request,'No se puede ir a la direccion')
         return redirect('index')
+<<<<<<< HEAD
     if Niñera.objects.filter(perfil_niñera=request.user).exists() or Cliente.objects.filter(perfil_cliente=request.user).exists():
         
             return redirect('index')
     form = ClienteForm()
 
+=======
+    
+    form = ClienteForm()
+>>>>>>> 2b7cf22324543d9e1c692889b984b213d87136b5
 
     if request.method == 'POST':
         
@@ -112,6 +151,7 @@ def register_cliente(request,user):
             form = form.save(commit=False)
             user = User.objects.get(username = request.user.username)
             form.perfil_cliente = user
+<<<<<<< HEAD
             
             if form.perfil_cliente not in Niñera.objects.all():
                 form.save()
@@ -133,53 +173,57 @@ def register_cliente(request,user):
 
 
 
+=======
+            # if not Cliente.objects.all():
+            if form.perfil_cliente not in Cliente.objects.all():
+                form.save()
+                messages.success(request, message='Registro como cliente exitoso!')
+                return redirect('index')
+            else:
+                messages.error(request, message='Este cliente ya se encuentra registrado')
+                return redirect('index')
+            # else:
+            #     messages.error(request, message='Ya tienes un perfil creado')
+            #     return redirect('index')    
+        else:
+            messages.error(request, message='Ha ocurrido un error con los campos a llenar.')
 
-# from django.shortcuts import redirect,render
-# from .forms import CuidadorForm,OwnerKidForm
-# from .models import *
-# # Create your views here.
-# def index(request):
-#     return render(request,'Homepage/index.html',{})
+    return render(request, 'mainapp/register_cliente.html', {'form_cliente':form})
 
-# def cuidadora(request):
+>>>>>>> 2b7cf22324543d9e1c692889b984b213d87136b5
+
+@login_required(login_url='logueo')
+def update_perfil(request,user):
+    # try:
+    #     perfil = Niñera.objects.get(perfil_niñera=request.user)
+    #     form = NiñeraForm(instance=perfil)
+    #     if request.user != perfil.perfil_niñera:
+    #         return HttpResponse('No estás autorizado aquí')
+    # except:
+    #     pass
+    # try:
+    perfil = Cliente.objects.get(perfil_cliente=request.user)
+    form = ClienteForm(instance=perfil)
+    if request.user != perfil.perfil_cliente:
+        return HttpResponse('No estás autorizado aquí')
+# except:
+    mod = Cliente.objects.get(perfil_cliente=request.user)
+
+    form=RegisterForm(request.POST, instance=mod)
+    messages.error(request,'No existe ningún perfil')
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success('Perfil actualizado exitosamente!')
+            return redirect('index')
+    else:
+        # print(Niñera.objects.get(perfil_niñera=request.user))
+        print(Cliente.objects.get(perfil_cliente=request.user))
+        print(request.user)
+        
+        perfil=User()
+            
     
-#     form = CuidadorForm(request.POST or None)
-#     if request.method == 'POST' and form.is_valid():
-#         form = form.save(commit=False)
-#         user = User.objects.get(username = request.user.username)
-#         form.user_id = user
-#         if form.user_id not in Cuidadora.objects.all():
-#             if is_valid_ownerkid(user):
-#                 form.save()
-#                 return redirect('home:index')
-#             else:
-#                 return redirect('user:logout')
-#         else:
-#             return redirect('user:logout')
-#     else:
-#         form = CuidadorForm(request.POST or None)
-#     return render(request,'reservation/change_cuid.html',{'form':form})
-
-# def ownerkid(request):
-    
-#     form = OwnerKidForm(request.POST or None)
-#     if request.method == 'POST' and form.is_valid():
-#         form = form.save(commit=False)
-#         user = User.objects.get(username = request.user.username)
-#         form.user_id = user
-#         if form.user_id not in Cuidadora.objects.all():
-#             if is_valid_ownerkid(user):
-#                 form.save()
-#                 return redirect('home:index')
-#             else:
-#                 return redirect('user:logout')
-#         else:
-#             return redirect('user:logout')
-#     else:
-#         form = OwnerKidForm(request.POST or None)
-#     return render(request,'reservation/ownerkid.html',{'form':form})
-# def is_valid_cuidador(user_name):
-#     return not Cuidadora.objects.filter(user_id=user_name) 
-
-# def is_valid_ownerkid(user_name):
-#     return not OwnerKid.objects.filter(user_id=user_name
+    context = {'perfil':perfil, 'form':form}
+    return render(request, 'mainapp/perfil.html', context)
