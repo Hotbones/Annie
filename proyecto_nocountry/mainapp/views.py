@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -125,3 +126,40 @@ def register_cliente(request,user):
             messages.error(request, message='Ha ocurrido un error con los campos a llenar.')
 
     return render(request, 'mainapp/register_cliente.html', {'form_cliente':form})
+
+
+@login_required(login_url='logueo')
+def update_perfil(request,user):
+    # try:
+    #     perfil = Niñera.objects.get(perfil_niñera=request.user)
+    #     form = NiñeraForm(instance=perfil)
+    #     if request.user != perfil.perfil_niñera:
+    #         return HttpResponse('No estás autorizado aquí')
+    # except:
+    #     pass
+    # try:
+    perfil = Cliente.objects.get(perfil_cliente=request.user)
+    form = ClienteForm(instance=perfil)
+    if request.user != perfil.perfil_cliente:
+        return HttpResponse('No estás autorizado aquí')
+# except:
+    mod = Cliente.objects.get(perfil_cliente=request.user)
+
+    form=RegisterForm(request.POST, instance=mod)
+    messages.error(request,'No existe ningún perfil')
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success('Perfil actualizado exitosamente!')
+            return redirect('index')
+    else:
+        # print(Niñera.objects.get(perfil_niñera=request.user))
+        print(Cliente.objects.get(perfil_cliente=request.user))
+        print(request.user)
+        
+        perfil=User()
+            
+    
+    context = {'perfil':perfil, 'form':form}
+    return render(request, 'mainapp/perfil.html', context)
