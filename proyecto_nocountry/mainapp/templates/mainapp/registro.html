@@ -1,7 +1,7 @@
 {% extends './base.html' %}
 
 {% block content %}
-<body>
+
     <h1>Hola</h1>
     <form action="" method="POST">
         {% csrf_token %}
@@ -12,5 +12,4 @@
     <button><a href="{% url 'reg-niñera' user %}">¿Quieres ser niñera?</a></button>
     <button><a href="{% url 'reg-cliente' user %}">¿Buscas una niñera?</a></button>
     
-</body>
 {% endblock %}

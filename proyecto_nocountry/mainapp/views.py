@@ -33,8 +33,7 @@ def log_out(request):
     if not request.user.is_authenticated:
         messages.error(request,'No se puede ir a la direccion')
         return redirect('index')
-    else:
-        logout(request)
+    logout(request)
 
     messages.success(request,'Sesion cerrada exitosamente')
     return redirect('index')
@@ -58,72 +57,77 @@ def register(request):
 @login_required(login_url='logueo')
 def register_niñera(request,user):
 
-    form = NiñeraForm()
-
     if not request.user.is_authenticated:
         messages.error(request,'No se puede ir a la direccion')
         return redirect('index')
+    if Niñera.objects.filter(perfil_niñera=request.user).exists() or Cliente.objects.filter(perfil_cliente=request.user).exists():
+        
+            return redirect('index')
+    form = NiñeraForm()
+
 
     if request.method == 'POST':
+        
         form = NiñeraForm(request.POST)
         if form.is_valid():
             form = form.save(commit=False)
-            perfil_niñera = User.objects.get(username = request.user.username)
-            form.perfil_niñera = perfil_niñera
-            if not is_niñera(user):
-                if form.perfil_niñera not in Niñera.objects.all():
+            user = User.objects.get(username = request.user.username)
+            form.perfil_niñera = user
+            if not Cliente.objects.all():
+                if  form.perfil_niñera not in Niñera.objects.all():
                     form.save()
                     messages.success(request, message='Registro como niñera exitoso!')
                     return redirect('index')  # access granted
+                else:
+                    return redirect('index')
             else:
                 messages.error(request, message='Esta niñera ya se encuentra registrada')
                 return redirect('index')    
-
+            
         else:
             messages.error(request, message='Ha ocurrido un error con los campos a llenar.')
     else:
         form = NiñeraForm()
     return render(request, 'mainapp/register_niñera.html', {'form_niñera':form})
 
-def is_niñera(user_identification):
-    return Niñera.objects.filter(perfil_niñera=user_identification)
+
 
 
 @login_required(login_url='logueo')
 def register_cliente(request,user):
-   
-    form = ClienteForm()
 
     if not request.user.is_authenticated:
         messages.error(request,'No se puede ir a la direccion')
         return redirect('index')
+    if Niñera.objects.filter(perfil_niñera=request.user).exists() or Cliente.objects.filter(perfil_cliente=request.user).exists():
+        
+            return redirect('index')
+    form = ClienteForm()
+
 
     if request.method == 'POST':
+        
         form = ClienteForm(request.POST)
         if form.is_valid():
             form = form.save(commit=False)
-            perfil_cliente = User.objects.get(username = request.user.username)
-            form.perfil_cliente = perfil_cliente
-            if not is_cliente(user):
-                if form.perfil_cliente not in Cliente.objects.all():
-                    form.save()
-                    messages.success(request, message='Registro como cliente exitoso!')
-                    return redirect('index')
-                else:
-                    messages.error(request, message='Este cliente ya se encuentra registrado')
-                    return redirect('index')
+            user = User.objects.get(username = request.user.username)
+            form.perfil_cliente = user
+            
+            if form.perfil_cliente not in Niñera.objects.all():
+                form.save()
+                messages.success(request, message='Registro como cliente exitoso!')
+                return redirect('index')  # access granted
             else:
-                messages.error(request, message='Ya tienes un perfil creado')
-                return redirect('index')    
+                return redirect('index')
+           
+            
         else:
             messages.error(request, message='Ha ocurrido un error con los campos a llenar.')
-
     else:
-        pass
+        form = ClienteForm()
     return render(request, 'mainapp/register_cliente.html', {'form_cliente':form})
 
-def is_cliente(user_identification):
-    return Cliente.objects.filter(perfil_cliente=user_identification)
+
 
 
 

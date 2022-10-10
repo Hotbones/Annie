@@ -5,7 +5,7 @@ from multiselectfield import MultiSelectField
 
 class Niñera(models.Model):
     
-    perfil_niñera = models.ForeignKey(User, on_delete=models.CASCADE)
+    perfil_niñera = models.OneToOneField(User, on_delete=models.CASCADE)
 
     TURNOS = [
         ('Mañana', 'Mañana'),
@@ -56,11 +56,11 @@ class Niñera(models.Model):
 
 class Cliente(models.Model):
 
-    perfil_cliente = models.ForeignKey(User, on_delete=models.CASCADE)
+    perfil_cliente = models.OneToOneField(User, on_delete=models.CASCADE)
 
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
-    dni = models.IntegerField(unique=True, primary_key=True,
+    dni = models.IntegerField(unique=True,
         error_messages ={
                         "unique":"Este DNI ya está registrado."
                         })
