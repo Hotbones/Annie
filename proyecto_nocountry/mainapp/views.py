@@ -1,3 +1,4 @@
+from symbol import except_clause
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib import messages
@@ -132,7 +133,6 @@ def register_cliente(request,user):
 @login_required(login_url='logueo')
 def update_perfil(request,user):
     try:
-        # chequea si es niñera
         if Niñera.objects.get(perfil_id=request.user.id):
             perfil = Niñera.objects.get(perfil_id=request.user.id)
             form = NiñeraForm(instance=perfil)
@@ -141,8 +141,12 @@ def update_perfil(request,user):
                 form.save()
                 messages.success(request, 'Perfil actualizado exitosamente!')
                 return redirect('index')
-        # chequea si es cliente
-        elif Cliente.objects.get(perfil_id=request.user.id):
+    except:
+        pass
+
+    try:
+        if Cliente.objects.get(perfil_id=request.user.id):
+
             perfil = Cliente.objects.get(perfil_id=request.user.id)
             form = ClienteForm(instance=perfil)
             if request.method == 'POST':
@@ -150,10 +154,14 @@ def update_perfil(request,user):
                 form.save()
                 messages.success(request, 'Perfil actualizado exitosamente!')
                 return redirect('index')
-    # si es un usuario pero no tiene perfil, entra en este except
+
     except:
         messages.error(request,'No existe ningún perfil')
         return redirect('index')
 
     context = {'perfil':perfil, 'form':form}
     return render(request, 'mainapp/perfil.html', context)
+
+@login_required(login_url='logueo')
+def crear_mensaje(request,user):
+    pass
