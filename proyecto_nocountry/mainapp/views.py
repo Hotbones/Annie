@@ -68,17 +68,9 @@ def register_niñera(request,user):
     if not request.user.is_authenticated:
         messages.error(request,'No se puede ir a la direccion')
         return redirect('index')
-    if Niñera.objects.filter(perfil_niñera=request.user).exists() or Cliente.objects.filter(perfil_cliente=request.user).exists():
-        
-            return redirect('index')
-    form = NiñeraForm()
-
-
-    if request.method == 'POST':
-       
-        if Niñera.objects.filter(perfil_niñera=request.user).exists() or \
+    if Niñera.objects.filter(perfil_niñera=request.user).exists() or \
         Cliente.objects.filter(perfil_cliente=request.user).exists():
-            return redirect('index')
+        return redirect('index')
     
     form = NiñeraForm()
 
@@ -89,18 +81,8 @@ def register_niñera(request,user):
             form = form.save(commit=False)
             user = User.objects.get(username = request.user.username)
             form.perfil_niñera = user
-            if not Cliente.objects.all():
-                if  form.perfil_niñera not in Niñera.objects.all():
-                    form.save()
-                    messages.success(request, message='Registro como niñera exitoso!')
-                    return redirect('index')  # access granted
-                else:
-                    return redirect('index')
-            else:
-                messages.error(request, message='Esta niñera ya se encuentra registrada')
-                return redirect('index')    
 
-        if form.perfil_niñera not in Niñera.objects.all():
+            if form.perfil_niñera not in Niñera.objects.all():
                 form.save()
                 messages.success(request, message='Registro como niñera exitoso!')
                 return redirect('index')  # access granted
@@ -117,9 +99,9 @@ def register_niñera(request,user):
 
 @login_required(login_url='logueo')
 def register_cliente(request,user):
-
-    if Niñera.objects.filter(perfil=request.user).exists() or \
-    Cliente.objects.filter(perfil=request.user).exists():
+   
+    if Niñera.objects.filter(perfil_niñera=request.user).exists() or \
+    Cliente.objects.filter(perfil_cliente=request.user).exists():
         messages.error(request, message='Ya has creado un perfil')
         return redirect('index')
 
@@ -134,9 +116,9 @@ def register_cliente(request,user):
         if form.is_valid():
             form = form.save(commit=False)
             user = User.objects.get(username = request.user.username)
-            form.perfil = user
+            form.perfil_cliente = user
             # if not Cliente.objects.all():
-            if form.perfil not in Cliente.objects.all():
+            if form.perfil_cliente not in Cliente.objects.all():
                 form.save()
                 messages.success(request, message='Registro como cliente exitoso!')
                 return redirect('index')
@@ -153,36 +135,32 @@ def register_cliente(request,user):
 
 @login_required(login_url='logueo')
 def update_perfil(request,user):
-    # try:
-    #     perfil = Niñera.objects.get(perfil_niñera=request.user)
-    #     form = NiñeraForm(instance=perfil)
-    #     if request.user != perfil.perfil_niñera:
-    #         return HttpResponse('No estás autorizado aquí')
-    # except:
-    #     pass
-    # try:
-    perfil = Cliente.objects.get(perfil_cliente=request.user)
-    form = ClienteForm(instance=perfil)
-    if request.user != perfil.perfil_cliente:
-        return HttpResponse('No estás autorizado aquí')
-# except:
-    mod = Cliente.objects.get(perfil_cliente=request.user)
-
-    form=RegisterForm(request.POST, instance=mod)
-    messages.error(request,'No existe ningún perfil')
-
-    if request.method == 'POST':
-        if form.is_valid():
+    try:
+        perfil = Niñera.objects.get(perfil_id=request.user.id)
+        form = NiñeraForm(instance=perfil)
+        if request.method == 'POST':
+            form = NiñeraForm(request.POST, instance=perfil)
             form.save()
-            messages.success('Perfil actualizado exitosamente!')
+            messages.success(request, 'Perfil actualizado exitosamente!')
             return redirect('index')
-    else:
-        # print(Niñera.objects.get(perfil_niñera=request.user))
-        print(Cliente.objects.get(perfil_cliente=request.user))
-        print(request.user)
-        
-        perfil=User()
-            
-    
-    context = {'perfil':perfil, 'form':form}
-    return render(request, 'mainapp/perfil.html', context)
+    except:
+        pass
+
+    try:
+        perfil = Cliente.objects.get(perfil_id=request.user.id)
+        form = ClienteForm(instance=perfil)
+        if request.method == 'POST':
+            form = ClienteForm(request.POST, instance=perfil)
+            form.save()
+            messages.success(request, 'Perfil actualizado exitosamente!')
+            return redirect('index')
+    except:
+        messages.error(request,'No existe ningún perfil')
+        return redirect('index')
+    finally:
+        context = {'perfil':perfil, 'form':form}
+        return render(request, 'mainapp/perfil.html', context)
+
+@login_required(login_url='logueo')
+def crear_mensaje(request,user):
+    pass
