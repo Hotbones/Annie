@@ -9,3 +9,6 @@ def searcher(request):
 
 def perfil_niñera(request):
     return render(request, 'mainapp/perfilniñera.html', {})
+
+def perfil_cliente(request):
+    return render(request, 'mainapp/perfilcliente.html', {})
