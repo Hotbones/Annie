@@ -1,10 +1,8 @@
-from symbol import except_clause
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-# from django.contrib.auth.models import User
 from .forms import NiñeraForm,ClienteForm,RegisterForm
 from .models import *
 
@@ -133,34 +131,30 @@ def register_cliente(request,user):
 @login_required(login_url='logueo')
 def update_perfil(request,user):
     try:
-        if Niñera.objects.get(perfil_id=request.user.id):
-            perfil = Niñera.objects.get(perfil_id=request.user.id)
-            form = NiñeraForm(instance=perfil)
-            if request.method == 'POST':
-                form = NiñeraForm(request.POST, instance=perfil)
-                form.save()
-                messages.success(request, 'Perfil actualizado exitosamente!')
-                return redirect('index')
+        perfil = Niñera.objects.get(perfil_id=request.user.id)
+        form = NiñeraForm(instance=perfil)
+        if request.method == 'POST':
+            form = NiñeraForm(request.POST, instance=perfil)
+            form.save()
+            messages.success(request, 'Perfil actualizado exitosamente!')
+            return redirect('index')
     except:
         pass
 
     try:
-        if Cliente.objects.get(perfil_id=request.user.id):
-
-            perfil = Cliente.objects.get(perfil_id=request.user.id)
-            form = ClienteForm(instance=perfil)
-            if request.method == 'POST':
-                form = ClienteForm(request.POST, instance=perfil)
-                form.save()
-                messages.success(request, 'Perfil actualizado exitosamente!')
-                return redirect('index')
-
+        perfil = Cliente.objects.get(perfil_id=request.user.id)
+        form = ClienteForm(instance=perfil)
+        if request.method == 'POST':
+            form = ClienteForm(request.POST, instance=perfil)
+            form.save()
+            messages.success(request, 'Perfil actualizado exitosamente!')
+            return redirect('index')
     except:
         messages.error(request,'No existe ningún perfil')
         return redirect('index')
-
-    context = {'perfil':perfil, 'form':form}
-    return render(request, 'mainapp/perfil.html', context)
+    finally:
+        context = {'perfil':perfil, 'form':form}
+        return render(request, 'mainapp/perfil.html', context)
 
 @login_required(login_url='logueo')
 def crear_mensaje(request,user):
