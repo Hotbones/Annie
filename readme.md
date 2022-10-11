@@ -47,7 +47,7 @@ Para las reservas, ambos tipos de usuario aceptarán su conformidad y realizará
 |Jesus Leal                 |Front-end  |[Jesux](https://github.com/imjesusleal)       |[Link](https://www.linkedin.com/in/jesus-leal-6908291b2/)|
 |Santiago Muñoz             |Back-end   |[Santix](https://github.com/SantiagoEzequielMunioz)|[Link](https://www.linkedin.com/in/santiago-muñoz-b4833a236/)|
 |Mateo Pamasime             |Back-end   |[mateox](https://github.com/pamasime)          |[Link](https://www.linkedin.com/in/mateopamasime/)|
-|Matias Cañadas             |Back-end   |[Matix](https://github.com/Hotbones)           |[Link](https://www.linkedin.com/in/matiascanadas/)|
+|Matias Cañadas             |Back-end & QA|[Matix](https://github.com/Hotbones)           |[Link](https://www.linkedin.com/in/matiascanadas/)|
 
 ## Agradecimientos 🎁
 
@@ -101,6 +101,6 @@ For reservations, both types of user will accept their agreement and carry out t
 |Jesus Leal                 |Front-end  |[Jesux](https://github.com/imjesusleal)       |[Link](https://www.linkedin.com/in/jesus-leal-6908291b2/)|
 |Santiago Muñoz             |Back-end   |[Santix](https://github.com/SantiagoEzequielMunioz)|[Link](https://www.linkedin.com/in/santiago-muñoz-b4833a236/)|
 |Mateo Pamasime             |Back-end   |[mateox](https://github.com/pamasime)          |[Link](https://www.linkedin.com/in/mateopamasime/)|
-|Matias Cañadas             |Back-end   |[Matix](https://github.com/Hotbones)           |[Link](https://www.linkedin.com/in/matiascanadas/)|
+|Matias Cañadas             |Back-end & QA|[Matix](https://github.com/Hotbones)           |[Link](https://www.linkedin.com/in/matiascanadas/)|
 
 [Back to the init](#beginning)
