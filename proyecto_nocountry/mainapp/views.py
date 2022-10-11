@@ -17,8 +17,6 @@ def perfil_niñera(request):
 
 def perfil_cliente(request):
     return render(request, 'mainapp/perfilcliente.html', {})
-    context = {}
-    return render(request, 'mainapp/index.html', context)
 
 def logueo(request):
     
@@ -78,9 +76,9 @@ def register_niñera(request,user):
 
     if request.method == 'POST':
        
-    if Niñera.objects.filter(perfil_niñera=request.user).exists() or \
+        if Niñera.objects.filter(perfil_niñera=request.user).exists() or \
         Cliente.objects.filter(perfil_cliente=request.user).exists():
-        return redirect('index')
+            return redirect('index')
     
     form = NiñeraForm()
 
@@ -102,16 +100,16 @@ def register_niñera(request,user):
                 messages.error(request, message='Esta niñera ya se encuentra registrada')
                 return redirect('index')    
 
-            if form.perfil_niñera not in Niñera.objects.all():
+        if form.perfil_niñera not in Niñera.objects.all():
                 form.save()
                 messages.success(request, message='Registro como niñera exitoso!')
                 return redirect('index')  # access granted
-            else:
+        else:
                 messages.error(request, message='Esta niñera ya se encuentra registrado')
                 return redirect('index')
 
-        else:
-            messages.error(request, message='Ha ocurrido un error con los campos a llenar.')
+    else:
+        messages.error(request, message='Ha ocurrido un error con los campos a llenar.')
 
 
     return render(request, 'mainapp/register_niñera.html', {'form_niñera':form})
@@ -119,49 +117,26 @@ def register_niñera(request,user):
 
 @login_required(login_url='logueo')
 def register_cliente(request,user):
-   
-    if Niñera.objects.filter(perfil_niñera=request.user).exists() or \
-    Cliente.objects.filter(perfil_cliente=request.user).exists():
+
+    if Niñera.objects.filter(perfil=request.user).exists() or \
+    Cliente.objects.filter(perfil=request.user).exists():
         messages.error(request, message='Ya has creado un perfil')
         return redirect('index')
-
 
     if not request.user.is_authenticated:
         messages.error(request,'No se puede ir a la direccion')
         return redirect('index')
-    if Niñera.objects.filter(perfil_niñera=request.user).exists() or Cliente.objects.filter(perfil_cliente=request.user).exists():
-        
-            return redirect('index')
-    form = ClienteForm()
-    
-    form = ClienteForm()
 
+    form = ClienteForm()
 
     if request.method == 'POST':
-        
         form = ClienteForm(request.POST)
         if form.is_valid():
             form = form.save(commit=False)
             user = User.objects.get(username = request.user.username)
-            form.perfil_cliente = user
-
-            if form.perfil_cliente not in Niñera.objects.all():
-                form.save()
-                messages.success(request, message='Registro como cliente exitoso!')
-                return redirect('index')  # access granted
-            else:
-                return redirect('index')
-           
-            
-        else:
-            messages.error(request, message='Ha ocurrido un error con los campos a llenar.')
-    else:
-        form = ClienteForm()
-    return render(request, 'mainapp/register_cliente.html', {'form_cliente':form})
-
-
+            form.perfil = user
             # if not Cliente.objects.all():
-            if form.perfil_cliente not in Cliente.objects.all():
+            if form.perfil not in Cliente.objects.all():
                 form.save()
                 messages.success(request, message='Registro como cliente exitoso!')
                 return redirect('index')
@@ -170,7 +145,7 @@ def register_cliente(request,user):
                 return redirect('index')
             # else:
             #     messages.error(request, message='Ya tienes un perfil creado')
-            #     return redirect('index')    
+            #     return redirect('index')
         else:
             messages.error(request, message='Ha ocurrido un error con los campos a llenar.')
 

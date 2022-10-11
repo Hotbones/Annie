@@ -13,6 +13,8 @@ sqlparse = "==0.4.2"
 tzdata = "==2022.2"
 npm = "*"
 python-decouple = "*"
+django-multiselectfield = "*"
+pillow = "*"
 
 [dev-packages]
 
