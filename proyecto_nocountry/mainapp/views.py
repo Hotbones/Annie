@@ -132,29 +132,28 @@ def register_cliente(request,user):
 @login_required(login_url='logueo')
 def update_perfil(request,user):
     try:
-        perfil = Niñera.objects.get(perfil_id=request.user.id)
-        form = NiñeraForm(instance=perfil)
-        if request.method == 'POST':
-            form = NiñeraForm(request.POST, instance=perfil)
-            form.save()
-            messages.success(request, 'Perfil actualizado exitosamente!')
-            return redirect('index')
-
-    except:
-        pass
-    try:
-        perfil = Cliente.objects.get(perfil_id=request.user.id)
-        form = ClienteForm(instance=perfil)
-        if request.method == 'POST':
-            form = ClienteForm(request.POST, instance=perfil)
-            form.save()
-            messages.success(request, 'Perfil actualizado exitosamente!')
-            return redirect('index')
+        # chequea si es niñera
+        if Niñera.objects.get(perfil_id=request.user.id):
+            perfil = Niñera.objects.get(perfil_id=request.user.id)
+            form = NiñeraForm(instance=perfil)
+            if request.method == 'POST':
+                form = NiñeraForm(request.POST, instance=perfil)
+                form.save()
+                messages.success(request, 'Perfil actualizado exitosamente!')
+                return redirect('index')
+        # chequea si es cliente
+        elif Cliente.objects.get(perfil_id=request.user.id):
+            perfil = Cliente.objects.get(perfil_id=request.user.id)
+            form = ClienteForm(instance=perfil)
+            if request.method == 'POST':
+                form = ClienteForm(request.POST, instance=perfil)
+                form.save()
+                messages.success(request, 'Perfil actualizado exitosamente!')
+                return redirect('index')
+    # si es un usuario pero no tiene perfil, entra en este except
     except:
         messages.error(request,'No existe ningún perfil')
+        return redirect('index')
 
-    else:
-        perfil=User()
-            
     context = {'perfil':perfil, 'form':form}
     return render(request, 'mainapp/perfil.html', context)
