@@ -1,36 +1,79 @@
 from django.db import models
 from django.contrib.auth.models import User
+from multiselectfield import MultiSelectField
 
 class Niñera(models.Model):
-    nombre_niñera = models.CharField(max_length=100)
-    apellido_niñera = models.CharField(max_length=100)
-    dni_niñera = models.IntegerField(unique=True, primary_key=True)
-    fecha_nacimiento = models.DateField()
-    ciudad_niñera = models.CharField(max_length=100)
-    email_niñera = models.EmailField()
-    puntaje = models.FloatField()
-    precio = models.IntegerField()
+    
+    perfil_niñera = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    TURNOS = [
+        ('Mañana', 'Mañana'),
+        ('Tarde', 'Tarde'),
+        ('Noche', 'Noche'),
+    ]
+    turnos = MultiSelectField(choices=TURNOS,max_length=50,null=True, blank=True)
+
+    HABILIDADES = [
+        ('Cocina', 'Cocina'),
+        ('Maneja', 'Maneja'),
+        ('Limpieza', 'Limpieza'),
+        ('Traslado', 'Traslado'),
+    ]
+    habilidades = MultiSelectField(choices=HABILIDADES,max_length=50,null=True, blank=True)
+
+    EDADES = [
+        ('0 - 3 años', '0 - 3 años'),
+        ('4 - 6 años', '4 - 6 años'),
+        ('7 - 10 años', '7 - 10 años'),
+        ('11 - 13 años', '11 - 13 años'),
+    ]
+    edades = MultiSelectField(choices=EDADES,max_length=80,null=True, blank=True)
+
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    dni = models.IntegerField(unique=True, error_messages ={"unique":"Este DNI ya está registrado."},null=True, blank=True)
+    fecha_nacimiento = models.DateField(null=True, blank=True, default='1990-10-10')
+    ciudad = models.CharField(max_length=100,null=True, blank=True)
+    telefono = models.CharField(max_length=10, help_text='Número sin 0 ni 15',null=True, blank=True)
+    tarifa_por_hora = models.IntegerField(null=True, blank=True)
+    descripcion = models.TextField(null=True, blank=True)
+
+    foto_perfil = models.ImageField(upload_to='img_niñeras/', null=True, blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    # verificacion [activo,foto_cargada,anteced_penales]
 
     class Meta:
         verbose_name = 'Niñera'
         verbose_name_plural = 'Niñeras'
     
     def __str__(self):
-        return self.nombre_niñera
+        return self.nombre
+
 
 class Cliente(models.Model):
 
-    nombre_cliente = models.CharField(max_length=100)
-    apellido_cliente = models.CharField(max_length=100)
-    dni_cliente = models.IntegerField(unique=True, primary_key=True)
+    perfil_cliente = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+<<<<<<< HEAD
+    dni = models.IntegerField(unique=True,
+        error_messages ={
+                        "unique":"Este DNI ya está registrado."
+                        })
     domicilio = models.CharField(max_length=200)
-    ciudad_cliente = models.CharField(max_length=100)
-    email_cliente = models.EmailField()
-    reserva = models.IntegerField()
+    ciudad = models.CharField(max_length=100)
+    email = models.EmailField()
+    telefono = models.CharField(max_length=10,help_text='Número sin 0 ni 15')
+=======
+    dni = models.IntegerField(unique=True, error_messages ={"unique":"Este DNI ya está registrado."})
+    domicilio = models.CharField(max_length=200,null=True, blank=True)
+    ciudad = models.CharField(max_length=100,null=True, blank=True)
+    telefono = models.CharField(max_length=10,help_text='Número sin 0 ni 15',null=True, blank=True)
+>>>>>>> 2b7cf22324543d9e1c692889b984b213d87136b5
+    
+    foto_perfil = models.ImageField(upload_to='img_clientes/', null=True, blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -41,13 +84,14 @@ class Cliente(models.Model):
         verbose_name_plural = 'Clientes'
     
     def __str__(self):
-        return self.nombre_cliente
+        return self.nombre
 
 
 class Reserva(models.Model):
-    reserva = models.IntegerField(unique=True)
-    # view que crea reserva y asignarlo a cliente y niñera
+    cliente_id = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    niñera_id = models.ForeignKey(Niñera, on_delete=models.CASCADE)
     fecha_reserva = models.DateField() # 2022-09-28
+
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -60,7 +104,9 @@ class Reserva(models.Model):
 
 class Mensaje(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    puntaje = models.FloatField(default=0) # estrellas??
     mensaje = models.TextField()
+
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

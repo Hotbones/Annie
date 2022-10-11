@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from .configuracion import local,base
+from django.conf.urls.static import static
+
 
 from mainapp import urls
 
@@ -24,3 +27,7 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path('', include('mainapp.urls'))
 ]
+
+if local.DEBUG:
+        urlpatterns += static(base.MEDIA_URL,
+                              document_root = base.MEDIA_ROOT)

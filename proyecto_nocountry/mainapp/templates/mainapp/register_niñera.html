@@ -1,0 +1,18 @@
+{% extends './base.html' %}
+{% block content %}
+    <h2>REGISTRARME COMO NIÑERA</h2>
+    <div>
+        {% for message in messages %}
+        {{message}}
+        {% endfor %}
+    </div>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form_niñera.as_p}}
+        <button type="submit">Crear</button>
+    </form>
+    <div>
+        ¿Ya estás registrada? <a href="{% url 'logueo' %}">Inicia Sesión</a>
+    </div>
+
+    {% endblock %}
