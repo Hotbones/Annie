@@ -94,7 +94,8 @@ class Reserva(models.Model):
         return str(self.reserva)
 
 class Mensaje(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comentarios')
+    comentarista = models.CharField(max_length=200)
     puntaje = models.FloatField(default=0) # estrellas??
     mensaje = models.TextField()
 

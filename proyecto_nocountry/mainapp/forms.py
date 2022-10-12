@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
-from .models import Niñera,Cliente
+from .models import Niñera,Cliente,Mensaje
 
 
 class NiñeraForm(forms.ModelForm):
@@ -69,3 +68,8 @@ class RegisterForm(forms.Form):
                 self.cleaned_data.get('email'),
                 self.cleaned_data.get('password')
             )
+    
+class MensajeForm(forms.ModelForm):
+    class Meta:
+        model = Mensaje
+        fields = ('puntaje','mensaje')

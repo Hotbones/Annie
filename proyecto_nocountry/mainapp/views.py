@@ -3,7 +3,7 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .forms import NiñeraForm,ClienteForm,RegisterForm
+from .forms import NiñeraForm,ClienteForm,RegisterForm,MensajeForm
 from .models import *
 
 def index(request):
@@ -13,7 +13,10 @@ def searcher(request):
     return render(request, 'mainapp/searcher.html', {})
 
 def perfil_niñera(request):
-    return render(request, 'mainapp/perfilniñera.html', {})
+    niñeras = Niñera.objects.all()
+
+    context = {'niñeras':niñeras}
+    return render(request, 'mainapp/perfilniñera.html', context)
 
 def perfil_cliente(request):
     return render(request, 'mainapp/perfilcliente.html', {})
@@ -162,5 +165,32 @@ def update_perfil(request,user):
         return render(request, 'mainapp/perfil.html', context)
 
 @login_required(login_url='logueo')
-def crear_mensaje(request,user):
-    pass
+def crear_mensaje(request,pk):
+
+    puntaje=0
+    usuario = User.objects.get(id=pk)
+
+    # mensajes = Mensaje.usuario_id.mensaje_set.all() #message es el model, esta es la forma de pedir el set de messages que estan referidos a cierto room
+
+
+    form = MensajeForm(instance=usuario)
+    if request.method == 'POST':
+        form = MensajeForm(request.POST, instance=usuario)
+        if form.is_valid():
+            comentarista = request.user.username
+            puntaje=str(puntaje)
+            nuevo_comentario = form.cleaned_data['mensaje']
+            c = Mensaje(usuario=usuario, comentarista=comentarista, mensaje=nuevo_comentario, puntaje=puntaje)
+            c.save()
+
+            return redirect('index')
+        else:
+            print('form is invalid')
+
+    else:
+        form = MensajeForm()
+    
+    context = {'form':form, 'usuario':usuario}
+
+    return render(request,'mainapp/crear_mensaje.html',context)
+    
