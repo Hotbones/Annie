@@ -1,0 +1,261 @@
+{% load tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="./assets/css/filterlist.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+    {% tailwind_css %}
+    <title>Document</title>
+</head>
+<body class="from-red-100 via-orange-300 to-red-500 bg-gradient-to-br">
+    
+    <section>
+            <div class="flex justify-evenly text-2xl text-red-400 mt-2">
+                <h1 class="font-bold py-2 px-4 text-3xl">Annie</h1>
+                <div class="grid-flow-col">
+                    <button class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full">
+                        Ser niñera
+                    </button>
+                    <button class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full">
+                        Conectate
+                    </button>
+                </div>
+            </div>
+<br><br><br><br><br>
+            <div class="">
+                <form action="">
+                    <input type="text" class="ml-80 w-6/12 h-12 bg-white rounded-full shadow-lg shadow-indigo-500/40">
+                    <input type="submit" value="Buscar" id="btn" class="rounded-2xl bg-green-400 h-18 w-36 -translate-x-28 cursor-pointer hover:bg-blue-400 hover:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-400 active:shadow-lg transition duration-300 ease-in-out"> 
+                </form>
+            </div>
+        
+<br><br><br>
+    </section>
+
+    <section>
+        <div class="bg-grey col-12 mt-3 align-middle justify-content-center flex" >
+            <button type="button" class="btn btn-light mr-10 shadow-sm" data-toggle="collapse" data-target="#filters">Filters <i class="fa fa-filter"></i></button>
+        </div>
+
+        <div id="filters" class="collapse">
+            <hr class="solid col-9 mx-auto">
+
+            <div class="d-md-flex d-lg-flex d-xl-flex justify-content-around col-9 mx-auto">
+
+            <div class="col-lg-4 col-xl-3 col-md-6">
+                <article class="filter-group">
+                    <header class="card-header"> 
+                            <h6 class="title">Edad </h6>
+                     </header>
+                        <div class="filter-content" id="collapse_aside1">
+                            <div class="card-body"> <label class="custom-control"> <input type="checkbox" checked="" class="custom-control-input">
+                                    <div class="custom-control-label"> 0-3 años </div>
+                                </label> <label class="custom-control"> <input type="checkbox" checked="" class="custom-control-input">
+                                    <div class="custom-control-label"> 4-6 años </div>
+                                </label> <label class="custom-control"> <input type="checkbox" checked="" class="custom-control-input">
+                                    <div class="custom-control-label"> 7-10 años </div>
+                                </label> <label class="custom-control"> <input type="checkbox" checked="" class="custom-control-input">
+                                    <div class="custom-control-label"> 11-13 años </div>
+                                </label> </div>
+                        </div>
+                </article>
+
+                
+            </div>
+            
+            <div class ="col-lg-4 col-md-6">
+                
+                
+            </div>
+            <div class ="col-lg-4 col-xl-3 col-md-6">
+                <article class="filter-group">
+                    <header class="card-header"> 
+                        <h6 class="title">Actividades </h6>
+                    </header>
+                    <div class="filter-content" id="collapse_aside4">
+                        <div class="card-body"> <label class="custom-control"> <input type="checkbox" checked="" class="custom-control-input">
+                                <div class="custom-control-label"> Manejar </div>
+                            </label> <label class="custom-control"> <input type="checkbox" checked="" class="custom-control-input">
+                                <div class="custom-control-label"> Traslado de niñe </div>
+                            </label> <label class="custom-control"> <input type="checkbox" checked="" class="custom-control-input">
+                                <div class="custom-control-label"> Tarea del hogar</div>
+                            </label> <label class="custom-control"> <input type="checkbox" checked="" class="custom-control-input">
+                                <div class="custom-control-label"> Cocinar </div>
+                            </label> </div>
+                    </div>
+                </article>
+                
+                <a href="#" class="btn btn-medium button mt-6 mb-12 md:mb-0 md:mt-10 inline-block  text-white bg-red-500 hover:bg-red-600 rounded-lg shadow mx-auto" data-abc="true" data-toggle="collapse" data-target="#filters">Apply Now</a>
+
+            </div>
+
+            </div>
+            
+            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <section>
+    {% include 'mainapp/extends/calendar.html' %}
+    </section>
+
+
+    <section>
+        <h2 class="text-center text-3xl font-semibold">
+            500 niñeras han dado resultado
+        </h2>
+
+        <div class="grid grid-cols-3 ml-36">
+            <div class="p-8">  
+                <!--Card 1-->
+                <div class="w-2/4 rounded shadow-lg">
+                    <img class="" src="../../static/img/profile1.png" alt="">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2"> Maria Perez</div>
+                        <p class="text-gray-700 text-base">
+                        Experiencia con bebés de recién nacidos hasta los 3 años
+                        $500 / hora
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-8">  
+                <!--Card 1-->
+                <div class="w-2/4 rounded  shadow-lg">
+                    <img class="" src="../../static/img/profile1.png" alt="">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2"> Maria Perez</div>
+                        <p class="text-gray-700 text-base">
+                        Experiencia con bebés de recién nacidos hasta los 3 años
+                        $500 / hora
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-8">  
+                <!--Card 1-->
+                <div class="w-2/4 rounded  shadow-lg">
+                    <img class="" src="../../static/img/profile1.png" alt="">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2"> Maria Perez</div>
+                        <p class="text-gray-700 text-base">
+                        Experiencia con bebés de recién nacidos hasta los 3 años
+                        $500 / hora
+                        </p>
+                    </div>
+                </div>
+            </div>  
+        </div>    
+
+        <div class="grid grid-cols-3 ml-36">
+            <div class="p-8">  
+                <!--Card 1-->
+                <div class="w-2/4 rounded shadow-lg">
+                    <img class="" src="../../static/img/profile1.png" alt="">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2"> Maria Perez</div>
+                        <p class="text-gray-700 text-base">
+                        Experiencia con bebés de recién nacidos hasta los 3 años
+                        $500 / hora
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-8">  
+                <!--Card 1-->
+                <div class="w-2/4 rounded  shadow-lg">
+                    <img class="" src="../../static/img/profile1.png" alt="">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2"> Maria Perez</div>
+                        <p class="text-gray-700 text-base">
+                        Experiencia con bebés de recién nacidos hasta los 3 años
+                        $500 / hora
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-8">  
+                <!--Card 1-->
+                <div class="w-2/4 rounded  shadow-lg">
+                    <img class="" src="../../static/img/profile1.png" alt="">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2"> Maria Perez</div>
+                        <p class="text-gray-700 text-base">
+                        Experiencia con bebés de recién nacidos hasta los 3 años
+                        $500 / hora
+                        </p>
+                    </div>
+                </div>
+            </div>  
+        </div>        
+
+        <div class="grid grid-cols-3 ml-36">
+            <div class="p-8">  
+                <!--Card 1-->
+                <div class="w-2/4 rounded shadow-lg">
+                    <img class="" src="../../static/img/profile1.png" alt="">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2"> Maria Perez</div>
+                        <p class="text-gray-700 text-base">
+                        Experiencia con bebés de recién nacidos hasta los 3 años
+                        $500 / hora
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-8">  
+                <!--Card 1-->
+                <div class="w-2/4 rounded  shadow-lg">
+                    <img class="" src="../../static/img/profile1.png" alt="">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2"> Maria Perez</div>
+                        <p class="text-gray-700 text-base">
+                        Experiencia con bebés de recién nacidos hasta los 3 años
+                        $500 / hora
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-8">  
+                <!--Card 1-->
+                <div class="w-2/4 rounded  shadow-lg">
+                    <img class="" src="../../static/img/profile1.png" alt="">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2"> Maria Perez</div>
+                        <p class="text-gray-700 text-base">
+                        Experiencia con bebés de recién nacidos hasta los 3 años
+                        $500 / hora
+                        </p>
+                    </div>
+                </div>
+            </div>  
+        </div>    
+    </section>
+
+    <footer>
+        {% include 'mainapp/extends/footer.html' %}
+    </footer>
+    <script src="{% static 'calendar.js' %}"></script>
+</body>
+</html>

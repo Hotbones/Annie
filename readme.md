@@ -4,9 +4,8 @@
 # Annie app
 La revolucionaria forma de reservar y contratar niñeras de manera on line.
 
-<p align="center">
-<img src="https://github.com/No-Country/c7-14-t-python/blob/front-develop/proyecto_nocountry/mainapp/static/img/indexhero1.png">
-</p>
+
+![Baby](https://user-images.githubusercontent.com/105388226/195204215-cee50a6a-0b5d-4aae-b94b-3a57422432fe.png)
 
 <a name="ES"></a>
 ## Descripción del proyecto
@@ -47,7 +46,7 @@ Para las reservas, ambos tipos de usuario aceptarán su conformidad y realizará
 |Jesus Leal                 |Front-end  |[Jesux](https://github.com/imjesusleal)       |[Link](https://www.linkedin.com/in/jesus-leal-6908291b2/)|
 |Santiago Muñoz             |Back-end   |[Santix](https://github.com/SantiagoEzequielMunioz)|[Link](https://www.linkedin.com/in/santiago-muñoz-b4833a236/)|
 |Mateo Pamasime             |Back-end   |[mateox](https://github.com/pamasime)          |[Link](https://www.linkedin.com/in/mateopamasime/)|
-|Matias Cañadas             |Back-end   |[Matix](https://github.com/Hotbones)           |[Link](https://www.linkedin.com/in/matiascanadas/)|
+|Matias Cañadas             |Back-end & QA|[Matix](https://github.com/Hotbones)           |[Link](https://www.linkedin.com/in/matiascanadas/)|
 
 ## Agradecimientos 🎁
 
@@ -60,9 +59,7 @@ Para las reservas, ambos tipos de usuario aceptarán su conformidad y realizará
 # Annie app
 The revolutionary way to book and hire babysitters online.
 
-<p align="center">
-<img src="https://github.com/No-Country/c7-14-t-python/blob/front-develop/proyecto_nocountry/mainapp/static/img/indexhero1.png">
-</p>
+![Baby](https://user-images.githubusercontent.com/105388226/195204318-22efdc2e-c65b-49ca-bff3-c264cfa2beb7.png)
 
 ## Project description
 
@@ -101,6 +98,6 @@ For reservations, both types of user will accept their agreement and carry out t
 |Jesus Leal                 |Front-end  |[Jesux](https://github.com/imjesusleal)       |[Link](https://www.linkedin.com/in/jesus-leal-6908291b2/)|
 |Santiago Muñoz             |Back-end   |[Santix](https://github.com/SantiagoEzequielMunioz)|[Link](https://www.linkedin.com/in/santiago-muñoz-b4833a236/)|
 |Mateo Pamasime             |Back-end   |[mateox](https://github.com/pamasime)          |[Link](https://www.linkedin.com/in/mateopamasime/)|
-|Matias Cañadas             |Back-end   |[Matix](https://github.com/Hotbones)           |[Link](https://www.linkedin.com/in/matiascanadas/)|
+|Matias Cañadas             |Back-end & QA|[Matix](https://github.com/Hotbones)           |[Link](https://www.linkedin.com/in/matiascanadas/)|
 
 [Back to the init](#beginning)

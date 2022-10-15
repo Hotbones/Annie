@@ -4,7 +4,7 @@ from multiselectfield import MultiSelectField
 
 class Niñera(models.Model):
     
-    perfil_niñera = models.OneToOneField(User, on_delete=models.CASCADE)
+    perfil = models.OneToOneField(User, on_delete=models.CASCADE)
 
     TURNOS = [
         ('Mañana', 'Mañana'),
@@ -53,10 +53,11 @@ class Niñera(models.Model):
 
 class Cliente(models.Model):
 
-    perfil_cliente = models.OneToOneField(User, on_delete=models.CASCADE)
+    perfil = models.OneToOneField(User, on_delete=models.CASCADE)
 
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
+<<<<<<< HEAD
     dni = models.IntegerField(unique=True,
         error_messages ={
                         "unique":"Este DNI ya está registrado."
@@ -65,6 +66,14 @@ class Cliente(models.Model):
     ciudad = models.CharField(max_length=100)
     email = models.EmailField()
     telefono = models.CharField(max_length=10,help_text='Número sin 0 ni 15')
+=======
+
+    dni = models.IntegerField(unique=True, error_messages ={"unique":"Este DNI ya está registrado."})
+    domicilio = models.CharField(max_length=200,null=True, blank=True)
+    ciudad = models.CharField(max_length=100,null=True, blank=True)
+    telefono = models.CharField(max_length=10,help_text='Número sin 0 ni 15',null=True, blank=True)
+
+>>>>>>> 760b35e44d318df68440ce5f326e878ae68e3546
     
     foto_perfil = models.ImageField(upload_to='img_clientes/', null=True, blank=True)
 
@@ -83,7 +92,8 @@ class Cliente(models.Model):
 
 
 class Mensaje(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comentarios')
+    comentarista = models.CharField(max_length=200)
     puntaje = models.FloatField(default=0) # estrellas??
     mensaje = models.TextField()
 

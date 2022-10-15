@@ -9,14 +9,14 @@ class NiñeraForm(forms.ModelForm):
     class Meta:
         model = Niñera
         fields = '__all__'
-        exclude = ['perfil_niñera','created','updated']
+        exclude = ['perfil','created','updated']
         
 
 class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = '__all__'
-        exclude = ['perfil_cliente','created','updated']
+        exclude = ['perfil','created','updated']
 
 
 class RegisterForm(forms.Form):

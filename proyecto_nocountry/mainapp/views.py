@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+<<<<<<< HEAD
 from .forms import NiñeraForm,ClienteForm,RegisterForm,ReservationForm
 from .models import *
 
@@ -21,7 +22,40 @@ def index(request):
         })
     return render(request, 'mainapp/index.html', {
         })
+=======
+from .forms import NiñeraForm,ClienteForm,RegisterForm,MensajeForm
+from .models import *
 
+def index(request):
+    perfil=None
+    cliente=None
+    niñera=None
+    try:
+        perfil = Niñera.objects.get(perfil_id=request.user.id)
+        niñera = perfil
+    except:
+        pass
+    try:
+        perfil = Cliente.objects.get(perfil_id=request.user.id)
+        cliente = perfil
+    except:
+        pass
+    context = {'perfil':perfil,'niñera':niñera,'cliente':cliente}
+    return render(request, 'mainapp/index.html', context)
+
+def searcher(request):
+    return render(request, 'mainapp/searcher.html', {})
+
+@login_required(login_url='logueo')
+def perfil_niñera(request):
+    niñeras = Niñera.objects.all()
+    mi_perfil = Niñera.objects.get(perfil_id=request.user.id)
+    context = {'niñeras':niñeras, 'mi_perfil':mi_perfil}
+    return render(request, 'mainapp/perfilniñera.html', context)
+
+@login_required(login_url='logueo')
+def perfil_cliente(request):
+    return render(request, 'mainapp/perfilcliente.html', {})
 
 def logueo(request):
     
@@ -116,7 +150,6 @@ def register_cliente(request,user):
 
 
     if request.method == 'POST':
-        
         form = ClienteForm(request.POST)
         if form.is_valid():
             form = form.save(commit=False)
@@ -150,10 +183,19 @@ def update_perfil(request,user):
 
             messages.error(request,'No existe ningún perfil')
 
+    puntaje=0
+    usuario = User.objects.get(id=pk)
+
+    form = MensajeForm(instance=usuario)
     if request.method == 'POST':
+        form = MensajeForm(request.POST, instance=usuario)
         if form.is_valid():
-            form.save()
-            messages.success('Perfil actualizado exitosamente!')
+            comentarista = request.user.username
+            puntaje=str(puntaje)
+            nuevo_comentario = form.cleaned_data['mensaje']
+            c = Mensaje(usuario=usuario, comentarista=comentarista, puntaje=puntaje, mensaje=nuevo_comentario)
+            c.save()
+
             return redirect('index')
 
     
