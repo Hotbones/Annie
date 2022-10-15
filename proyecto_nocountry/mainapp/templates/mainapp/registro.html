@@ -1,11 +1,17 @@
 {% extends './base.html' %}
+{% include './messages.html' %}
 
 {% block content %}
 
     <h1>Hola</h1>
     <form action="" method="POST">
         {% csrf_token %}
-            {{form.as_p}}
+        {% for field in form %}  
+            <div class="">
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+        {% endfor %}
         
         <button type="submit">Crear</button>
     </form>

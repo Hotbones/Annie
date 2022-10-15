@@ -57,7 +57,6 @@ class Cliente(models.Model):
 
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
-<<<<<<< HEAD
     dni = models.IntegerField(unique=True,
         error_messages ={
                         "unique":"Este DNI ya está registrado."
@@ -66,12 +65,6 @@ class Cliente(models.Model):
     ciudad = models.CharField(max_length=100)
     email = models.EmailField()
     telefono = models.CharField(max_length=10,help_text='Número sin 0 ni 15')
-=======
-    dni = models.IntegerField(unique=True, error_messages ={"unique":"Este DNI ya está registrado."})
-    domicilio = models.CharField(max_length=200,null=True, blank=True)
-    ciudad = models.CharField(max_length=100,null=True, blank=True)
-    telefono = models.CharField(max_length=10,help_text='Número sin 0 ni 15',null=True, blank=True)
->>>>>>> 2b7cf22324543d9e1c692889b984b213d87136b5
     
     foto_perfil = models.ImageField(upload_to='img_clientes/', null=True, blank=True)
 
@@ -87,20 +80,7 @@ class Cliente(models.Model):
         return self.nombre
 
 
-class Reserva(models.Model):
-    cliente_id = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    niñera_id = models.ForeignKey(Niñera, on_delete=models.CASCADE)
-    fecha_reserva = models.DateField() # 2022-09-28
 
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = 'Reserva'
-        verbose_name_plural = 'Reservas'
-    
-    def __str__(self):
-        return str(self.reserva)
 
 class Mensaje(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -116,3 +96,15 @@ class Mensaje(models.Model):
     
     def __str__(self):
         return self.mensaje[0:50]
+
+class Reserva(models.Model):
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    niñera = models.ForeignKey(Niñera, on_delete=models.CASCADE)
+
+    fecha = models.DateTimeField()
+    hora = models.IntegerField()
+    lugar = models.CharField(max_length=500)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return f'{self.cliente} Hizo una reserva a {self.niñera}'
