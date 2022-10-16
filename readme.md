@@ -19,7 +19,7 @@ Como usuario puedo elegir dos roles: Cliente o Niñera.
 
 Para las reservas, ambos tipos de usuario aceptarán su conformidad y realizarán la transacción económica.
 
-## Tecnologías usadas para la app
+## Tecnologías usadas para la app:
 
         En el Frontend:
 <p align="left">
@@ -38,7 +38,7 @@ Para las reservas, ambos tipos de usuario aceptarán su conformidad y realizará
 <img src="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg" width=8% height=8%>
 </p>
  
- ## Humanos & roles
+ ## Humanos & roles:
 
 |Integrante                 |Rol        |Github|LinkedIn|
 |---------------------------|-----------|-----------------------------------------------|---|
@@ -71,7 +71,7 @@ As a user I can choose two roles: Client or Babysitter.
 
 For reservations, both types of user will accept their agreement and carry out the economic transaction.
 
-## Technologies used for the app
+## Technologies used for the app:
 
         In the Frontend:
 <p align="left">
@@ -90,7 +90,7 @@ For reservations, both types of user will accept their agreement and carry out t
 <img src="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg" width=8% height=8%>
 </p>
  
- ## Humans & roles
+ ## Humans & roles:
 
 |Member                     |Rol        |Github|LinkedIn|
 |---------------------------|-----------|-----------------------------------------------|---|
