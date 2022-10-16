@@ -164,60 +164,32 @@ def register_cliente(request,user):
 
 @login_required(login_url='logueo')
 def update_perfil(request,user):
-    if Cliente.objects.all():
-            perfil = Cliente.objects.get(perfil_cliente=request.user)
-            form = ClienteForm(instance=perfil)
-            if request.user != perfil.perfil_cliente:
-                messages.success(request,'No estas autorizado')
-            mod = Cliente.objects.get(perfil_cliente=request.user)
-
-            messages.error(request,'No existe ningún perfil')
-
-    puntaje=0
-    usuario = User.objects.get(id=pk)
-
-    form = MensajeForm(instance=usuario)
-    if request.method == 'POST':
-        form = MensajeForm(request.POST, instance=usuario)
-        if form.is_valid():
-            comentarista = request.user.username
-            puntaje=str(puntaje)
-            nuevo_comentario = form.cleaned_data['mensaje']
-            c = Mensaje(usuario=usuario, comentarista=comentarista, puntaje=puntaje, mensaje=nuevo_comentario)
-            c.save()
-
+    try:
+        perfil = Niñera.objects.get(perfil_id=request.user.id)
+        form = NiñeraForm(instance=perfil)
+        if request.method == 'POST':
+            form = NiñeraForm(request.POST, instance=perfil)
+            form.save()
+            messages.success(request, 'Perfil actualizado exitosamente!')
             return redirect('index')
+    except:
+        pass
 
-    
+    try:
+        perfil = Cliente.objects.get(perfil_id=request.user.id)
+        form = ClienteForm(instance=perfil)
+        if request.method == 'POST':
+            form = ClienteForm(request.POST, instance=perfil)
+            form.save()
+            messages.success(request, 'Perfil actualizado exitosamente!')
+            return redirect('index')
+    except:
+        messages.error(request,'No existe ningún perfil')
+        return redirect('index')
+    finally:
         context = {'perfil':perfil, 'form':form}
         return render(request, 'mainapp/perfil.html', context)
-       
-    messages.error(request,'Tienes que crear un perfil')
-    return redirect('index')
 
-def delete_perfil(request,cliente_id):
-    if not request.user.is_authenticated:
-        messages.error(request,'Tienes que iniciar sesion')
-        return redirect('index')
-
-    
-    if Cliente.objects.all():
-        
-        if Cliente.objects.get(pk=cliente_id):
-            cliente_delete= Cliente.objects.get(pk=cliente_id)
-            cliente_delete.delete()
-            messages.success(request,'Cliente Eliminada Correctamente')
-    elif Niñera.objects.all():
-        if Niñera.objects.get(pk=cliente_id):
-            
-                Niñera_delete= Niñera.objects.get(pk=cliente_id)
-                Niñera_delete.delete()
-                messages.success(request,'Niñera Eliminada Correctamente')
-                return redirect('index')
-    else:
-        messages.error(request,'No puede acceder')
-        
-    return redirect('index')
 
        
 def reserva_add(request,id):
@@ -238,3 +210,29 @@ def reserva_add(request,id):
         'form' : form,
     })
         
+@login_required(login_url='logueo')
+def crear_mensaje(request,pk):
+
+    puntaje=0
+    usuario = User.objects.get(id=pk)
+
+    form = MensajeForm(instance=usuario)
+    if request.method == 'POST':
+        form = MensajeForm(request.POST, instance=usuario)
+        if form.is_valid():
+            comentarista = request.user.username
+            puntaje=str(puntaje)
+            nuevo_comentario = form.cleaned_data['mensaje']
+            c = Mensaje(usuario=usuario, comentarista=comentarista, puntaje=puntaje, mensaje=nuevo_comentario)
+            c.save()
+
+            return redirect('index')
+        else:
+            print('form is invalid')
+
+    else:
+        form = MensajeForm()
+
+    context = {'form':form, 'usuario':usuario}
+
+    return render(request,'mainapp/crear_mensaje.html',context)

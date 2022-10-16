@@ -57,23 +57,12 @@ class Cliente(models.Model):
 
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
-<<<<<<< HEAD
-    dni = models.IntegerField(unique=True,
-        error_messages ={
-                        "unique":"Este DNI ya está registrado."
-                        })
-    domicilio = models.CharField(max_length=200)
-    ciudad = models.CharField(max_length=100)
-    email = models.EmailField()
-    telefono = models.CharField(max_length=10,help_text='Número sin 0 ni 15')
-=======
-
     dni = models.IntegerField(unique=True, error_messages ={"unique":"Este DNI ya está registrado."})
     domicilio = models.CharField(max_length=200,null=True, blank=True)
     ciudad = models.CharField(max_length=100,null=True, blank=True)
     telefono = models.CharField(max_length=10,help_text='Número sin 0 ni 15',null=True, blank=True)
 
->>>>>>> 760b35e44d318df68440ce5f326e878ae68e3546
+
     
     foto_perfil = models.ImageField(upload_to='img_clientes/', null=True, blank=True)
 
