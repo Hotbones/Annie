@@ -12,6 +12,17 @@ urlpatterns = [
     path('reg-niñera/<str:user>', views.register_niñera, name="reg-niñera"),
     path('registro/', views.register, name="registro"),
     path('perfil/<str:user>', views.update_perfil, name='perfil'),
+    path('<int:pk>/add-comment', views.crear_mensaje, name='crear_mensaje'),
     path('logueo/', views.logueo, name="logueo"),
+<<<<<<< HEAD
+    path('logout/', views.log_out, name="logout"),
+    path('delete_perfiles/<cliente_id>',views.delete_perfil,name='delete_perfil'),
+    path('reservas/<int:id>',views.reserva_add,name="reservas"),
+
+
+
+]
+=======
     path('logout/', views.log_out, name="logout")
 ]
+>>>>>>> 760b35e44d318df68440ce5f326e878ae68e3546

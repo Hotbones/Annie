@@ -13,6 +13,7 @@ class ReservaAdmin(admin.ModelAdmin):
 class MensajeAdmin(admin.ModelAdmin):
     readonly_fields = ('created','updated')
 
+
 admin.site.register(Niñera,NiñeraAdmin)
 admin.site.register(Cliente,ClienteAdmin)
 admin.site.register(Reserva,ReservaAdmin)
