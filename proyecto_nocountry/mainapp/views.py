@@ -3,26 +3,7 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-<<<<<<< HEAD
-from .forms import NiñeraForm,ClienteForm,RegisterForm,ReservationForm
-from .models import *
 
-def index(request):
-    if request.user.is_authenticated: 
-        perfil_list = Cliente.objects.filter(perfil_cliente=request.user) 
-
-        if perfil_list.exists():
-            perfil_list = Cliente.objects.filter(perfil_cliente=request.user) 
-
-        elif Niñera.objects.filter(perfil_niñera=request.user).exists():
-            perfil_list = Niñera.objects.filter(perfil_niñera=request.user) 
-
-        return render(request, 'mainapp/index.html', {
-            'perfil_list' : perfil_list,
-        })
-    return render(request, 'mainapp/index.html', {
-        })
-=======
 from .forms import NiñeraForm,ClienteForm,RegisterForm,MensajeForm
 from .models import *
 
@@ -108,9 +89,11 @@ def register_niñera(request,user):
     if not request.user.is_authenticated:
         messages.error(request,'No se puede ir a la direccion')
         return redirect('index')
-    if Niñera.objects.filter(perfil_niñera=request.user).exists() or Cliente.objects.filter(perfil_cliente=request.user).exists():
-        
-            return redirect('index')
+
+    if Niñera.objects.filter(perfil=request.user).exists() or \
+        Cliente.objects.filter(perfil=request.user).exists():
+        return redirect('index')
+    
     form = NiñeraForm()
 
 
@@ -139,6 +122,12 @@ def register_niñera(request,user):
 
 @login_required(login_url='logueo')
 def register_cliente(request,user):
+   
+    if Niñera.objects.filter(perfil=request.user).exists() or \
+    Cliente.objects.filter(perfil=request.user).exists():
+        messages.error(request, message='Ya has creado un perfil')
+        return redirect('index')
+
 
     if not request.user.is_authenticated:
         messages.error(request,'No se puede ir a la direccion')
@@ -154,9 +143,10 @@ def register_cliente(request,user):
         if form.is_valid():
             form = form.save(commit=False)
             user = User.objects.get(username = request.user.username)
-            form.perfil_cliente = user
-            
-            if not  Niñera.objects.all():
+
+            form.perfil = user
+            # if not Cliente.objects.all():
+            if form.perfil not in Cliente.objects.all():
                 form.save()
                 messages.success(request, message='Registro como cliente exitoso!')
                 return redirect('index')  # access granted
