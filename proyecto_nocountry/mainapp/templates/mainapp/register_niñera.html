@@ -1,18 +1,23 @@
 {% extends './base.html' %}
+{% load tailwind_tags %}
 {% block content %}
-    <h2>REGISTRARME COMO NIÑERA</h2>
-    <div>
-        {% for message in messages %}
-        {{message}}
-        {% endfor %}
-    </div>
-    <form action="" method="POST">
+<div class="flex flex-col items-center mt-11">
+    <h2 class="text-2xl text-center underline">REGISTRARME COMO NIÑERA</h2>
+    <form action="" method="POST" >
         {% csrf_token %}
-        {{form_niñera.as_p}}
-        <button type="submit">Crear</button>
+        {% for field in form_niñera %}
+        <div class="grid justify-center">
+            {{ field.label_tag }}
+            {{ field }}
+        </div>
+        {% endfor %}
+        <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-6 mb-6">
+            Crear
+        </button>
     </form>
-    <div>
-        ¿Ya estás registrada? <a href="{% url 'logueo' %}">Inicia Sesión</a>
+       
+    <div class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-12">
+        ¿Ya estás registrada? <a href="{% url 'logueo' %}" class="underline">Inicia Sesión</a>
     </div>
-
+</div>
     {% endblock %}

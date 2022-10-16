@@ -68,8 +68,8 @@ def register_niñera(request,user):
     if not request.user.is_authenticated:
         messages.error(request,'No se puede ir a la direccion')
         return redirect('index')
-    if Niñera.objects.filter(perfil_niñera=request.user).exists() or \
-        Cliente.objects.filter(perfil_cliente=request.user).exists():
+    if Niñera.objects.filter(perfil=request.user).exists() or \
+        Cliente.objects.filter(perfil=request.user).exists():
         return redirect('index')
     
     form = NiñeraForm()
@@ -100,8 +100,8 @@ def register_niñera(request,user):
 @login_required(login_url='logueo')
 def register_cliente(request,user):
    
-    if Niñera.objects.filter(perfil_niñera=request.user).exists() or \
-    Cliente.objects.filter(perfil_cliente=request.user).exists():
+    if Niñera.objects.filter(perfil=request.user).exists() or \
+    Cliente.objects.filter(perfil=request.user).exists():
         messages.error(request, message='Ya has creado un perfil')
         return redirect('index')
 
@@ -116,9 +116,9 @@ def register_cliente(request,user):
         if form.is_valid():
             form = form.save(commit=False)
             user = User.objects.get(username = request.user.username)
-            form.perfil_cliente = user
+            form.perfil = user
             # if not Cliente.objects.all():
-            if form.perfil_cliente not in Cliente.objects.all():
+            if form.perfil not in Cliente.objects.all():
                 form.save()
                 messages.success(request, message='Registro como cliente exitoso!')
                 return redirect('index')
