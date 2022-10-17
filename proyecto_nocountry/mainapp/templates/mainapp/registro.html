@@ -3,6 +3,7 @@
 
 {% block content %}
 <div class="flex flex-col items-center h-screen mt-28">
+    <h2 class="text-2xl text-center underline">REGISTRATE</h2>
     <form action="" method="POST" class="flex flex-col items-center ">
         {% csrf_token %}
         {% for field in form %}

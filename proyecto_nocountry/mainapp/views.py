@@ -132,7 +132,7 @@ def register_cliente(request,user):
     if not request.user.is_authenticated:
         messages.error(request,'No se puede ir a la direccion')
         return redirect('index')
-    if Niñera.objects.filter(perfil_niñera=request.user).exists() or Cliente.objects.filter(perfil_cliente=request.user).exists():
+    if Niñera.objects.filter(perfil=request.user).exists() or Cliente.objects.filter(perfil=request.user).exists():
         
             return redirect('index')
     form = ClienteForm()
