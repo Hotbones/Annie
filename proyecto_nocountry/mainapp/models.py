@@ -61,7 +61,7 @@ class Cliente(models.Model):
     domicilio = models.CharField(max_length=200,null=True, blank=True)
     ciudad = models.CharField(max_length=100,null=True, blank=True)
     telefono = models.CharField(max_length=10,help_text='Número sin 0 ni 15',null=True, blank=True)
-
+    descripcion = models.TextField(null=True, blank=True)
 
     
     foto_perfil = models.ImageField(upload_to='img_clientes/', null=True, blank=True)

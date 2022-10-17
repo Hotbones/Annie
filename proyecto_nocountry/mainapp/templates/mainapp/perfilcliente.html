@@ -39,17 +39,28 @@
     </section>
 
     <section>
-            <div class="flex flex-col m-auto rounded-2xl shadow-2xl shadow-slate-900 md:flex-row md:max-w-xl ">
-                <img src="../../static/img/profile1.png" class="object-contain w-full h-96 md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
-                <div class="flex flex-col alig p-4 leading-normal justify-center">
-                    <h2 class="text-3xl tracking-tighter text-center">Maria Perez</h2>
-                    <h3 class="text-2xl text-center">29 años</h3>
-                    <p class="text-lg tracking-tight text-black text-center">Experiencia con bebés de recién nacidos hasta los 3 años.</p>
-                    <p class="font-normal text-black text-center">Me encantan los niños, son mi pasión. Tengo carnet B2 y auto propio. Me gusta cocinar y ayudar a los niños con su tarea.</p>
-                    <p class="text-right">$500 / hora</p>
-                </div>
+        <!-- MI PERFIL -->
+        <div class="flex flex-col m-auto rounded-2xl shadow-2xl shadow-slate-900 md:flex-row md:max-w-xl ">
+            <img src="../../static/img/profile1.png" class="object-contain w-full h-96 md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
+            <div class="flex flex-col alig p-4 leading-normal justify-center">
+                <h2 class="text-3xl tracking-tighter text-center">{{ mi_perfil.nombre }} {{mi_perfil.apellido}}</h2>
+                <h3 class="text-2xl text-center">{{ mi_perfil.ciudad }}</h3>
+                <p class="text-lg tracking-tight text-black text-center">{{mi_perfil.descripcion}}</p>
+                <p class="font-normal text-black text-center">Teléfono de contacto: {{mi_perfil.telefono}}</p>
+                <!-- <p class="text-right">Tarifa por hora: ${{mi_perfil.tarifa_por_hora}}</p> -->
             </div>
-    </section>        
+        </div>
+<br><br>
+        <div class="mx-auto w-2/5  text-center font-sans transition duration-300 hover:scale-125">
+            <p class="bg-blue-400 rounded-m">
+                {% for edad in mi_perfil.edades %}
+                    <li>{{edad}}</li>
+                {% endfor %}
+            </p>
+        </div>
+
+
+</section>       
 </body>
 
 
