@@ -16,5 +16,4 @@ urlpatterns = [
     path('logout/', views.log_out, name="logout"),
     path('delete_perfil/<str:user>',views.delete_perfil,name='delete_perfil'),
     # path('reservas/<int:id>',views.reserva_add,name="reservas"),
-
 ]
