@@ -192,23 +192,23 @@ def update_perfil(request,user):
 
 
        
-def reserva_add(request,id):
-    if request.user.is_authenticated:
-        form = ReservationForm(request.POST)
-        if form.is_valid():
-            formulario = form.save(commit=False)
-            user = User.objects.get(username=request.user.username)
-            formulario.user_id = user
+# def reserva_add(request,id):
+#     if request.user.is_authenticated:
+#         form = ReservationForm(request.POST)
+#         if form.is_valid():
+#             formulario = form.save(commit=False)
+#             user = User.objects.get(username=request.user.username)
+#             formulario.user_id = user
 
-            id = Cliente.objects.get(id = id)
-            formulario.sitter_publication =  id # refrencia al id de publicacion de sitter
+#             id = Cliente.objects.get(id = id)
+#             formulario.sitter_publication =  id # refrencia al id de publicacion de sitter
 
-            form.save()
-            messages.success(request,'Reserva creada correctamente')
-            return redirect('index')
-    return render(request, 'mainapp/reservas.html',{
-        'form' : form,
-    })
+#             form.save()
+#             messages.success(request,'Reserva creada correctamente')
+#             return redirect('index')
+#     return render(request, 'mainapp/reservas.html',{
+#         'form' : form,
+#     })
         
 @login_required(login_url='logueo')
 def crear_mensaje(request,pk):
