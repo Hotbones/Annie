@@ -22,7 +22,7 @@
                     </h5>
                 </div>
             <div class="grid-flow-col ">
-<<<<<<< HEAD
+
                 {% if user.is_authenticated %}
                     <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logout' %}">
                         Log out
@@ -53,31 +53,7 @@
                             Ser niñera
                         </a>
                     {% endif %}
-=======
-               
-              
-                <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logout' %}">
-                    Log out
-                </a>
-                <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'perfil' user.pk %}">
-                    Modificar perfil
-                </a>
-                  
-                <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'delete_perfil' request.user.id %}">
-                    Eliminar perfil
-                </a>
-                    
-                <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'reg-cliente' user %}">
-                    ¿Buscas una niñera?
-                </a>
-                <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'reg-niñera' user %}">
-                    Ser niñera
-                </a>
-                    
-                    
-                
-                    
->>>>>>> db52a651f6c707681fab46ae8c33bc019d8c154b
+
                 {% else %}
                 
                 <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logueo' %}">
