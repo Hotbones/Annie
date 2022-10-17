@@ -156,13 +156,11 @@ def update_perfil(request,user):
             messages.success(request, 'Perfil actualizado exitosamente!')
             return redirect('index')
     except:
-        pass
-    else:
+        messages.error(request,'No existe ningún perfil')
+        return redirect('index')
+    finally:
         context = {'perfil':perfil, 'form':form}
         return render(request, 'mainapp/perfil.html', context)
-    messages.error(request,'Crea un perfil')
-    return redirect('index')
-
     
 
 
