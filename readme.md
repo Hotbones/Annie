@@ -42,7 +42,7 @@ Para las reservas, ambos tipos de usuario aceptarán su conformidad y realizará
 
 |Integrante                 |Rol        |Github|LinkedIn|
 |---------------------------|-----------|-----------------------------------------------|---|
-|Laura Quintar              |UX/UI      |[Laux](https://github.com/lau)                |[Link](https://www.linkedin.com/in/lauraquintar/)|
+|Maria Laura Quintar              |UX/UI      |[Laux](https://github.com/lau)                |[Link](https://www.linkedin.com/in/lauraquintar/)|
 |Jesus Leal                 |Front-end  |[Jesux](https://github.com/imjesusleal)       |[Link](https://www.linkedin.com/in/jesus-leal-6908291b2/)|
 |Santiago Muñoz             |Back-end   |[Santix](https://github.com/SantiagoEzequielMunioz)|[Link](https://www.linkedin.com/in/santiago-muñoz-b4833a236/)|
 |Mateo Pamasime             |Back-end   |[mateox](https://github.com/pamasime)          |[Link](https://www.linkedin.com/in/mateopamasime/)|
@@ -94,7 +94,7 @@ For reservations, both types of user will accept their agreement and carry out t
 
 |Member                     |Rol        |Github|LinkedIn|
 |---------------------------|-----------|-----------------------------------------------|---|
-|Laura Quintar              |UX/UI      |[Laux](https://github.com/lau)                |[Link](https://www.linkedin.com/in/lauraquintar/)|
+|Maria Laura Quintar              |UX/UI      |[Laux](https://github.com/lau)                |[Link](https://www.linkedin.com/in/lauraquintar/)|
 |Jesus Leal                 |Front-end  |[Jesux](https://github.com/imjesusleal)       |[Link](https://www.linkedin.com/in/jesus-leal-6908291b2/)|
 |Santiago Muñoz             |Back-end   |[Santix](https://github.com/SantiagoEzequielMunioz)|[Link](https://www.linkedin.com/in/santiago-muñoz-b4833a236/)|
 |Mateo Pamasime             |Back-end   |[mateox](https://github.com/pamasime)          |[Link](https://www.linkedin.com/in/mateopamasime/)|
