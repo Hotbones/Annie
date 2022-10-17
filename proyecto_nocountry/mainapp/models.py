@@ -57,7 +57,6 @@ class Cliente(models.Model):
 
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
-
     dni = models.IntegerField(unique=True, error_messages ={"unique":"Este DNI ya está registrado."})
     domicilio = models.CharField(max_length=200,null=True, blank=True)
     ciudad = models.CharField(max_length=100,null=True, blank=True)
