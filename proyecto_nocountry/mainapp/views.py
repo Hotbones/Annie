@@ -91,8 +91,8 @@ def register_niñera(request,user):
         messages.error(request,'No se puede ir a la direccion')
         return redirect('index')
     if Niñera.objects.filter(perfil=request.user).exists() or Cliente.objects.filter(perfil=request.user).exists():
-        
-            return redirect('index')
+        messages.error(request, message='Ya has creado un perfil')
+        return redirect('index')
     form = NiñeraForm()
 
 
@@ -151,35 +151,37 @@ def register_cliente(request,user):
 
 
 @login_required(login_url='logueo')
-def update_perfil(request,perfil_id):
-    if Cliente.objects.filter(perfil = request.user).exists():
-        perfil = Cliente.objects.filter(pk=perfil_id)
-        form = ClienteForm(request.POST or None)
-        user = User.objects.get(username = request.user.username)
-        form.perfil = user
-        if form.is_valid():
-            form.save() 
-            messages.success(request,'Pefil actualizado correctamente')
+def update_perfil(request,user):
+    try:
+        perfil = Niñera.objects.get(perfil_id=request.user.id)
+        form = NiñeraForm(instance=perfil)
+        if request.method == 'POST':
+            form = NiñeraForm(request.POST, instance=perfil)
+            form.save()
+            messages.success(request, 'Perfil actualizado exitosamente!')
             return redirect('index')
-        if request.user != perfil.perfil:
+    except:
+        pass
+
+    try:
+        perfil = Cliente.objects.get(perfil_id=request.user.id)
+        form = ClienteForm(instance=perfil)
+        if request.method == 'POST':
+            form = ClienteForm(request.POST, instance=perfil)
+            form.save()
+            messages.success(request, 'Perfil actualizado exitosamente!')
             return redirect('index')
-        return render(request,'mainapp/perfil.html',{
-                'perfil':perfil, 'form' : form
-            })
-    elif Niñera.objects.filter(perfil = request.user).exists():
-        perfil = Niñera.objects.get(pk=perfil_id)
-        form = NiñeraForm(request.POST or None, instance=perfil)
-        if form.is_valid():
-            form.save() 
-            messages.success(request,'Pefil actualizado correctamente')
-            return redirect('index')
-        if request.user.username != request.user:
-            return redirect('index')
-        return render(request,'mainapp/perfil.html',{
-                'perfil':perfil, 'form' : form
-            })
-    return render(request,'mainapp/perfil.html',{
-            })
+    except:
+        pass
+    else:
+        context = {'perfil':perfil, 'form':form}
+        return render(request, 'mainapp/perfil.html', context)
+    messages.error(request,'Crea un perfil')
+    return redirect('index')
+
+    
+
+
 def delete_perfil(request,cliente_id):
     if not request.user.is_authenticated:
         messages.error(request,'Tienes que iniciar sesion')
@@ -187,20 +189,16 @@ def delete_perfil(request,cliente_id):
 
     
     if Cliente.objects.filter(perfil=request.user).exists(): 
-        if Cliente.objects.filter(perfil=request.user):
-            cliente_delete= Cliente.objects.filter(perfil=request.user)
-            cliente_delete.delete()
-            messages.success(request,'Cliente Eliminada Correctamente')
+        cliente_delete= Cliente.objects.filter(perfil=request.user)
+        cliente_delete.delete()
+        messages.success(request,'Cliente Eliminada Correctamente')
     elif  Niñera.objects.filter(perfil=request.user).exists():
-        if Niñera.objects.get(perfil=cliente_id):
-            
-                Niñera_delete= Niñera.objects.get(pk=cliente_id)
-                Niñera_delete.delete()
-                messages.success(request,'Niñera Eliminada Correctamente')
-                return redirect('index')
+        Niñera_delete= Niñera.objects.filter(perfil=cliente_id)
+        print(Niñera_delete)
+        Niñera_delete.delete()
+        messages.success(request,'Niñera Eliminada Correctamente')
+        return redirect('index')
+    
     else:
-        form = MensajeForm()
-
-    context = {'form':form}
-
-    return render(request,'mainapp/crear_mensaje.html',context)
+        messages.error(request,'No se puede acceder')
+    return redirect('index')
