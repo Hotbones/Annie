@@ -185,3 +185,21 @@ def delete_perfil(request,cliente_id):
     else:
         messages.error(request,'No se puede acceder')
     return redirect('index')
+
+def reserva_add(request,id):
+    if request.user.is_authenticated:
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            formulario = form.save(commit=False)
+            user = User.objects.get(username=request.user.username)
+            formulario.user_id = user
+
+            id = Cliente.objects.get(id = id)
+            formulario.sitter_publication =  id # refrencia al id de publicacion de sitter
+
+            form.save()
+            messages.success(request,'Reserva creada correctamente')
+            return redirect('index')
+    return render(request, 'mainapp/reservas.html',{
+        'form' : form,
+    })   

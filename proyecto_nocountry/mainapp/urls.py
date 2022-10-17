@@ -15,5 +15,5 @@ urlpatterns = [
     path('logueo/', views.logueo, name="logueo"),
     path('logout/', views.log_out, name="logout"),
     path('delete_perfiles/<cliente_id>',views.delete_perfil,name='delete_perfil'),
-    #path('reservas/<int:id>',views.reserva_add,name="reservas"),
+    path('reservas/<int:id>',views.reserva_add,name="reservas"),
 ]
