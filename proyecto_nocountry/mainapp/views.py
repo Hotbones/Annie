@@ -6,25 +6,9 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import NiñeraForm,ClienteForm,RegisterForm,ReservationForm,MensajeForm
 from .models import *
 
-def index(request):
-    if request.user.is_authenticated: 
-        user = request.user
-        if Cliente.objects.filter(perfil=user).exists():
-            if Cliente.objects.filter(perfil=request.user):
-                perfil_list = Cliente.objects.get(perfil=request.user) 
-         
-            return render(request, 'mainapp/index.html', {
-                'perfil_list' : perfil_list,
-            })
-        elif Niñera.objects.filter(perfil=user).exists():
-            if Niñera.objects.filter(perfil=request.user):
-                perfil_list = Niñera.objects.filter(perfil=request.user) 
-            return render(request, 'mainapp/index.html', {
-                'perfil_list' : perfil_list,
-            })
-    
-    return render(request, 'mainapp/index.html', {
-            })
+def index(request):  
+    return render(request, 'mainapp/index.html', {})
+
 def searcher(request):
     return render(request, 'mainapp/searcher.html', {})
 
@@ -192,6 +176,7 @@ def delete_perfil(request,cliente_id):
         cliente_delete= Cliente.objects.filter(perfil=request.user)
         cliente_delete.delete()
         messages.success(request,'Cliente Eliminada Correctamente')
+        return redirect('index')
     elif  Niñera.objects.filter(perfil=request.user).exists():
         Niñera_delete= Niñera.objects.filter(perfil=cliente_id)
         print(Niñera_delete)
