@@ -6,8 +6,22 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import NiñeraForm,ClienteForm,RegisterForm,ReservationForm,MensajeForm
 from .models import *
 
-def index(request):  
-    return render(request, 'mainapp/index.html', {})
+def index(request):
+    perfil=None
+    cliente=None
+    niñera=None
+    try:
+        perfil = Niñera.objects.get(perfil_id=request.user.id)
+        niñera = perfil
+    except:
+        pass
+    try:
+        perfil = Cliente.objects.get(perfil_id=request.user.id)
+        cliente = perfil
+    except:
+        pass
+    context = {'perfil':perfil,'niñera':niñera,'cliente':cliente}
+    return render(request, 'mainapp/index.html', context)
 
 def searcher(request):
     return render(request, 'mainapp/searcher.html', {})
