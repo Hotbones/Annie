@@ -1,0 +1,19 @@
+<div id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch" class="relative">
+    <button class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full focus:ring-4">
+      Conectate
+    </button>
+    <div id="dropdownSearch" class="hidden top-full min-w-full w-max shadow-md mt-1 rounded">
+        <form action="" method="post" aria-labelledby="dropdownDefault">
+            {% csrf_token %}
+            <div class="grupo">
+                <label for="usuario">Username</label>
+                <input type="placeholder" name="usuario">
+            </div>
+            <div class="grupo">
+                <label for="password" >Password</label>
+                <input type="password" name="password">
+            </div>
+            <button type="submit">Conectarse</button>
+        </form>
+    </div>
+</div>

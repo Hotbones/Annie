@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,8 @@
     <title>Document</title>
 </head>
 
+=======
+>>>>>>> 75e1d78eba2100f257ad8a5dd09144158f391f9e
 {% load tailwind_tags %}
 {% load static %}
 <!DOCTYPE html>
@@ -16,9 +19,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% tailwind_css %}
+<<<<<<< HEAD
 <body class="bg-orange-200">
     {% include './messages.html' %}
 
+=======
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">   
+</head>
+
+<body class="from-red-100 via-orange-300 to-red-500 bg-gradient-to-br">
+    {% include './messages.html' %}
+>>>>>>> 75e1d78eba2100f257ad8a5dd09144158f391f9e
     <section class="header">
         <div class="flex justify-evenly text-2xl text-red-400 mt-2">
             <h1 class="font-bold py-2 px-4 text-3xl">Annie</h1>
@@ -30,6 +42,7 @@
                     </h5>
                 </div>
             <div class="grid-flow-col ">
+<<<<<<< HEAD
                
               
                 <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logout' %}">
@@ -41,11 +54,17 @@
                   
                     <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'delete_perfil' request.user.id %}">
                         Eliminar perfil
+=======
+                {% if user.is_authenticated %}
+                    <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logout' %}">
+                        Log out
+>>>>>>> 75e1d78eba2100f257ad8a5dd09144158f391f9e
                     </a>
                     
                     <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'reg-cliente' user %}">
                         ¿Buscas una niñera?
                     </a>
+<<<<<<< HEAD
                     <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'reg-niñera' user %}">
                         Ser niñera
                     </a>
@@ -53,7 +72,27 @@
                     
                 
                     
+=======
+                    {% if niñera %}
+                        <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'perfilniñera' %}">
+                            Mi Perfil
+                        </a>
+                    {% else %}
+                        <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'perfilcliente' %}">
+                            Mi Perfil
+                        </a>
+                    {% endif %}
+                    {% if not perfil %}
+                        <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'reg-cliente' user %}">
+                            ¿Buscas una niñera?
+                        </a>
+                        <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'reg-niñera' user %}">
+                            Ser niñera
+                        </a>
+                    {% endif %}
+>>>>>>> 75e1d78eba2100f257ad8a5dd09144158f391f9e
                 {% else %}
+                
                 <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logueo' %}">
                     ¿Buscas una niñera?
                 </a>
@@ -86,7 +125,7 @@
                     </form>
                 </div>
                 <div>
-                    <img src="../../static/img/indexhero1.png" class="-translate-y-20" alt="">
+                    <img src="../../static/img/babyindex1.png" class="-translate-y-20" alt="">
                     <img src="../../static/img/indexcircle.png" class="h-8 absolute top-28 animate-ping">
                     <img src="../../static/img/indexcircle.png" class="h-8 absolute top-28 left-16 animate-ping">
                     <img src="../../static/img/indexcircle.png" class="h-8 absolute top-80 left-96 animate-ping">
@@ -100,7 +139,7 @@
 
     <section id="main" class="grid justify-center">
         
-        <div class="flex flex-col bg-orange-200 rounded-2xl border shadow-md md:flex-row md:max-w-xl transition-all ease-in-out hover:bg-red-400">
+        <div class="h-44 ml-40 flex flex-col bg-orange-200 rounded-2xl border shadow-md md:flex-row md:max-w-xl transition-all ease-in-out hover:bg-red-400 mb-12 ">
             <img src="../../static/img/main1.jpg" class="object-cover w-full h-96 md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
             <div class="flex flex-col alig p-4 leading-normal">
                 <img src="../../static/img/indexicon1.png" class="w-9 animate-bounce ml-36" alt="">
@@ -109,7 +148,7 @@
             </div>
         </div>
 
-        <div class="flex flex-col-reverse bg-orange-200 rounded-2xl border shadow-md md:flex-row md:max-w-xl transition-all ease-in-out hover:bg-red-400">
+        <div class= "h-44 -ml-32 flex flex-col-reverse bg-orange-200 rounded-2xl border shadow-md md:flex-row md:max-w-xl transition-all ease-in-out hover:bg-red-400 mb-12">
             <img src="../../static/img/main1.jpg" class="object-cover w-full h-96 md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
             <div class="flex flex-col alig p-4 leading-normal">
                 <img src="../../static/img/indexicon1.png" class="w-9 animate-bounce ml-36" alt="">
@@ -119,20 +158,21 @@
         </div>
 
 
-        <div class="flex flex-col bg-orange-200 rounded-2xl border shadow-md md:flex-row md:max-w-xl transition-all ease-in-out hover:bg-red-400">
+        <div class="h-44 ml-40 flex flex-col bg-orange-200 rounded-2xl border shadow-md md:flex-row md:max-w-xl transition-all ease-in-out hover:bg-red-400 mb-12">
             <img src="../../static/img/main1.jpg" class="object-cover w-full h-96 md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
-            <div class="flex flex-col alig p-4 leading-normal">
+            <div class="flex flex-col alig p-4 leading-normal ">
                 <img src="../../static/img/indexicon1.png" class="w-9 animate-bounce ml-36" alt="">
                 <h2 class="mb-2 text-2xl tracking-tight text-black">Personalizacion</h2>
                 <p class="mb-3 font-normal text-black">Resultado de niñeras, segun gran variedad de filtros</p>
             </div>
         </div>
     </section>
-
-    <footer>
-        {% include 'mainapp/extends/footer.html' %}
-    </footer>
 </body>
-<script src="{% static '/js/navbar.js' %}"></script>
+
+<footer >
+    {% include 'mainapp/extends/footer.html' %}
+</footer>
+
+<script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
 </html>
 

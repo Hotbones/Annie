@@ -40,10 +40,16 @@ module.exports = {
          */
         // '../../**/*.py'
     ],
+
+    variants: {
+        extend: {
+            background: ['group-focus']
+        }
+    },
+    
     theme: {
         extend: {
-            
-        },
+        }
     },
     plugins: [
         /**

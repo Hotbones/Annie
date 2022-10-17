@@ -1,17 +1,27 @@
 {% extends './base.html' %}
+{% load tailwind_tags %}
 {% block content %}
-    <h2>REGISTER DE CLIENTE</h2>
-    <div>
-        
-    </div>
-    <form action="" method="POST">
+
+<div class="flex flex-col items-center">    
+    <h2 class="text-2xl text-center underline">REGISTER DE CLIENTE</h2>
+    <form action="" method="POST" class="">
+
         {% csrf_token %}
-        {{form_cliente.as_p}}
-        <button type="submit">Crear</button>
+        {% for field in form_cliente %}
+        <div class="grid justify-center text-center">
+            {{ field.label_tag }}
+            {{ field }}
+
+        </div>
+        {% endfor %}
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm min-w-full sm:w-auto px-5 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-6 mb-6">
+            Crear
+        </button>
     </form>
-    <div>
-        ¿Ya estás registrado? <a href="{% url 'logueo' %}">Inicia Sesión</a>
+    <div class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-12">
+        ¿Ya estás registrado? <a href="{% url 'logueo' %}" class="underline">Inicia Sesión</a>
     </div>
+</div>
 </body>
 </html>
 {% endblock %}
