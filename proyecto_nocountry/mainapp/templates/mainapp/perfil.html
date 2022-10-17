@@ -21,5 +21,10 @@
     <div>
         <a href="{% url 'index' %}">Volver a Inicio</a>
     </div>
+    {% if True %}
+    <div>
+        <a href="{% url 'reservas' user.id %}">Hacer Reserva</a>
+    </div>
+    {% endif %}
 </body>
 </html>

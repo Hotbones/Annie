@@ -3,46 +3,28 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-<<<<<<< HEAD
-from .forms import NiñeraForm,ClienteForm,RegisterForm,ReservationForm
+from .forms import NiñeraForm,ClienteForm,RegisterForm,ReservationForm,MensajeForm
 from .models import *
 
 def index(request):
     if request.user.is_authenticated: 
-        perfil_list = Cliente.objects.filter(perfil_cliente=request.user) 
-
-        if perfil_list.exists():
-            perfil_list = Cliente.objects.filter(perfil_cliente=request.user) 
-
-        elif Niñera.objects.filter(perfil_niñera=request.user).exists():
-            perfil_list = Niñera.objects.filter(perfil_niñera=request.user) 
-
-        return render(request, 'mainapp/index.html', {
-            'perfil_list' : perfil_list,
-        })
+        user = request.user
+        if Cliente.objects.filter(perfil=user).exists():
+            if Cliente.objects.filter(perfil=request.user):
+                perfil_list = Cliente.objects.get(perfil=request.user) 
+         
+            return render(request, 'mainapp/index.html', {
+                'perfil_list' : perfil_list,
+            })
+        elif Niñera.objects.filter(perfil=user).exists():
+            if Niñera.objects.filter(perfil=request.user):
+                perfil_list = Niñera.objects.filter(perfil=request.user) 
+            return render(request, 'mainapp/index.html', {
+                'perfil_list' : perfil_list,
+            })
+    
     return render(request, 'mainapp/index.html', {
-        })
-=======
-from .forms import NiñeraForm,ClienteForm,RegisterForm,MensajeForm
-from .models import *
-
-def index(request):
-    perfil=None
-    cliente=None
-    niñera=None
-    try:
-        perfil = Niñera.objects.get(perfil_id=request.user.id)
-        niñera = perfil
-    except:
-        pass
-    try:
-        perfil = Cliente.objects.get(perfil_id=request.user.id)
-        cliente = perfil
-    except:
-        pass
-    context = {'perfil':perfil,'niñera':niñera,'cliente':cliente}
-    return render(request, 'mainapp/index.html', context)
-
+            })
 def searcher(request):
     return render(request, 'mainapp/searcher.html', {})
 
@@ -108,7 +90,7 @@ def register_niñera(request,user):
     if not request.user.is_authenticated:
         messages.error(request,'No se puede ir a la direccion')
         return redirect('index')
-    if Niñera.objects.filter(perfil_niñera=request.user).exists() or Cliente.objects.filter(perfil_cliente=request.user).exists():
+    if Niñera.objects.filter(perfil=request.user).exists() or Cliente.objects.filter(perfil=request.user).exists():
         
             return redirect('index')
     form = NiñeraForm()
@@ -120,15 +102,11 @@ def register_niñera(request,user):
         if form.is_valid():
             form = form.save(commit=False)
             user = User.objects.get(username = request.user.username)
-            form.perfil_niñera = user
-            if not Cliente.objects.all():
-                form.save()
-                messages.success(request, message='Registro como niñera exitoso!')
-                return redirect('index')  # access granted
-                
-            else:
-                messages.error(request, message='Esta niñera ya se encuentra registrada')
-                return redirect('index')    
+            form.perfil = user
+            form.save()
+            messages.success(request, message='Registro como niñera exitoso!')
+            return redirect('index')  # access granted
+           
             
         else:
             messages.error(request, message='Ha ocurrido un error con los campos a llenar.')
@@ -143,7 +121,7 @@ def register_cliente(request,user):
     if not request.user.is_authenticated:
         messages.error(request,'No se puede ir a la direccion')
         return redirect('index')
-    if Niñera.objects.filter(perfil_niñera=request.user).exists() or Cliente.objects.filter(perfil_cliente=request.user).exists():
+    if Niñera.objects.filter(perfil=request.user).exists() or Cliente.objects.filter(perfil=request.user).exists():
         
             return redirect('index')
     form = ClienteForm()
@@ -154,16 +132,10 @@ def register_cliente(request,user):
         if form.is_valid():
             form = form.save(commit=False)
             user = User.objects.get(username = request.user.username)
-            form.perfil_cliente = user
-            
-            if not  Niñera.objects.all():
-                form.save()
-                messages.success(request, message='Registro como cliente exitoso!')
-                return redirect('index')  # access granted
-            else:
-                return redirect('index')
-           
-            
+            form.perfil = user
+            form.save()
+            messages.success(request, message='Registro como cliente exitoso!')
+            return redirect('index')  # access granted     
         else:
             messages.error(request, message='Ha ocurrido un error con los campos a llenar.')
     else:
@@ -173,52 +145,48 @@ def register_cliente(request,user):
 
 
 @login_required(login_url='logueo')
-def update_perfil(request,user):
-    if Cliente.objects.all():
-            perfil = Cliente.objects.get(perfil_cliente=request.user)
-            form = ClienteForm(instance=perfil)
-            if request.user != perfil.perfil_cliente:
-                messages.success(request,'No estas autorizado')
-            mod = Cliente.objects.get(perfil_cliente=request.user)
-
-            messages.error(request,'No existe ningún perfil')
-
-    puntaje=0
-    usuario = User.objects.get(id=pk)
-
-    form = MensajeForm(instance=usuario)
-    if request.method == 'POST':
-        form = MensajeForm(request.POST, instance=usuario)
+def update_perfil(request,perfil_id):
+    if Cliente.objects.filter(perfil = request.user).exists():
+        perfil = Cliente.objects.filter(pk=perfil_id)
+        form = ClienteForm(request.POST or None)
+        user = User.objects.get(username = request.user.username)
+        form.perfil = user
         if form.is_valid():
-            comentarista = request.user.username
-            puntaje=str(puntaje)
-            nuevo_comentario = form.cleaned_data['mensaje']
-            c = Mensaje(usuario=usuario, comentarista=comentarista, puntaje=puntaje, mensaje=nuevo_comentario)
-            c.save()
-
+            form.save() 
+            messages.success(request,'Pefil actualizado correctamente')
             return redirect('index')
-
-    
-        context = {'perfil':perfil, 'form':form}
-        return render(request, 'mainapp/perfil.html', context)
-       
-    messages.error(request,'Tienes que crear un perfil')
-    return redirect('index')
-
+        if request.user != perfil.perfil:
+            return redirect('index')
+        return render(request,'mainapp/perfil.html',{
+                'perfil':perfil, 'form' : form
+            })
+    elif Niñera.objects.filter(perfil = request.user).exists():
+        perfil = Niñera.objects.get(pk=perfil_id)
+        form = NiñeraForm(request.POST or None, instance=perfil)
+        if form.is_valid():
+            form.save() 
+            messages.success(request,'Pefil actualizado correctamente')
+            return redirect('index')
+        if request.user.username != request.user:
+            return redirect('index')
+        return render(request,'mainapp/perfil.html',{
+                'perfil':perfil, 'form' : form
+            })
+    return render(request,'mainapp/perfil.html',{
+            })
 def delete_perfil(request,cliente_id):
     if not request.user.is_authenticated:
         messages.error(request,'Tienes que iniciar sesion')
         return redirect('index')
 
     
-    if Cliente.objects.all():
-        
-        if Cliente.objects.get(pk=cliente_id):
-            cliente_delete= Cliente.objects.get(pk=cliente_id)
+    if Cliente.objects.filter(perfil=request.user).exists(): 
+        if Cliente.objects.filter(perfil=request.user):
+            cliente_delete= Cliente.objects.filter(perfil=request.user)
             cliente_delete.delete()
             messages.success(request,'Cliente Eliminada Correctamente')
-    elif Niñera.objects.all():
-        if Niñera.objects.get(pk=cliente_id):
+    elif  Niñera.objects.filter(perfil=request.user).exists():
+        if Niñera.objects.get(perfil=cliente_id):
             
                 Niñera_delete= Niñera.objects.get(pk=cliente_id)
                 Niñera_delete.delete()
