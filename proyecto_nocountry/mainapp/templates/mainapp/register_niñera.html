@@ -1,8 +1,10 @@
 {% extends './base.html' %}
 {% load tailwind_tags %}
 {% block content %}
+
 <div class="flex flex-col items-center mt-11">
     <h2 class="text-2xl text-center underline">REGISTRARME COMO NIÑERA</h2>
+
     <form action="" method="POST" >
         {% csrf_token %}
         {% for field in form %}

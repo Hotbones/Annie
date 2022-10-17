@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Niñera,Cliente,Reserva, Mensaje
+from .models import Niñera,Cliente,Reserva,Mensaje
 
 
 class NiñeraForm(forms.ModelForm):
@@ -80,4 +80,5 @@ class ReservationForm(forms.ModelForm):
 class MensajeForm(forms.ModelForm):
     class Meta:
         model = Mensaje
-        fields = ('puntaje','mensaje')
+        fields = '__all__'
+        exclude = ['created','updated']

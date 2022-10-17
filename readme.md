@@ -1,8 +1,9 @@
 <a name="beginning"></a>
 [Español](#ES) - [English](#EN)
 
-# Annie app
-La revolucionaria forma de reservar y contratar niñeras de manera on line.
+# Annie app: tu niñera ideal.
+Una nueva manera de reservar y contratar tu niñera personalizada de manera online.
+Annie es la plataforma de contratación nueva de Argentina.
 
 
 ![Baby](https://user-images.githubusercontent.com/105388226/195204215-cee50a6a-0b5d-4aae-b94b-3a57422432fe.png)
@@ -10,14 +11,16 @@ La revolucionaria forma de reservar y contratar niñeras de manera on line.
 <a name="ES"></a>
 ## Descripción del proyecto
 
-Como usuario puedo elegir dos roles: Cliente o Niñera. 
-    
-   * Como Cliente, puedes validar una serie de características y aptitudes con las que cuentan los Niñeras. Puedes elegir en el calendario que días y horarios
-    esta libre la Niñera a elegir. 
-    
-   * Como Niñera, puedes conocer las características del cliente y sus necesidades. 
+La página web Annie ofrece:
 
-Para las reservas, ambos tipos de usuario aceptarán su conformidad y realizarán la transacción económica.
+ * Personalización: resultados de niñeras según gran variedad de filtros, obteniendo diferentes perfiles para encontrar la niñera ideal.
+
+ * Seguridad: perfiles de niñeras y clientes, con identificación de identidad, asegurando una comunidad basada en la confianza, transparencia y veracidad de sus miembros.
+
+
+Podrás registrar cómo perfil de "Cliente", donde se validará una serie de características y aptitudes con que cuentan las niñeras registradas. Y perfil de "Niñera", se podrá conocer las características del cliente y sus necesidades, en base a valoración y comentarios.
+
+El cliente selecciona el perfil de niñera de su interés, y ambas partes confirman la reserva, aceptarán dicha conformidad y realizarán la transacción económica para dar inicio de los servicios contratados.
 
 ## Tecnologías usadas para la app:
 
@@ -42,7 +45,7 @@ Para las reservas, ambos tipos de usuario aceptarán su conformidad y realizará
 
 |Integrante                 |Rol        |Github|LinkedIn|
 |---------------------------|-----------|-----------------------------------------------|---|
-|Laura Quintar              |UX/UI      |[Laux](https://github.com/lau)                |[Link](https://www.linkedin.com/in/lauraquintar/)|
+|Maria Laura Quintar              |UX/UI      |[Laux](https://github.com/lau)                |[Link](https://www.linkedin.com/in/lauraquintar/)|
 |Jesus Leal                 |Front-end  |[Jesux](https://github.com/imjesusleal)       |[Link](https://www.linkedin.com/in/jesus-leal-6908291b2/)|
 |Santiago Muñoz             |Back-end   |[Santix](https://github.com/SantiagoEzequielMunioz)|[Link](https://www.linkedin.com/in/santiago-muñoz-b4833a236/)|
 |Mateo Pamasime             |Back-end   |[mateox](https://github.com/pamasime)          |[Link](https://www.linkedin.com/in/mateopamasime/)|
@@ -94,7 +97,7 @@ For reservations, both types of user will accept their agreement and carry out t
 
 |Member                     |Rol        |Github|LinkedIn|
 |---------------------------|-----------|-----------------------------------------------|---|
-|Laura Quintar              |UX/UI      |[Laux](https://github.com/lau)                |[Link](https://www.linkedin.com/in/lauraquintar/)|
+|Maria Laura Quintar              |UX/UI      |[Laux](https://github.com/lau)                |[Link](https://www.linkedin.com/in/lauraquintar/)|
 |Jesus Leal                 |Front-end  |[Jesux](https://github.com/imjesusleal)       |[Link](https://www.linkedin.com/in/jesus-leal-6908291b2/)|
 |Santiago Muñoz             |Back-end   |[Santix](https://github.com/SantiagoEzequielMunioz)|[Link](https://www.linkedin.com/in/santiago-muñoz-b4833a236/)|
 |Mateo Pamasime             |Back-end   |[mateox](https://github.com/pamasime)          |[Link](https://www.linkedin.com/in/mateopamasime/)|
