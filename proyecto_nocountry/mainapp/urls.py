@@ -15,7 +15,7 @@ urlpatterns = [
     path('<int:pk>/add-comment', views.crear_mensaje, name='crear_mensaje'),
     path('logueo/', views.logueo, name="logueo"),
     path('logout/', views.log_out, name="logout"),
-    #path('delete_perfiles/<cliente_id>',views.delete_perfil,name='delete_perfil'),
+    path('delete_perfil/<str:user>',views.delete_perfil,name='delete_perfil'),
     # path('reservas/<int:id>',views.reserva_add,name="reservas"),
 ]
 

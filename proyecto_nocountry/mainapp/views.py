@@ -39,6 +39,7 @@ def perfil_niñera(request):
 def perfil_cliente(request):
     clientes = Cliente.objects.all()
     mi_perfil = Cliente.objects.get(perfil_id=request.user.id)
+    
     context = {'clientes':clientes, 'mi_perfil':mi_perfil}
     return render(request, 'mainapp/perfilcliente.html', context)
 
@@ -191,9 +192,29 @@ def update_perfil(request,user):
         messages.error(request,'No existe ningún perfil')
         return redirect('index')
     finally:
+        if perfil == None:
+            messages.error(request,'No se puede acceder')
         context = {'perfil':perfil, 'form':form}
         return render(request, 'mainapp/perfil.html', context)
 
+def delete_perfil(request,user):
+    if not request.user.is_authenticated:
+        messages.error(request,'Tienes que iniciar sesion')
+        return redirect('index')
+
+    if Cliente.objects.filter(perfil=request.user).exists(): 
+        cliente_delete= Cliente.objects.filter(perfil=request.user)
+        cliente_delete.delete()
+
+    elif Niñera.objects.filter(perfil=request.user).exists():
+        niñera_delete= Niñera.objects.filter(perfil=user)
+        niñera_delete.delete()
+    else:
+        messages.error(request,'No se puede acceder')
+        return redirect('index')
+    
+    messages.success(request,'Perfil Eliminado Correctamente')
+    return redirect('index')
 
        
 # def reserva_add(request,id):

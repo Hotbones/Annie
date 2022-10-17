@@ -5,7 +5,7 @@
     <h2 class="text-2xl text-center underline">REGISTRARME COMO NIÑERA</h2>
     <form action="" method="POST" >
         {% csrf_token %}
-        {% for field in form_niñera %}
+        {% for field in form %}
         <div class="grid justify-center">
             {{ field.label_tag }}
             {{ field }}
