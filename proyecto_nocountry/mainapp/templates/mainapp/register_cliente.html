@@ -2,27 +2,32 @@
 {% load tailwind_tags %}
 {% block content %}
 
-<div class="flex flex-col items-center">    
+<div class="flex flex-col items-center mt-11">    
     <h2 class="text-2xl text-center underline">REGISTER DE CLIENTE</h2>
-    <form action="" method="POST" class="">
-        
-      
-        {% csrf_token %}
-        {% for field in form_cliente %}
-        <div class="grid justify-center text-center">
-            {{ field.label_tag }}
-            {{ field }}
 
+   
+    <form action="" method="POST" class="">
+        {% for field in form_cliente %}
+        {% csrf_token %}
+        {% if field == form_cliente.foto_perfil %}
+        <div class="block text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm min-w-full sm:w-auto px-5 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-6">
+            {{ field }}
         </div>
+        {% else %}
+        <div class="grid justify-center text-center [&:nth-child(2)]:rounded-lg">
+            {{ field.label_tag }}
+                {{ field }}
+        </div>
+        {% endif %}
         {% endfor %}
         <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm min-w-full sm:w-auto px-5 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-6 mb-6">
             Crear
         </button>
-    </form>
+
     <div class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-12">
         ¿Ya estás registrado? <a href="{% url 'logueo' %}" class="underline">Inicia Sesión</a>
     </div>
 </div>
 </body>
-</html>
 {% endblock %}
+</html>

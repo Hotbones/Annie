@@ -203,27 +203,6 @@ def delete_perfil(request,user):
     messages.success(request,'Perfil Eliminado Correctamente')
     return redirect('index')
 
-def delete_perfil(request,cliente_id):
-    if not request.user.is_authenticated:
-        messages.error(request,'Tienes que iniciar sesion')
-        return redirect('index')
-
-    
-    if Cliente.objects.filter(perfil=request.user).exists(): 
-        cliente_delete= Cliente.objects.filter(perfil=request.user)
-        cliente_delete.delete()
-        messages.success(request,'Cliente Eliminada Correctamente')
-        return redirect('index')
-    elif  Niñera.objects.filter(perfil=request.user).exists():
-        Niñera_delete= Niñera.objects.filter(perfil=cliente_id)
-        print(Niñera_delete)
-        Niñera_delete.delete()
-        messages.success(request,'Niñera Eliminada Correctamente')
-        return redirect('index')
-    
-    else:
-        messages.error(request,'No se puede acceder')
-    return redirect('index')
 
 def reserva_add(request,id):
     if request.user.is_authenticated:
@@ -240,5 +219,4 @@ def reserva_add(request,id):
             messages.success(request,'Reserva creada correctamente')
             return redirect('index')
     return render(request, 'mainapp/reservas.html',{
-        'form' : form,
-    })   
+        'form' : form, })   
