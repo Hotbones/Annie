@@ -43,13 +43,13 @@ module.exports = {
 
     variants: {
         extend: {
-            background: ['group-focus']
+            background: ['group-focus'] 
         }
     },
     
     theme: {
         extend: {
- 
+            
         },
     },
     
