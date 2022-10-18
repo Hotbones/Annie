@@ -50,7 +50,7 @@ def logueo(request):
     
     if request.user.is_authenticated:
         messages.success(request,'Ya estas conectado!')
-        return redirect('index')
+        return redirect('welcome')
 
     if request.method == 'POST':
         user = request.POST.get('usuario')
@@ -59,7 +59,7 @@ def logueo(request):
         if usuario:
             login(request,usuario)
             messages.success(request,'Bienvenido de nuevo'.format(usuario))
-            return redirect('index')
+            return redirect('welcome')
         else:
             messages.info(request,'Debes registrarte')
             return redirect('registro')
@@ -148,7 +148,7 @@ def register_cliente(request,user):
             form.perfil = user
             form.save()
             messages.success(request, message='Registro como cliente exitoso!')
-            return redirect('index')  # access granted     
+            return redirect('welcome')  # access granted     
         else:
             messages.error(request, message='Ha ocurrido un error con los campos a llenar.')
     else:
@@ -211,8 +211,10 @@ def delete_perfil(request,user):
     return redirect('index')
 
 
+
 @login_required(login_url='logueo')
 def crear_mensaje(request,pk):
+
 
     puntaje=0
     usuario = User.objects.get(id=pk)
@@ -228,6 +230,7 @@ def crear_mensaje(request,pk):
             c.save()
 
             return redirect('index')
+
         else:
             print('form is invalid')
 
@@ -255,3 +258,8 @@ def crear_mensaje(request,pk):
 #     return render(request, 'mainapp/reservas.html',{
 #         'form' : form,
 #     })   
+
+
+def login_landing(request):
+    return render(request, 'mainapp/loginlanding.html', {})
+

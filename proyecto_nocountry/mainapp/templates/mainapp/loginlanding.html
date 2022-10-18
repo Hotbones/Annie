@@ -1,0 +1,63 @@
+{% load tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
+    {% tailwind_css %}
+    <title>Welcome</title>
+</head>
+<body class="bg-orange-200">
+    
+    <header>
+        {% include './extends/navbar.html' %}
+
+        {% if   user.is_authenticated %}
+              
+        <div class="flex justify-center mt-10">
+            <h5 class="uppercase underline font-bold text-red-400 text-center text-3xl">
+                Bienvenido {{user}}
+            </h5>
+        </div>
+    
+    {% endif %}
+    
+
+    </header>
+
+
+    <main>
+        <div class="mt-28">
+            <h2 class="uppercase font-bold text-2xl text-center">
+                Bienvenido a Annie
+            </h2>
+
+            <h2 class="uppercase font-bold text-xl text-center">
+                Busca tu niñera ideal
+            </h2>
+        </div>
+
+        <div class="self-center">
+            <img src="../../static/img/loginview.png" alt="" class="h-96 m-auto">
+        </div>
+
+        <div class="bg-green-300 h-16 w-52 m-auto border rounded-2xl hover:scale-125 hover:translate-y-1 hover:bg-green-400 transition-all ease-in-out delay-75">
+            <a href="{% url 'searcher' %}" class="block mt-5 h-16">
+                <h2 class="text-center">
+                    Encontra a tu niñera!
+                </h2>
+            </a>
+            
+
+        </div>
+    </main>
+
+    <footer>
+        {% include './extends/footer.html' %}
+    </footer>
+</body>
+</html>
