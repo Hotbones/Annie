@@ -1,0 +1,40 @@
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% if messages %}
+  {% for message in messages %}
+
+      {% if message.tags == "success" %}
+        <script class="">
+          Swal.fire({
+          "title" : "Ok",
+          "text" : "{{message}}",
+          "icon" : "success"
+          })
+      </script>
+
+      {% endif %}
+
+
+      {% if message.tags ==  "error" %}
+
+      <script>
+        Swal.fire({
+        "title" : "Opss!",
+        "text" : "{{message}}",
+        "icon" : "warning"
+        })
+    </script>
+    {% endif %}
+    {% if message.tags ==  "warning" %}
+
+    <script>
+      Swal.fire({
+      "title" : "Indicacion",
+      "text" : "{{message}}",
+      "icon" : "question"
+      })
+  </script>
+  {% endif %}
+  {% endfor %}
+
+{% endif %}

@@ -12,13 +12,12 @@ module.exports = {
          */
 
         /*  Templates within theme app (<tailwind_app_name>/templates), e.g. base.html. */
-        '../templates/**/*.html',
-
+        'theme/templates/**/*.html',
         /*
          * Main templates directory of the project (BASE_DIR/templates).
          * Adjust the following line to match your project structure.
          */
-        '../../templates/**/*.html',
+        'proyecto_nocountry/mainapp/templates/**/*.html',
 
         /*
          * Templates in other django apps (BASE_DIR/<any_app_name>/templates).
@@ -41,9 +40,19 @@ module.exports = {
          */
         // '../../**/*.py'
     ],
-    theme: {
-        extend: {},
+
+    variants: {
+        extend: {
+            background: ['group-focus'] 
+        }
     },
+    
+    theme: {
+        extend: {
+            
+        },
+    },
+    
     plugins: [
         /**
          * '@tailwindcss/forms' is the forms plugin that provides a minimal styling
@@ -55,4 +64,6 @@ module.exports = {
         require('@tailwindcss/line-clamp'),
         require('@tailwindcss/aspect-ratio'),
     ],
+
+
 }

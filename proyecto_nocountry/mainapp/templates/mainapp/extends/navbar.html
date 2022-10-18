@@ -1,0 +1,48 @@
+<div class="flex justify-evenly text-2xl text-red-400 mt-2">
+  <h1 class="font-bold py-2 px-4 text-3xl">Annie</h1>
+
+<div class="grid-flow-col ">
+  {% if user.is_authenticated %}
+      <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logout' %}">
+          Log out
+      </a>
+      {% if niñera or cliente %}
+      <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'perfil' user %}">
+          Modificar perfil
+      </a>
+      <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'delete_perfil' user %}">
+          Eliminar perfil
+      </a>
+          {% if niñera %}
+              <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'perfilniñera' %}">
+                  Mi Perfil
+              </a>
+          {% else %}
+              <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'perfilcliente' %}">
+                  Mi Perfil
+              </a>
+          {% endif %}
+      {% endif %}
+
+      {% if not perfil %}
+          <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'reg-cliente' user %}">
+              ¿Buscas una niñera?
+          </a>
+          <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'reg-niñera' user %}">
+              Ser niñera
+          </a>
+      {% endif %}
+  {% else %}
+  
+  <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logueo' %}">
+      ¿Buscas una niñera?
+  </a>
+  <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logueo' %}">
+      Ser niñera
+  </a>
+  <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logueo' %}">
+      Conectate
+  </a>
+  {% endif %}
+</div>
+</div>
