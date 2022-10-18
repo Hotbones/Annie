@@ -47,23 +47,13 @@
                 <h3 class="text-2xl text-center">{{ mi_perfil.ciudad }}</h3>
                 <p class="text-lg tracking-tight text-black text-center">{{mi_perfil.descripcion}}</p>
                 <p class="font-normal text-black text-center">Teléfono de contacto: {{mi_perfil.telefono}}</p>
-                <!-- <p class="text-right">Tarifa por hora: ${{mi_perfil.tarifa_por_hora}}</p> -->
+
             </div>
         </div>
 <br><br>
-        <div class="mx-auto w-2/5  text-center font-sans transition duration-300 hover:scale-125">
-            <p class="bg-blue-400 rounded-m">
-                {% for edad in mi_perfil.edades %}
-                    <li>{{edad}}</li>
-                {% endfor %}
-            </p>
-        </div>
-
 
 </section>       
 </body>
-
-
 
 <section id="comentarios" class="">
         
@@ -72,39 +62,40 @@
             Comentarios
         </h2>
     </div>
-
+    <!-- CREAR COMENTARIO -->
+    
+    <!-- <div>
+        {% for comentario in usuario.comentarios.all %}
+        <p>{{comentario.mensaje}}</p>
+        <p>{{comentario.created}}</p>
+        {% endfor %}
+    </div> -->
+    <!-- 1ER COMENTARIO -->
+    <div>      
+        <p><a href="#">Añadir comentario</a></p>
+    </div>
+    
     <div class="grid grid-cols-2">
-        <div class="grid p-4 w-2/5 overflow-hidden m-auto rounded-2xl shadow-2xl shadow-slate-900 md:flex-row md:max-w-xl ">
-            <div class="m-auto">
-                <img src="../../static/img/profile1.png" class="w-full md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
+        {% if not usuario.comentarios.all  %}
+            <p>No hay comentarios aún</p>
+        {% else %}
+            {% for comentario in usuario.comentarios.all %}
+            <div class="grid p-4 w-2/5 overflow-hidden m-auto rounded-2xl shadow-2xl shadow-slate-900 md:flex-row md:max-w-xl ">
+                <div class="m-auto">
+                    <img src="../../static/img/profile1.png" class="w-full md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
+                </div>
+                <div class="flex flex-col alig p-4 leading-normal justify-center">
+                    <h2 class="text-3xl tracking-tighter text-center">{{ comentario.comentarista }}</h2>
+                    <h3 class="text-2xl text-center">29 años</h3>
+                    <p class="text-lg tracking-tight text-black text-center">{{ comentario.mensaje }}</p>
+                    <p class="font-normal text-black text-center">Me encantan los niños, son mi pasión. Tengo carnet B2 y auto propio. Me gusta cocinar y ayudar a los niños con su tarea.</p>
+                    <p class="text-right">$500 / hora</p>
+                </div>
             </div>
-            <div class="flex flex-col alig p-4 leading-normal justify-center">
-                <h2 class="text-3xl tracking-tighter text-center">Maria Perez</h2>
-                <h3 class="text-2xl text-center">29 años</h3>
-                <p class="text-lg tracking-tight text-black text-center">Experiencia con bebés de recién nacidos hasta los 3 años.</p>
-                <p class="font-normal text-black text-center">Me encantan los niños, son mi pasión. Tengo carnet B2 y auto propio. Me gusta cocinar y ayudar a los niños con su tarea.</p>
-                <p class="text-right">$500 / hora</p>
-            </div>
-        </div>
-
-        <div class="grid p-4 w-2/5 overflow-hidden m-auto rounded-2xl shadow-2xl shadow-slate-900 md:flex-row md:max-w-xl ">
-            <div class="m-auto">
-                <img src="../../static/img/profile1.png" class="w-full md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
-            </div>
-            <div class="flex flex-col alig p-4 leading-normal justify-center">
-                <h2 class="text-3xl tracking-tighter text-center">Maria Perez</h2>
-                <h3 class="text-2xl text-center">29 años</h3>
-                <p class="text-lg tracking-tight text-black text-center">Experiencia con bebés de recién nacidos hasta los 3 años.</p>
-                <p class="font-normal text-black text-center">Me encantan los niños, son mi pasión. Tengo carnet B2 y auto propio. Me gusta cocinar y ayudar a los niños con su tarea.</p>
-                <p class="text-right">$500 / hora</p>
-            </div>
-        </div>
+            {% endfor %}
+        {% endif %}
 
     </div>
-
-
-
-
 
 <footer>
     {% include 'mainapp/extends/footer.html' %}
