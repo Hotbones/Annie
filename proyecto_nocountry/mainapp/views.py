@@ -183,7 +183,7 @@ def update_perfil(request,user):
         context = {'perfil':perfil, 'form':form}
         return render(request, 'mainapp/perfil.html', context)
     
-
+@login_required(login_url='logueo')
 def delete_perfil(request,user):
     if not request.user.is_authenticated:
         messages.error(request,'Tienes que iniciar sesion')
@@ -203,27 +203,19 @@ def delete_perfil(request,user):
     messages.success(request,'Perfil Eliminado Correctamente')
     return redirect('index')
 
-def delete_perfil(request,cliente_id):
+@login_required(login_url='logueo')
+def crear_mensaje(request,user):
     if not request.user.is_authenticated:
         messages.error(request,'Tienes que iniciar sesion')
         return redirect('index')
+    
+    if request.method == 'POST':
+        mensaje = Mensaje.objects.create(
+            usuario = 
+        )
+    
 
     
-    if Cliente.objects.filter(perfil=request.user).exists(): 
-        cliente_delete= Cliente.objects.filter(perfil=request.user)
-        cliente_delete.delete()
-        messages.success(request,'Cliente Eliminada Correctamente')
-        return redirect('index')
-    elif  Niñera.objects.filter(perfil=request.user).exists():
-        Niñera_delete= Niñera.objects.filter(perfil=cliente_id)
-        print(Niñera_delete)
-        Niñera_delete.delete()
-        messages.success(request,'Niñera Eliminada Correctamente')
-        return redirect('index')
-    
-    else:
-        messages.error(request,'No se puede acceder')
-    return redirect('index')
 
 def reserva_add(request,id):
     if request.user.is_authenticated:

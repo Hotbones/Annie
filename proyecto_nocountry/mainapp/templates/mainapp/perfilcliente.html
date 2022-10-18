@@ -72,7 +72,20 @@
             Comentarios
         </h2>
     </div>
+    
+    {% if user.is_authenticathed %}
+        <div>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit">Comentar</button>
+            </form>
+        {% else %}
+            <h2>Logueate para comentar <a href="{% url 'logueo' %}"></a></h2>
+        </div>
+    {% endif %}
 
+<!-- COMENTARIO 1 -->
     <div class="grid grid-cols-2">
         <div class="grid p-4 w-2/5 overflow-hidden m-auto rounded-2xl shadow-2xl shadow-slate-900 md:flex-row md:max-w-xl ">
             <div class="m-auto">
@@ -86,7 +99,7 @@
                 <p class="text-right">$500 / hora</p>
             </div>
         </div>
-
+<!-- COMENTARIO 2 -->
         <div class="grid p-4 w-2/5 overflow-hidden m-auto rounded-2xl shadow-2xl shadow-slate-900 md:flex-row md:max-w-xl ">
             <div class="m-auto">
                 <img src="../../static/img/profile1.png" class="w-full md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
