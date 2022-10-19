@@ -1,3 +1,4 @@
+
 {% load tailwind_tags %}
 {% load static %}
 <!DOCTYPE html>
@@ -6,61 +7,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% tailwind_css %}
     <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
-    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">   
-</head>
-
-<body class="from-red-100 via-orange-300 to-red-500 bg-gradient-to-br">
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
+    {% tailwind_css %}
+    <title>Annie</title>
+</head>    
+    
+    
+<body class="bg-orange-200">
     {% include './messages.html' %}
+
     <section class="header">
-        <div class="flex justify-evenly text-2xl text-red-400 mt-2">
-            <h1 class="font-bold py-2 px-4 text-3xl">Annie</h1>
-            <div class="grid-flow-col" >
-                {% if user.is_authenticated %}
-                <h5>
-                    Bienvenido {{user}}
-                </h5>
-                {% endif %}
-            </div>
-            <div class="grid-flow-col ">
-                {% if user.is_authenticated %}
-                    <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logout' %}">
-                        Log out
-                    </a>
-                    <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'perfil' user %}">
-                        Modificar perfil
-                    </a>
-                    {% if niñera %}
-                        <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'perfilniñera' %}">
-                            Mi Perfil
-                        </a>
-                    {% else %}
-                        <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'perfilcliente' %}">
-                            Mi Perfil
-                        </a>
-                    {% endif %}
-                    {% if not perfil %}
-                        <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'reg-cliente' user %}">
-                            ¿Buscas una niñera?
-                        </a>
-                        <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'reg-niñera' user %}">
-                            Ser niñera
-                        </a>
-                    {% endif %}
-                {% else %}
-                
-                <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logueo' %}">
-                    ¿Buscas una niñera?
-                </a>
-                <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logueo' %}">
-                    Ser niñera
-                </a>
-                <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logueo' %}">
-                    Conectate
-                </a>
-                {% endif %}
-            </div>
+            
+        {% include './extends/navbar.html' %}
+        
+
 
         </div>
 <br><br><br><br><br><br><br>
@@ -75,12 +36,11 @@
                         Mas de 10.000 niñeras disponibles
                         en Argentina.
                     </h3>
-                <br><br><br><br><br><br>
-                    <form action="">
-                        <input type="text" class="w-5/6 h-12 bg-white rounded-full shadow-lg shadow-indigo-500/40">
-                        <input type="submit" value="Buscar" id="btn" class="rounded-2xl bg-green-300 h-18 w-3/12 translate-x-80 -translate-y-9 cursor-pointer hover:bg-blue-400"> 
-                    </form>
+                <br><br><br><br><br><br>    
+                {% include './extends/buscar.html' %}
                 </div>
+                
+                
                 <div>
                     <img src="../../static/img/babyindex1.png" class="-translate-y-20" alt="">
                     <img src="../../static/img/indexcircle.png" class="h-8 absolute top-28 animate-ping">

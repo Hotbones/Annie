@@ -1,4 +1,5 @@
 
+
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
@@ -24,6 +25,7 @@ class Migration(migrations.Migration):
                 ('domicilio', models.CharField(blank=True, max_length=200, null=True)),
                 ('ciudad', models.CharField(blank=True, max_length=100, null=True)),
                 ('telefono', models.CharField(blank=True, help_text='Número sin 0 ni 15', max_length=10, null=True)),
+                ('descripcion', models.TextField(blank=True, null=True)),
                 ('foto_perfil', models.ImageField(blank=True, null=True, upload_to='img_clientes/')),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
@@ -76,11 +78,12 @@ class Migration(migrations.Migration):
             name='Mensaje',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('comentarista', models.CharField(max_length=200)),
                 ('puntaje', models.FloatField(default=0)),
                 ('mensaje', models.TextField()),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
-                ('usuario', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('usuario', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comentarios', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'Mensaje',

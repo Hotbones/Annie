@@ -1,8 +1,9 @@
 <a name="beginning"></a>
 [Español](#ES) - [English](#EN)
 
-# Annie app
-La revolucionaria forma de reservar y contratar niñeras de manera on line.
+# Annie app: tu niñera ideal.
+Una nueva manera de reservar y contratar tu niñera personalizada de manera online.
+Annie es la plataforma de contratación nueva de Argentina.
 
 
 ![Baby](https://user-images.githubusercontent.com/105388226/195204215-cee50a6a-0b5d-4aae-b94b-3a57422432fe.png)
@@ -10,14 +11,16 @@ La revolucionaria forma de reservar y contratar niñeras de manera on line.
 <a name="ES"></a>
 ## Descripción del proyecto
 
-Como usuario puedo elegir dos roles: Cliente o Niñera. 
-    
-   * Como Cliente, puedes validar una serie de características y aptitudes con las que cuentan los Niñeras. Puedes elegir en el calendario que días y horarios
-    esta libre la Niñera a elegir. 
-    
-   * Como Niñera, puedes conocer las características del cliente y sus necesidades. 
+La página web Annie ofrece:
 
-Para las reservas, ambos tipos de usuario aceptarán su conformidad y realizarán la transacción económica.
+ * Personalización: resultados de niñeras según gran variedad de filtros, obteniendo diferentes perfiles para encontrar la niñera ideal.
+
+ * Seguridad: perfiles de niñeras y clientes, con identificación de identidad, asegurando una comunidad basada en la confianza, transparencia y veracidad de sus miembros.
+
+
+Podrás registrar cómo perfil de "Cliente", donde se validará una serie de características y aptitudes con que cuentan las niñeras registradas. Y perfil de "Niñera", se podrá conocer las características del cliente y sus necesidades, en base a valoración y comentarios.
+
+El cliente selecciona el perfil de niñera de su interés, y ambas partes confirman la reserva, aceptarán dicha conformidad y realizarán la transacción económica para dar inicio de los servicios contratados.
 
 ## Tecnologías usadas para la app:
 
@@ -42,7 +45,7 @@ Para las reservas, ambos tipos de usuario aceptarán su conformidad y realizará
 
 |Integrante                 |Rol        |Github|LinkedIn|
 |---------------------------|-----------|-----------------------------------------------|---|
-|Laura Quintar              |UX/UI      |[Laux](https://github.com/lau)                |[Link](https://www.linkedin.com/in/lauraquintar/)|
+|Maria Laura Quintar              |UX/UI      |[Laux](https://github.com/lau)                |[Link](https://www.linkedin.com/in/lauraquintar/)|
 |Jesus Leal                 |Front-end  |[Jesux](https://github.com/imjesusleal)       |[Link](https://www.linkedin.com/in/jesus-leal-6908291b2/)|
 |Santiago Muñoz             |Back-end   |[Santix](https://github.com/SantiagoEzequielMunioz)|[Link](https://www.linkedin.com/in/santiago-muñoz-b4833a236/)|
 |Mateo Pamasime             |Back-end   |[mateox](https://github.com/pamasime)          |[Link](https://www.linkedin.com/in/mateopamasime/)|
@@ -56,20 +59,19 @@ Para las reservas, ambos tipos de usuario aceptarán su conformidad y realizará
 --------------------------------------------
 
 <a name="EN"></a>
-# Annie app
+# App Annie: Your best babysitter
 The revolutionary way to book and hire babysitters online.
 
 ![Baby](https://user-images.githubusercontent.com/105388226/195204318-22efdc2e-c65b-49ca-bff3-c264cfa2beb7.png)
 
 ## Project description
 
-As a user I can choose two roles: Client or Babysitter.
-    
-   * As a Client, I can validate a series of characteristics and attitudes that the Nannies have. You can choose in the calendar what days and times the Babysitter is      free to choose.
-    
-   * As a Nanny, you can get to know the characteristics of the client and their needs.
+Annie is the new Argentina's website for finding and hiring your special babysitter.
 
-For reservations, both types of user will accept their agreement and carry out the economic transaction.
+With Annie you will have the possibility to customize your online research, selecting the filters of interest. Then, you will look through the different babysitter's profiles. 
+Also, as we value the safety and integrity of our customers, we offer verified profiles.
+
+For the user registration you will have two option, client and babysitter. As client you would see the features and skills of the babysitters, and as babysitter you can also read the client's profile, deciding to accept or not the job, according to the reviews.
 
 ## Technologies used for the app:
 
@@ -94,7 +96,7 @@ For reservations, both types of user will accept their agreement and carry out t
 
 |Member                     |Rol        |Github|LinkedIn|
 |---------------------------|-----------|-----------------------------------------------|---|
-|Laura Quintar              |UX/UI      |[Laux](https://github.com/lau)                |[Link](https://www.linkedin.com/in/lauraquintar/)|
+|Maria Laura Quintar              |UX/UI      |[Laux](https://github.com/lau)                |[Link](https://www.linkedin.com/in/lauraquintar/)|
 |Jesus Leal                 |Front-end  |[Jesux](https://github.com/imjesusleal)       |[Link](https://www.linkedin.com/in/jesus-leal-6908291b2/)|
 |Santiago Muñoz             |Back-end   |[Santix](https://github.com/SantiagoEzequielMunioz)|[Link](https://www.linkedin.com/in/santiago-muñoz-b4833a236/)|
 |Mateo Pamasime             |Back-end   |[mateox](https://github.com/pamasime)          |[Link](https://www.linkedin.com/in/mateopamasime/)|

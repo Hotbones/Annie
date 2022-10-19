@@ -35,28 +35,29 @@
         <div class="flex flex-col m-auto rounded-2xl shadow-2xl shadow-slate-900 md:flex-row md:max-w-xl ">
             <img src="../../static/img/profile1.png" class="object-contain w-full h-96 md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
             <div class="flex flex-col alig p-4 leading-normal justify-center">
-                <h2 class="text-3xl tracking-tighter text-center">{{ mi_perfil.nombre }} {{mi_perfil.apellido}}</h2>
-                <h3 class="text-2xl text-center">{{ mi_perfil.ciudad }}</h3>
-                <p class="text-lg tracking-tight text-black text-center">{{mi_perfil.descripcion}}</p>
-                <p class="font-normal text-black text-center">Teléfono de contacto: {{mi_perfil.telefono}}</p>
+                <h2 class="text-3xl tracking-tighter text-center">{{ usuario.nombre }} {{usuario.apellido}}</h2>
+                <h3 class="text-2xl text-center">{{ usuario.ciudad }}</h3>
+                <p class="text-lg tracking-tight text-black text-center">{{usuario.descripcion}}</p>
+                <p class="font-normal text-black text-center">Teléfono de contacto: {{usuario.telefono}}</p>
 
             </div>
         </div>
-    <br><br>
-    </section>       
-</body>
+<br><br>
+    </section>
 
+{% if usuario.perfil_id != request.user.id %}
 <section id="comentarios" class="">
 
     <div>
         {% include './extends/comentarios.html' %}
     </div>
-
+    
     <div class="pb-20 mt-10">
         <h2 class="text-3xl text-center">
             Comentarios
         </h2>
     </div>
+{% endif %}
     <!-- CREAR COMENTARIO -->
     
     <!-- <div>
@@ -80,7 +81,7 @@
                     <img src="../../static/img/profile1.png" class="w-full md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
                 </div>
                 <div class="flex flex-col alig p-4 leading-normal justify-center">
-                    <h2 class="text-3xl tracking-tighter text-center"><a href="{% url 'perfil-niñera' %}">{{ comentario.comentarista }}</a></h2>
+                    <h2 class="text-3xl tracking-tighter text-center">{{ comentario.comentarista }}</h2>
                     <h3 class="text-2xl text-center">29 años</h3>
                     <p class="text-lg tracking-tight text-black text-center">{{ comentario.mensaje }}</p>
                     <p class="font-normal text-black text-center">Me encantan los niños, son mi pasión. Tengo carnet B2 y auto propio. Me gusta cocinar y ayudar a los niños con su tarea.</p>
@@ -91,8 +92,9 @@
         {% endif %}
 
     </div>
-
+</section>
 <footer>
     {% include 'mainapp/extends/footer.html' %}
 </footer>
+</body>
 </html>

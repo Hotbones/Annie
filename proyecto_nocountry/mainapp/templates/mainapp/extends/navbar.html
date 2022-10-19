@@ -1,14 +1,48 @@
-<div class="flex justify-center items-center gap-5 pt-20">
-  <button class="group flex justify-center items-center bg-white border focus:outline-none shadow text-gray-600rounded focus:ring ring-gray-200">
-    Conectate
-  </button>
-  <div class="group-focus:block absolute hidden top-full min-w-full w-max bg-white shadow-md mt-1 rounded">
-    <ul class="text-left border rounded">
-      <li class="px-4 py-1 hover:bg-gray-100 border-b">Nombre de usuario</li>
-      <li class="px-4 py-1 hover:bg-gray-100 border-b">Contraseña</li>
-    </ul>
+<div class="flex justify-evenly text-2xl text-red-400 mt-2">
+  <h1 class="font-bold py-2 px-4 text-3xl"> <a href="{% url 'index' %}"> Annie </a></h1>
 
-  </div>
+<div class="grid-flow-col ">
+  {% if user.is_authenticated %}
+      <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logout' %}">
+          Log out
+      </a>
+      {% if niñera or cliente %}
+      <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'perfil' user %}">
+          Modificar perfil
+      </a>
+      <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'delete_perfil' user %}">
+          Eliminar perfil
+      </a>
+          {% if niñera %}
+              <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'perfilniñera' user %}">
+                  Mi Perfil
+              </a>
+          {% else %}
+              <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'perfilcliente' user %}">
+                  Mi Perfil
+              </a>
+          {% endif %}
+      {% endif %}
+
+      {% if not perfil %}
+          <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'reg-cliente' user %}">
+              ¿Buscas una niñera?
+          </a>
+          <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'reg-niñera' user %}">
+              Ser niñera
+          </a>
+      {% endif %}
+  {% else %}
+  
+  <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logueo' %}">
+      ¿Buscas una niñera?
+  </a>
+  <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logueo' %}">
+      Ser niñera
+  </a>
+  <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'logueo' %}">
+      Conectate
+  </a>
+  {% endif %}
 </div>
-
-<!--<link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" /> <title>Document</title>!-->
+</div>

@@ -1,10 +1,10 @@
+from multiprocessing import current_process
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-
-from .forms import NiñeraForm,ClienteForm,RegisterForm,MensajeForm
+from .forms import NiñeraForm,ClienteForm,RegisterForm,ReservationForm,MensajeForm
 from .models import *
 
 def index(request):
@@ -28,25 +28,62 @@ def searcher(request):
     return render(request, 'mainapp/searcher.html', {})
 
 @login_required(login_url='logueo')
-def perfil_niñera(request):
-    niñeras = Niñera.objects.all()
-    mi_perfil = Niñera.objects.get(perfil_id=request.user.id)
+def perfil_niñera(request,user):
+
+    current_user = request.user #santi
+
+    if Cliente.objects.filter(perfil=request.user).exists(): 
+        mi_perfil= Cliente.objects.get(perfil=request.user)
+
+    elif Niñera.objects.filter(perfil=request.user).exists():
+        mi_perfil= Niñera.objects.get(perfil=request.user)
     
-    context = {'niñeras':niñeras, 'mi_perfil':mi_perfil}
+    
+    niñeras = Niñera.objects.all()
+    clientes = Cliente.objects.all()
+
+    context = {'clientes':clientes,'niñeras':niñeras, 'mi_perfil':mi_perfil, 'current_user':current_user}
     return render(request, 'mainapp/perfilniñera.html', context)
 
 @login_required(login_url='logueo')
-def perfil_cliente(request):
+def profiles(request,id,usuario=None):
+    
+    if Cliente.objects.filter(perfil_id = id).exists():
+        usuario = Cliente.objects.get(perfil_id = id)
+    elif Niñera.objects.filter(perfil_id = id).exists():
+        usuario = Niñera.objects.get(perfil_id = id)
+    # print(usuario.perfil_id) # usuario al que quiero ir
+    
+    # print(request.user) # usuario logueado
+
+    
+
+    context = {'usuario':usuario}
+    return render(request, 'mainapp/profiles.html', context)
+
+@login_required(login_url='logueo')
+def perfil_cliente(request,user):
+    current_user = request.user #santi
+
+    cliente = Cliente.objects.filter(perfil=request.user)
+    mi_perfil= Cliente.objects.get(perfil=request.user)
+
+    Niñera.objects.filter(perfil=request.user)
+    mi_perfil= Niñera.objects.get(perfil=request.user)
+
+
     clientes = Cliente.objects.all()
-    mi_perfil = Cliente.objects.get(perfil_id=request.user.id)
-    context = {'clientes':clientes, 'mi_perfil':mi_perfil}
+    # mi_perfil = Cliente.objects.get(perfil_id=request.user.id)
+
+        
+    context = {'clientes':clientes, 'mi_perfil':mi_perfil, 'current_user':current_user}
     return render(request, 'mainapp/perfilcliente.html', context)
 
 def logueo(request):
     
     if request.user.is_authenticated:
         messages.success(request,'Ya estas conectado!')
-        return redirect('index')
+        return redirect('welcome')
 
     if request.method == 'POST':
         user = request.POST.get('usuario')
@@ -55,7 +92,7 @@ def logueo(request):
         if usuario:
             login(request,usuario)
             messages.success(request,'Bienvenido de nuevo'.format(usuario))
-            return redirect('index')
+            return redirect('welcome')
         else:
             messages.info(request,'Debes registrarte')
             return redirect('registro')
@@ -93,11 +130,9 @@ def register_niñera(request,user):
     if not request.user.is_authenticated:
         messages.error(request,'No se puede ir a la direccion')
         return redirect('index')
-
-    if Niñera.objects.filter(perfil=request.user).exists() or \
-        Cliente.objects.filter(perfil=request.user).exists():
+    if Niñera.objects.filter(perfil=request.user).exists() or Cliente.objects.filter(perfil=request.user).exists():
+        messages.error(request, message='Ya has creado un perfil')
         return redirect('index')
-    
     form = NiñeraForm()
 
 
@@ -107,15 +142,11 @@ def register_niñera(request,user):
         if form.is_valid():
             form = form.save(commit=False)
             user = User.objects.get(username = request.user.username)
-            form.perfil_niñera = user
-            if not Cliente.objects.all():
-                form.save()
-                messages.success(request, message='Registro como niñera exitoso!')
-                return redirect('index')  # access granted
-                
-            else:
-                messages.error(request, message='Esta niñera ya se encuentra registrada')
-                return redirect('index')    
+            form.perfil = user
+            form.save()
+            messages.success(request, message='Registro como niñera exitoso!')
+            return redirect('index')  # access granted
+           
             
         else:
             messages.error(request, message='Ha ocurrido un error con los campos a llenar.')
@@ -147,23 +178,15 @@ def register_cliente(request,user):
         if form.is_valid():
             form = form.save(commit=False)
             user = User.objects.get(username = request.user.username)
-
             form.perfil = user
-            # if not Cliente.objects.all():
-            if form.perfil not in Cliente.objects.all():
-                form.save()
-                messages.success(request, message='Registro como cliente exitoso!')
-                return redirect('index')  # access granted
-            else:
-                return redirect('index')
-           
-            
+            form.save()
+            messages.success(request, message='Registro como cliente exitoso!')
+            return redirect('welcome')  # access granted     
         else:
             messages.error(request, message='Ha ocurrido un error con los campos a llenar.')
     else:
         form = ClienteForm()
     return render(request, 'mainapp/register_cliente.html', {'form_cliente':form})
-
 
 
 @login_required(login_url='logueo')
@@ -178,7 +201,7 @@ def update_perfil(request,user):
             return redirect('index')
     except:
         pass
-
+    
     try:
         perfil = Cliente.objects.get(perfil_id=request.user.id)
         form = ClienteForm(instance=perfil)
@@ -188,14 +211,69 @@ def update_perfil(request,user):
             messages.success(request, 'Perfil actualizado exitosamente!')
             return redirect('index')
     except:
-        messages.error(request,'No existe ningún perfil')
-        return redirect('index')
+        if perfil == None:
+            print('aqui')
+            messages.error(request,'No existe ningún perfil')
+            return redirect('index')
+        else:
+            pass
     finally:
+        if perfil == None:
+            messages.error(request,'No se puede acceder')
         context = {'perfil':perfil, 'form':form}
         return render(request, 'mainapp/perfil.html', context)
+    
+@login_required(login_url='logueo')
+def delete_perfil(request,user):
+    if not request.user.is_authenticated:
+        messages.error(request,'Tienes que iniciar sesion')
+        return redirect('index')
+
+    if Cliente.objects.filter(perfil=request.user).exists(): 
+        cliente_delete= Cliente.objects.filter(perfil=request.user)
+        cliente_delete.delete()
+
+    elif Niñera.objects.filter(perfil=request.user).exists():
+        niñera_delete= Niñera.objects.filter(perfil=request.user)
+        niñera_delete.delete()
+    else:
+        messages.error(request,'No se puede acceder')
+        return redirect('index')
+    
+    messages.success(request,'Perfil Eliminado Correctamente')
+    return redirect('index')
 
 
-       
+
+@login_required(login_url='logueo')
+def crear_mensaje(request,pk, puntaje=0):
+
+    usuario = User.objects.get(id=pk)
+
+    form = MensajeForm(instance=usuario)
+    if request.method == 'POST':
+        form = MensajeForm(request.POST, instance=usuario)
+        if form.is_valid():
+            comentarista = request.user.username
+            puntaje=str(puntaje)
+            nuevo_comentario = request.POST['name']
+            c = Mensaje(usuario=usuario, comentarista=comentarista, puntaje=puntaje, mensaje=nuevo_comentario)
+            print(c.mensaje)
+            c.save()
+
+            return redirect('index')
+
+        else:
+            print('form is invalid')
+
+    else:
+        print('no entro post')
+        form = MensajeForm()
+
+    context = {'form':form, 'usuario':usuario}
+
+    return render(request,'mainapp/extends/comentarios.html',context)
+
 # def reserva_add(request,id):
 #     if request.user.is_authenticated:
 #         form = ReservationForm(request.POST)
@@ -212,31 +290,34 @@ def update_perfil(request,user):
 #             return redirect('index')
 #     return render(request, 'mainapp/reservas.html',{
 #         'form' : form,
-#     })
-        
-@login_required(login_url='logueo')
-def crear_mensaje(request,pk):
+#     })   
 
-    puntaje=0
-    usuario = User.objects.get(id=pk)
 
-    form = MensajeForm(instance=usuario)
+def login_landing(request):
+    return render(request, 'mainapp/loginlanding.html', {})
+
+
+# def show_anecdota(request,anecdota_id,username=None):
+#     if not request.user.is_authenticated:
+#         messages.error(request,'Tienes que iniciar sesion ')
+#         return redirect('homepage')
+#     current_user = request.user
+#     if username and username != current_user.username:
+#         user = User.objects.get(username=username)
+#     else:
+#         user = current_user
+#     anecdota =  Anecdota.objects.get(pk=anecdota_id)
+
+
+def buscar(request):
+    if not request.user.is_authenticated:
+        messages.error(request,'Tienes que iniciar sesion')
+        return redirect('index')
     if request.method == 'POST':
-        form = MensajeForm(request.POST, instance=usuario)
-        if form.is_valid():
-            comentarista = request.user.username
-            puntaje=str(puntaje)
-            nuevo_comentario = form.cleaned_data['mensaje']
-            c = Mensaje(usuario=usuario, comentarista=comentarista, puntaje=puntaje, mensaje=nuevo_comentario)
-            c.save()
+        searched = request.POST.get('search')
+        buscar_cuidadoras = Niñera.objects.filter(titleicontains=searched)
+    return render(request,'searcher.html',{
+        'searched' : searched,
+        'buscar_cuidadoras' : buscar_cuidadoras})
+    
 
-            return redirect('index')
-        else:
-            print('form is invalid')
-
-    else:
-        form = MensajeForm()
-
-    context = {'form':form, 'usuario':usuario}
-
-    return render(request,'mainapp/crear_mensaje.html',context)
