@@ -8,6 +8,7 @@ urlpatterns = [
     path('buscar/', views.searcher, name="searcher"),
     path('niñera/<str:user>', views.perfil_niñera, name="perfilniñera"),
     path('cliente/<str:user>', views.perfil_cliente, name="perfilcliente"),
+    path('profiles/<id>', views.profiles, name="profiles"),
     path('reg-cliente/<str:user>', views.register_cliente, name="reg-cliente"),
     path('reg-niñera/<str:user>', views.register_niñera, name="reg-niñera"),
     path('registro/', views.register, name="registro"),

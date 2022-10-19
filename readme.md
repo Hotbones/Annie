@@ -28,17 +28,18 @@ El cliente selecciona el perfil de niñera de su interés, y ambas partes confir
 <p align="left">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/800px-HTML5_logo_and_wordmark.svg.png"  width=10% height=10%>
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg"  width=10% height=10%>
+<img src="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg" width=8% height=8%>
 </p> 
 <p align="left">
-<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png"  width=10% height=10%>
+<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/git/git.png"  width=10% height=10%>
 <img src="https://avatars.githubusercontent.com/u/5155369?s=200&v=4"  width=10% height=10%>
 </p>
 
         En el Backend:
 <p align="left">
-<img src="https://raw.githubusercontent.com/github/explore/7456fdff59816d37ef383a6c8f32a26ff7332db2/topics/django/django.png"  width=10% height=10%>
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width=8% height=8%> 
-<img src="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg" width=8% height=8%>
+<img src="https://raw.githubusercontent.com/github/explore/7456fdff59816d37ef383a6c8f32a26ff7332db2/topics/django/django.png"  width=10% height=10%>
+
 </p>
  
  ## Humanos & roles:
@@ -56,23 +57,54 @@ El cliente selecciona el perfil de niñera de su interés, y ambas partes confir
 
 * Agradecimientos a Wendy Fraile & No Country for Junior Devs 🤓.
 
+## Comenzando 🚀
+
+Clonar repositorio:
+
+      git clone https://github.com/No-Country/c7-14-t-python.git
+
+## Pre requisitos 📋
+ Para iniciar el proyecto debe descargar las siguientes dependencias :
+ 
+       📚 Linux & mac 📚 -- > pip3 install -r Requirements.txt 
+       📚 Windows 📚 -- > pip install -r Requirements.txt  
+       
+ Para el Ambiente virtual:
+ 
+       venv = pip install-r Requirements.txt 
+       pipenv = pipenv install -r Requirements.txt
+
+## Intalación 🔧
+   Ejecutar los siguientes comandos:
+ 
+       pip freeze    
+       pip install django-multiselectfield
+       Python manage.py tailwind install
+       python manage.py tailwind start
+       
+## Para correr la app en Django 🛠️
+        
+        python manage.py makemigrations
+        python manage.py migrate           
+        python manage.py runserver
+       
+
 --------------------------------------------
 
 <a name="EN"></a>
-# Annie app
+# App Annie: Your best babysitter
 The revolutionary way to book and hire babysitters online.
 
 ![Baby](https://user-images.githubusercontent.com/105388226/195204318-22efdc2e-c65b-49ca-bff3-c264cfa2beb7.png)
 
 ## Project description
 
-As a user I can choose two roles: Client or Babysitter.
-    
-   * As a Client, I can validate a series of characteristics and attitudes that the Nannies have. You can choose in the calendar what days and times the Babysitter is      free to choose.
-    
-   * As a Nanny, you can get to know the characteristics of the client and their needs.
+Annie is the new Argentina's website for finding and hiring your special babysitter.
 
-For reservations, both types of user will accept their agreement and carry out the economic transaction.
+With Annie you will have the possibility to customize your online research, selecting the filters of interest. Then, you will look through the different babysitter's profiles. 
+Also, as we value the safety and integrity of our customers, we offer verified profiles.
+
+For the user registration you will have two option, client and babysitter. As client you would see the features and skills of the babysitters, and as babysitter you can also read the client's profile, deciding to accept or not the job, according to the reviews.
 
 ## Technologies used for the app:
 
@@ -80,17 +112,17 @@ For reservations, both types of user will accept their agreement and carry out t
 <p align="left">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/800px-HTML5_logo_and_wordmark.svg.png"  width=10% height=10%>
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg"  width=10% height=10%>
+<img src="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg" width=8% height=8%>
 </p> 
 <p align="left">
-<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png"  width=10% height=10%>
+<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/git/git.png"  width=10% height=10%>
 <img src="https://avatars.githubusercontent.com/u/5155369?s=200&v=4"  width=10% height=10%>
 </p>
 
         In the Backend:
 <p align="left">
-<img src="https://raw.githubusercontent.com/github/explore/7456fdff59816d37ef383a6c8f32a26ff7332db2/topics/django/django.png"  width=10% height=10%>
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width=8% height=8%> 
-<img src="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg" width=8% height=8%>
+<img src="https://raw.githubusercontent.com/github/explore/7456fdff59816d37ef383a6c8f32a26ff7332db2/topics/django/django.png"  width=10% height=10%>
 </p>
  
  ## Humans & roles:
@@ -103,4 +135,36 @@ For reservations, both types of user will accept their agreement and carry out t
 |Mateo Pamasime             |Back-end   |[mateox](https://github.com/pamasime)          |[Link](https://www.linkedin.com/in/mateopamasime/)|
 |Matias Cañadas             |Back-end & QA|[Matix](https://github.com/Hotbones)           |[Link](https://www.linkedin.com/in/matiascanadas/)|
 
+## Starting 🚀
+
+Clone repository:
+
+      git clone https://github.com/No-Country/c7-14-t-python.git
+
+## Pre requirements 📋
+ To start the project you must download the following dependencies:
+ 
+       📚 Linux & mac 📚 -- > pip3 install -r Requirements.txt 
+       📚 Windows 📚 -- > pip install -r Requirements.txt  
+       
+ For the virtual environment:
+ 
+       venv = pip install-r Requirements.txt 
+       pipenv = pipenv install -r Requirements.txt
+
+## installation 🔧
+   Run the following commands:
+ 
+       pip freeze    
+       pip install django-multiselectfield
+       Python manage.py tailwind install
+       python manage.py tailwind start
+       
+## To run the app in Django 🛠️
+        
+        python manage.py makemigrations
+        python manage.py migrate           
+        python manage.py runserver
+        
+        
 [Back to the init](#beginning)

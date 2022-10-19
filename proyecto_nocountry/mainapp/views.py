@@ -46,15 +46,30 @@ def perfil_niñera(request,user):
     return render(request, 'mainapp/perfilniñera.html', context)
 
 @login_required(login_url='logueo')
-def perfil_cliente(request,user):
+def profiles(request,id,usuario=None):
+    
+    if Cliente.objects.filter(perfil_id = id).exists():
+        usuario = Cliente.objects.get(perfil_id = id)
+    elif Niñera.objects.filter(perfil_id = id).exists():
+        usuario = Niñera.objects.get(perfil_id = id)
+    # print(usuario.perfil_id) # usuario al que quiero ir
+    
+    # print(request.user) # usuario logueado
 
+    
+
+    context = {'usuario':usuario}
+    return render(request, 'mainapp/profiles.html', context)
+
+@login_required(login_url='logueo')
+def perfil_cliente(request,user):
     current_user = request.user #santi
 
-    if Cliente.objects.filter(perfil=request.user).exists(): 
-        mi_perfil= Cliente.objects.get(perfil=request.user)
+    cliente = Cliente.objects.filter(perfil=request.user)
+    mi_perfil= Cliente.objects.get(perfil=request.user)
 
-    elif Niñera.objects.filter(perfil=request.user).exists():
-        mi_perfil= Niñera.objects.get(perfil=request.user)
+    Niñera.objects.filter(perfil=request.user)
+    mi_perfil= Niñera.objects.get(perfil=request.user)
 
 
     clientes = Cliente.objects.all()
@@ -231,10 +246,8 @@ def delete_perfil(request,user):
 
 
 @login_required(login_url='logueo')
-def crear_mensaje(request,pk):
+def crear_mensaje(request,pk, puntaje=0):
 
-
-    puntaje=0
     usuario = User.objects.get(id=pk)
 
     form = MensajeForm(instance=usuario)
@@ -243,8 +256,9 @@ def crear_mensaje(request,pk):
         if form.is_valid():
             comentarista = request.user.username
             puntaje=str(puntaje)
-            nuevo_comentario = form.cleaned_data['mensaje']
+            nuevo_comentario = request.POST['name']
             c = Mensaje(usuario=usuario, comentarista=comentarista, puntaje=puntaje, mensaje=nuevo_comentario)
+            print(c.mensaje)
             c.save()
 
             return redirect('index')
@@ -253,11 +267,12 @@ def crear_mensaje(request,pk):
             print('form is invalid')
 
     else:
+        print('no entro post')
         form = MensajeForm()
 
     context = {'form':form, 'usuario':usuario}
 
-    return render(request,'mainapp/crear_mensaje.html',context)
+    return render(request,'mainapp/extends/comentarios.html',context)
 
 def reserva_add(request,id):
     if request.user.is_authenticated:
