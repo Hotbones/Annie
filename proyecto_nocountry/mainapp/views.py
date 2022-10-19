@@ -46,15 +46,24 @@ def perfil_niñera(request,user):
     return render(request, 'mainapp/perfilniñera.html', context)
 
 @login_required(login_url='logueo')
-def perfil_cliente(request,user):
+def profiles(request,id,usuario=None):
+    if Cliente.objects.filter(perfil_id = id).exists():
+        usuario = Cliente.objects.get(perfil_id = id)
+    elif Niñera.objects.filter(perfil_id = id).exists():
+        usuario = Niñera.objects.get(perfil_id = id)
 
+    context = {'usuario':usuario}
+    return render(request, 'mainapp/profiles.html', context)
+
+@login_required(login_url='logueo')
+def perfil_cliente(request,user):
     current_user = request.user #santi
 
-    if Cliente.objects.filter(perfil=request.user).exists(): 
-        mi_perfil= Cliente.objects.get(perfil=request.user)
+    cliente = Cliente.objects.filter(perfil=request.user)
+    mi_perfil= Cliente.objects.get(perfil=request.user)
 
-    elif Niñera.objects.filter(perfil=request.user).exists():
-        mi_perfil= Niñera.objects.get(perfil=request.user)
+    Niñera.objects.filter(perfil=request.user)
+    mi_perfil= Niñera.objects.get(perfil=request.user)
 
 
     clientes = Cliente.objects.all()
