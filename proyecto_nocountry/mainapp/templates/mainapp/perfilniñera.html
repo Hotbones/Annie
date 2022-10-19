@@ -14,100 +14,102 @@
 
 
 <body class="from-red-100 via-orange-300 to-red-500 bg-gradient-to-br">
-    <section>
-        <div class="flex justify-between text-2xl text-red-400 mt-2">
-            <h1 class="font-bold py-2 px-4 text-3xl">Annie</h1>
-            <div class="grid-flow-col">
-                <button class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full">
-                    Ser niñera
-                </button>
-                <button class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full">
-                    Conectate
-                </button>
+        <header>
+        {% include './extends/navbar.html' %}    
+        </header>   
+
+
+    <br><br><br>
+    
+    <main>
+        <section>
+                <!-- MI PERFIL -->
+                <div class="flex flex-col m-auto rounded-2xl shadow-2xl shadow-slate-900 md:flex-row md:max-w-xl ">
+                    <img src="../../static/img/profile1.png" class="object-contain w-full h-96 md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
+                    <div class="flex flex-col alig p-4 leading-normal justify-center">
+                        <h2 class="text-3xl tracking-tighter text-center">{{ mi_perfil.nombre }} {{mi_perfil.apellido}}</h2>
+                        <h3 class="text-2xl text-center">{{ mi_perfil.fecha_nacimiento }}</h3>
+                        <p class="text-lg tracking-tight text-black text-center">{{mi_perfil.descripcion}}</p>
+                        <!-- <p class="font-normal text-black text-center">Me encantan los niños, son mi pasión. Tengo carnet B2 y auto propio. Me gusta cocinar y ayudar a los niños con su tarea.</p> -->
+                        <p class="text-right">Tarifa por hora: ${{mi_perfil.tarifa_por_hora}}</p>
+                    </div>
+                </div>
+    <br><br>
+                <div class="grid grid-cols-4 items-end mx-96">
+                    <div class="mx-auto w-2/5 text-center font-sans transition duration-300 hover:scale-125">
+                        <p class="bg-blue-400 rounded-md ">
+                            {% for habilidad in mi_perfil.habilidades %}
+                                {{habilidad}}
+                            {% endfor %}
+                        </p>
+                    </div>
+                    <div class="mx-auto w-2/5  text-center font-sans transition duration-300 hover:scale-125">
+                        <p class="bg-blue-400 rounded-md">
+                            {% for edad in mi_perfil.edades %}
+                                {{edad}}
+                            {% endfor %}
+                        </p>
+                    </div>
+                    <div class="mx-auto w-2/5  text-center font-sans transition duration-300 hover:scale-125">
+                        <p class="bg-blue-400 rounded-md ">
+                            Cuidado
+                        </p>
+                    </div>
+                    <div class="mx-auto w-2/5  text-center font-sans transition duration-300 hover:scale-125">
+                        <p class="bg-blue-400 rounded-md ">
+                            Paseos
+                        </p>
+                    </div>
+                </div>
+        </section>
+
+        <section id="comentarios" class="">
+
+            <div class="my-8">
+                {% include './extends/comentarios.html' %}
             </div>
-        </div>
-        <br><br><br><br><br>
-        <div class="">
-            <form action="">
-                <input type="text" class="ml-80 w-6/12 h-12 bg-white rounded-full shadow-lg shadow-indigo-500/40">
-                <input type="submit" value="Buscar" id="btn" class="rounded-2xl bg-green-400 h-18 w-36 -translate-x-28 cursor-pointer hover:bg-blue-400 hover:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-400 active:shadow-lg transition duration-300 ease-in-out"> 
-            </form>
-        </div>
 
-        <br><br><br>
-    </section>
-
-    <section>
-            <!-- MI PERFIL -->
-            <div class="flex flex-col m-auto rounded-2xl shadow-2xl shadow-slate-900 md:flex-row md:max-w-xl ">
-                <img src="../../static/img/profile1.png" class="object-contain w-full h-96 md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
-                <div class="flex flex-col alig p-4 leading-normal justify-center">
-                    <h2 class="text-3xl tracking-tighter text-center">{{ mi_perfil.nombre }} {{mi_perfil.apellido}}</h2>
-                    <h3 class="text-2xl text-center">{{ mi_perfil.fecha_nacimiento }}</h3>
-                    <p class="text-lg tracking-tight text-black text-center">{{mi_perfil.descripcion}}</p>
-                    <!-- <p class="font-normal text-black text-center">Me encantan los niños, son mi pasión. Tengo carnet B2 y auto propio. Me gusta cocinar y ayudar a los niños con su tarea.</p> -->
-                    <p class="text-right">Tarifa por hora: ${{mi_perfil.tarifa_por_hora}}</p>
-                </div>
+            {% for niñera in niñeras %}
+            <div class="pb-20 ">
+                <h2 class="text-3xl text-center mt-10">
+                    Comentarios
+                </h2>
             </div>
-<br><br>
-            <div class="grid grid-cols-4 items-end mx-96">
-                <div class="mx-auto w-2/5 text-center font-sans transition duration-300 hover:scale-125 ">
-                    <p class="bg-blue-400 rounded-md ">
-                        {% for habilidad in mi_perfil.habilidades %}
-                            {{habilidad}}
-                        {% endfor %}
-                    </p>
+            <div class="flex flex-row ml-64">
+                <div class="grid grid-cols-2">
+                    <div class="grid p-4 m-auto rounded-2xl shadow-2xl shadow-slate-900 md:flex-row md:max-w-xl ">
+                        <div class="m-auto">
+                            <img src="../../static/img/profile1.png" class="w-full md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
+                        </div>
+                        <div class="flex flex-col alig p-4 leading-normal justify-center">
+                            <h2 class="text-3xl tracking-tighter text-center">{{ niñera.nombre }}{{ niñera.apellido }}</h2>
+                            <h3 class="text-2xl text-center">{{ niñera.ciudad }}</h3>
+                            <p class="text-lg tracking-tight text-black text-center">Experiencia con bebés de recién nacidos hasta los 3 años.</p>
+                            <p class="font-normal text-black text-center">Me encantan los niños, son mi pasión. Tengo carnet B2 y auto propio. Me gusta cocinar y ayudar a los niños con su tarea.</p>
+                            <p class="text-right">{{ niñera.tarifa_por_hora }}</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="mx-auto w-2/5  text-center font-sans transition duration-300 hover:scale-125">
-                    <p class="bg-blue-400 rounded-m">
-                        {% for edad in mi_perfil.edades %}
-                            <li>{{edad}}</li>
-                        {% endfor %}
-                    </p>
+
+                <div class="grid grid-cols-2">
+                    <div class="grid p-4 m-auto rounded-2xl shadow-2xl shadow-slate-900 md:flex-row md:max-w-xl ">
+                        <div class="m-auto">
+                            <img src="../../static/img/profile1.png" class="w-full md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
+                        </div>
+                        <div class="flex flex-col alig p-4 leading-normal justify-center">
+                            <h2 class="text-3xl tracking-tighter text-center">{{ niñera.nombre }}{{ niñera.apellido }}</h2>
+                            <h3 class="text-2xl text-center">{{ niñera.ciudad }}</h3>
+                            <p class="text-lg tracking-tight text-black text-center">Experiencia con bebés de recién nacidos hasta los 3 años.</p>
+                            <p class="font-normal text-black text-center">Me encantan los niños, son mi pasión. Tengo carnet B2 y auto propio. Me gusta cocinar y ayudar a los niños con su tarea.</p>
+                            <p class="text-right">{{ niñera.tarifa_por_hora }}</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="mx-auto w-2/5  text-center font-sans transition duration-300 hover:scale-125">
-                    <p class="bg-blue-400 rounded-md ">
-                        Cuidado
-                    </p>
-                </div>
-                <div class="mx-auto w-2/5  text-center font-sans transition duration-300 hover:scale-125">
-                    <p class="bg-blue-400 rounded-md ">
-                        Paseos
-                    </p>
-                </div>
+                {% endfor %}
             </div>
-    </section>
 
-    <section id="calendar">
-        {% include 'mainapp/extends/calendar.html' %}
-    </section>
-
-    <section id="comentarios" class="">
-        {% for niñera in niñeras %}
-        <div class="pb-20 ">
-            <h2 class="text-3xl text-center">
-                Comentarios
-            </h2>
-        </div>
-
-        <div class="grid grid-cols-2">
-            <div class="grid p-4 w-2/5 overflow-hidden m-auto rounded-2xl shadow-2xl shadow-slate-900 md:flex-row md:max-w-xl ">
-                <div class="m-auto">
-                    <img src="../../static/img/profile1.png" class="w-full md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
-                </div>
-                <div class="flex flex-col alig p-4 leading-normal justify-center">
-                    <h2 class="text-3xl tracking-tighter text-center">{{ niñera.nombre }}{{ niñera.apellido }}</h2>
-                    <h3 class="text-2xl text-center">{{ niñera.ciudad }}</h3>
-                    <p class="text-lg tracking-tight text-black text-center">Experiencia con bebés de recién nacidos hasta los 3 años.</p>
-                    <p class="font-normal text-black text-center">Me encantan los niños, son mi pasión. Tengo carnet B2 y auto propio. Me gusta cocinar y ayudar a los niños con su tarea.</p>
-                    <p class="text-right">{{ niñera.tarifa_por_hora }}</p>
-                </div>
-            </div>
-        </div>
-
-        {% endfor %}
-    </section>
-
+        </section>
+    </main>
 
 
 </body>

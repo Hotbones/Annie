@@ -263,3 +263,15 @@ def crear_mensaje(request,pk):
 def login_landing(request):
     return render(request, 'mainapp/loginlanding.html', {})
 
+
+def buscar(request):
+    if not request.user.is_authenticated:
+        messages.error(request,'Tienes que iniciar sesion')
+        return redirect('index')
+    if request.method == 'POST':
+        searched = request.POST.get('search')
+        buscar_cuidadoras = Niñera.objects.filter(titleicontains=searched)
+    return render(request,'searcher.html',{
+        'searched' : searched,
+        'buscar_cuidadoras' : buscar_cuidadoras})
+    
