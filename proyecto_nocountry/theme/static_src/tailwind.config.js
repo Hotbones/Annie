@@ -43,14 +43,16 @@ module.exports = {
 
     variants: {
         extend: {
-            background: ['group-focus']
+            background: ['group-focus'] 
         }
     },
     
     theme: {
         extend: {
-        }
+            
+        },
     },
+    
     plugins: [
         /**
          * '@tailwindcss/forms' is the forms plugin that provides a minimal styling
@@ -65,5 +67,3 @@ module.exports = {
 
 
 }
-
-
