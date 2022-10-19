@@ -79,8 +79,6 @@ class ReservationForm(forms.ModelForm):
 
 class MensajeForm(forms.ModelForm):
     
-    
-    
     class Meta:
         model = Mensaje
         fields = '__all__'
