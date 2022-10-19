@@ -1,3 +1,4 @@
+from multiprocessing import current_process
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib import messages
@@ -28,22 +29,39 @@ def searcher(request):
 
 @login_required(login_url='logueo')
 def perfil_niñera(request,user):
-    niñeras = Niñera.objects.all()
-    mi_perfil = Niñera.objects.get(perfil_id=request.user.id)
 
-    usuario = User.objects.get(id=request.user.id)
+    current_user = request.user #santi
+
+    if Cliente.objects.filter(perfil=request.user).exists(): 
+        mi_perfil= Cliente.objects.get(perfil=request.user)
+
+    elif Niñera.objects.filter(perfil=request.user).exists():
+        mi_perfil= Niñera.objects.get(perfil=request.user)
     
-    context = {'niñeras':niñeras, 'mi_perfil':mi_perfil, 'usuario':usuario}
+    
+    niñeras = Niñera.objects.all()
+    clientes = Cliente.objects.all()
+
+    context = {'clientes':clientes,'niñeras':niñeras, 'mi_perfil':mi_perfil, 'current_user':current_user}
     return render(request, 'mainapp/perfilniñera.html', context)
 
 @login_required(login_url='logueo')
 def perfil_cliente(request,user):
-    clientes = Cliente.objects.all()
-    mi_perfil = Cliente.objects.get(perfil_id=request.user.id)
 
-    usuario = User.objects.get(id=request.user.id)
-    
-    context = {'clientes':clientes, 'mi_perfil':mi_perfil, 'usuario':usuario}
+    current_user = request.user #santi
+
+    if Cliente.objects.filter(perfil=request.user).exists(): 
+        mi_perfil= Cliente.objects.get(perfil=request.user)
+
+    elif Niñera.objects.filter(perfil=request.user).exists():
+        mi_perfil= Niñera.objects.get(perfil=request.user)
+
+
+    clientes = Cliente.objects.all()
+    # mi_perfil = Cliente.objects.get(perfil_id=request.user.id)
+
+        
+    context = {'clientes':clientes, 'mi_perfil':mi_perfil, 'current_user':current_user}
     return render(request, 'mainapp/perfilcliente.html', context)
 
 def logueo(request):
@@ -263,3 +281,13 @@ def crear_mensaje(request,pk):
 def login_landing(request):
     return render(request, 'mainapp/loginlanding.html', {})
 
+# def show_anecdota(request,anecdota_id,username=None):
+#     if not request.user.is_authenticated:
+#         messages.error(request,'Tienes que iniciar sesion ')
+#         return redirect('homepage')
+#     current_user = request.user
+#     if username and username != current_user.username:
+#         user = User.objects.get(username=username)
+#     else:
+#         user = current_user
+#     anecdota =  Anecdota.objects.get(pk=anecdota_id)
