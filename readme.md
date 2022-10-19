@@ -59,20 +59,19 @@ El cliente selecciona el perfil de niñera de su interés, y ambas partes confir
 --------------------------------------------
 
 <a name="EN"></a>
-# Annie app
+# App Annie: Your best babysitter
 The revolutionary way to book and hire babysitters online.
 
 ![Baby](https://user-images.githubusercontent.com/105388226/195204318-22efdc2e-c65b-49ca-bff3-c264cfa2beb7.png)
 
 ## Project description
 
-As a user I can choose two roles: Client or Babysitter.
-    
-   * As a Client, I can validate a series of characteristics and attitudes that the Nannies have. You can choose in the calendar what days and times the Babysitter is      free to choose.
-    
-   * As a Nanny, you can get to know the characteristics of the client and their needs.
+Annie is the new Argentina's website for finding and hiring your special babysitter.
 
-For reservations, both types of user will accept their agreement and carry out the economic transaction.
+With Annie you will have the possibility to customize your online research, selecting the filters of interest. Then, you will look through the different babysitter's profiles. 
+Also, as we value the safety and integrity of our customers, we offer verified profiles.
+
+For the user registration you will have two option, client and babysitter. As client you would see the features and skills of the babysitters, and as babysitter you can also read the client's profile, deciding to accept or not the job, according to the reviews.
 
 ## Technologies used for the app:
 
