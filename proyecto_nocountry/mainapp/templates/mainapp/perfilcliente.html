@@ -43,13 +43,15 @@
             </div>
         </div>
 <br><br>
-
-</section>       
-</body>
+    </section>
 
 <section id="comentarios" class="">
-        
-    <div class="pb-20 ">
+
+    <div>
+        {% include './extends/comentarios.html' %}
+    </div>
+
+    <div class="pb-20 mt-10">
         <h2 class="text-3xl text-center">
             Comentarios
         </h2>
@@ -88,8 +90,9 @@
         {% endif %}
 
     </div>
-
+</section>
 <footer>
     {% include 'mainapp/extends/footer.html' %}
 </footer>
+</body>
 </html>
