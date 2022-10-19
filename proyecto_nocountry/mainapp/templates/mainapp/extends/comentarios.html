@@ -1,11 +1,9 @@
 <div class="max-w-lg rounded-lg shadow-md shadow-black-600/50 m-auto">
     <form action="" class="w-full p-4" method="POST">
       {% csrf_token %}
-      
       <div class="mb-2">
         <label class="block text-center text-lg text-black">Agrega un comentario</label>
-
-          <textarea
+        <textarea
           class="w-full h-20 p-2 border rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
           name="comment"
           placeholder="Escribe tu comentario"></textarea>
