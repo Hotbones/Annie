@@ -56,6 +56,38 @@ El cliente selecciona el perfil de niñera de su interés, y ambas partes confir
 
 * Agradecimientos a Wendy Fraile & No Country for Junior Devs 🤓.
 
+## Comenzando 🚀
+
+Clonar repositorio:
+
+      git clone https://github.com/No-Country/c7-14-t-python.git
+
+## Pre requisitos 📋
+ Para iniciar el proyecto debe descargar las siguientes dependencias :
+ 
+       📚 Linux & mac 📚 -- > pip3 install -r Requirements.txt 
+       📚 Windows 📚 -- > pip install -r Requirements.txt  
+       
+ Para el Ambiente virtual:
+ 
+       venv = pip install-r Requirements.txt 
+       pipenv = pipenv install -r Requirements.txt
+
+## Intalación 🔧
+   Ejecutar los siguientes comandos:
+ 
+       pip freeze    
+       pip install django-multiselectfield
+       Python manage.py tailwind install
+       python manage.py tailwind start
+       
+## Para correr la app en Django 🛠️
+        
+        python manage.py makemigrations
+        python manage.py migrate           
+        python manage.py runserver
+       
+
 --------------------------------------------
 
 <a name="EN"></a>
@@ -102,4 +134,36 @@ For the user registration you will have two option, client and babysitter. As cl
 |Mateo Pamasime             |Back-end   |[mateox](https://github.com/pamasime)          |[Link](https://www.linkedin.com/in/mateopamasime/)|
 |Matias Cañadas             |Back-end & QA|[Matix](https://github.com/Hotbones)           |[Link](https://www.linkedin.com/in/matiascanadas/)|
 
+## Starting 🚀
+
+Clone repository:
+
+      git clone https://github.com/No-Country/c7-14-t-python.git
+
+## Pre requirements 📋
+ To start the project you must download the following dependencies:
+ 
+       📚 Linux & mac 📚 -- > pip3 install -r Requirements.txt 
+       📚 Windows 📚 -- > pip install -r Requirements.txt  
+       
+ For the virtual environment:
+ 
+       venv = pip install-r Requirements.txt 
+       pipenv = pipenv install -r Requirements.txt
+
+## installation 🔧
+   Run the following commands:
+ 
+       pip freeze    
+       pip install django-multiselectfield
+       Python manage.py tailwind install
+       python manage.py tailwind start
+       
+## To run the app in Django 🛠️
+        
+        python manage.py makemigrations
+        python manage.py migrate           
+        python manage.py runserver
+        
+        
 [Back to the init](#beginning)
