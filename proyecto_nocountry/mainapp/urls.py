@@ -18,4 +18,5 @@ urlpatterns = [
     path('delete_perfil/<str:user>',views.delete_perfil,name='delete_perfil'),
     path('welcome/', views.login_landing, name="welcome"),
     path('reservas/<int:id>',views.reserva_add,name="reservas"),
+    path('perfiles/<int:id>/comentar_perfil',views.add_comment,name='add_coment'),
 ]

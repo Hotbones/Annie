@@ -68,10 +68,6 @@ def perfil_cliente(request,user):
     cliente = Cliente.objects.filter(perfil=request.user)
     mi_perfil= Cliente.objects.get(perfil=request.user)
 
-    Niñera.objects.filter(perfil=request.user)
-    mi_perfil= Niñera.objects.get(perfil=request.user)
-
-
     clientes = Cliente.objects.all()
     # mi_perfil = Cliente.objects.get(perfil_id=request.user.id)
 
@@ -246,33 +242,19 @@ def delete_perfil(request,user):
 
 
 @login_required(login_url='logueo')
-def crear_mensaje(request,pk, puntaje=0):
-
-    usuario = User.objects.get(id=pk)
-
-    form = MensajeForm(instance=usuario)
+def add_comment(request,id):
+    if not request.user.is_authenticated:
+        messages.error(request,'Tienes que iniciar sesion ')
+        return redirect('index')
+    coment_id = Niñera.objects.get(id=id)
     if request.method == 'POST':
-        form = MensajeForm(request.POST, instance=usuario)
-        if form.is_valid():
-            comentarista = request.user.username
-            puntaje=str(puntaje)
-            nuevo_comentario = request.POST['name']
-            c = Mensaje(usuario=usuario, comentarista=comentarista, puntaje=puntaje, mensaje=nuevo_comentario)
-            print(c.mensaje)
-            c.save()
-
+        body = request.POST.get('body')
+        add_coment = Mensaje.objects.create(usuario=coment_id,comentarista=request.user.username,puntaje=None, mensaje=body)
+        if add_coment:
+            messages.success(request,'Comentario enviado')
             return redirect('index')
-
-        else:
-            print('form is invalid')
-
-    else:
-        print('no entro post')
-        form = MensajeForm()
-
-    context = {'form':form, 'usuario':usuario}
-
-    return render(request,'mainapp/extends/comentarios.html',context)
+    return render(request,'mainapp/extends/comentarios.html',{
+    })
 
 def reserva_add(request,id):
     if request.user.is_authenticated:
