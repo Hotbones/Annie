@@ -46,19 +46,32 @@ def perfil_niñera(request,user):
     return render(request, 'mainapp/perfilniñera.html', context)
 
 @login_required(login_url='logueo')
-def profiles(request,id,usuario=None):
+def profiles(request,id,superfil=None,puntaje=0):
     
     if Cliente.objects.filter(perfil_id = id).exists():
-        usuario = Cliente.objects.get(perfil_id = id)
+        superfil = Cliente.objects.get(perfil_id = id)
     elif Niñera.objects.filter(perfil_id = id).exists():
-        usuario = Niñera.objects.get(perfil_id = id)
-    # print(usuario.perfil_id) # usuario al que quiero ir
-    
-    # print(request.user) # usuario logueado
+        superfil = Niñera.objects.get(perfil_id = id)
 
-    
+    usuario = User.objects.get(id=id)
 
-    context = {'usuario':usuario}
+    if request.method == 'POST':
+        form_comentario = MensajeForm(request.POST)
+        
+        # if form_comentario.is_valid():
+        comentarista = request.user.username
+        puntaje=str(puntaje)
+        nuevo_comentario = request.POST['comment']
+        c = Mensaje(usuario=usuario, comentarista=comentarista, puntaje=puntaje, mensaje=nuevo_comentario)
+        c.save()
+        messages.success(request, message='Comentario publicado')
+
+    else:
+        print('no entro post')
+        form_comentario = MensajeForm()
+
+
+    context = {'usuario':usuario,'form_comentario':form_comentario,'superfil':superfil}
     return render(request, 'mainapp/profiles.html', context)
 
 @login_required(login_url='logueo')
@@ -240,38 +253,23 @@ def delete_perfil(request,user):
     return redirect('index')
 
 
+# def reserva_add(request,id):
+#     if request.user.is_authenticated:
+#         form = ReservationForm(request.POST)
+#         if form.is_valid():
+#             formulario = form.save(commit=False)
+#             user = User.objects.get(username=request.user.username)
+#             formulario.user_id = user
 
-@login_required(login_url='logueo')
-def add_comment(request,id):
-    if not request.user.is_authenticated:
-        messages.error(request,'Tienes que iniciar sesion ')
-        return redirect('index')
-    coment_id = Niñera.objects.get(id=id)
-    if request.method == 'POST':
-        body = request.POST.get('body')
-        add_coment = Mensaje.objects.create(usuario=coment_id,comentarista=request.user.username,puntaje=None, mensaje=body)
-        if add_coment:
-            messages.success(request,'Comentario enviado')
-            return redirect('index')
-    return render(request,'mainapp/extends/comentarios.html',{
-    })
+#             id = Cliente.objects.get(id = id)
+#             formulario.sitter_publication =  id # refrencia al id de publicacion de sitter
 
-def reserva_add(request,id):
-    if request.user.is_authenticated:
-        form = ReservationForm(request.POST)
-        if form.is_valid():
-            formulario = form.save(commit=False)
-            user = User.objects.get(username=request.user.username)
-            formulario.user_id = user
-
-            id = Cliente.objects.get(id = id)
-            formulario.sitter_publication =  id # refrencia al id de publicacion de sitter
-
-            form.save()
-            messages.success(request,'Reserva creada correctamente')
-            return redirect('index')
-    return render(request, 'mainapp/reservas.html',{
-        'form' : form,})   
+#             form.save()
+#             messages.success(request,'Reserva creada correctamente')
+#             return redirect('index')
+#     return render(request, 'mainapp/reservas.html',{
+#         'form' : form,
+#     })   
 
 
 def login_landing(request):
