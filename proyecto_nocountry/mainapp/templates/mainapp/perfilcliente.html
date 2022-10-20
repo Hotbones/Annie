@@ -47,10 +47,7 @@
 
 <section id="comentarios" class="">
 
-    <div>
-       <a href="{% url 'add_coment' mi_perfil.pk %}"></a>
-    </div>
-
+    
     <div class="pb-20 mt-10">
         <h2 class="text-3xl text-center">
             Comentarios
@@ -65,9 +62,6 @@
         {% endfor %}
     </div> -->
     <!-- 1ER COMENTARIO -->
-    <div>      
-        <p><a href="#">Añadir comentario</a></p>
-    </div>
     
     <div class="grid grid-cols-2">
         {% if not usuario.comentarios.all  %}

@@ -67,7 +67,6 @@ def profiles(request,id,superfil=None,puntaje=0):
         messages.success(request, message='Comentario publicado')
 
     else:
-        print('no entro post')
         form_comentario = MensajeForm()
 
 
@@ -272,8 +271,13 @@ def delete_perfil(request,user):
 #     })   
 
 
-def login_landing(request):
-    return render(request, 'mainapp/loginlanding.html', {})
+def login_landing(request, cliente=None, niñera=None):
+    if Cliente.objects.filter(perfil_id = request.user.id).exists():
+        cliente = Cliente.objects.get(perfil_id = request.user.id)
+    elif Niñera.objects.filter(perfil_id = request.user.id).exists():
+        niñera = Niñera.objects.get(perfil_id = request.user.id)
+    context = {'niñ':niñera,'cli':cliente}
+    return render(request, 'mainapp/loginlanding.html', context)
 
 
 # def show_anecdota(request,anecdota_id,username=None):
@@ -299,4 +303,3 @@ def buscar(request):
         'searched' : searched,
         'buscar_cuidadoras' : buscar_cuidadoras})
     
-

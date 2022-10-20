@@ -13,15 +13,11 @@
       <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'delete_perfil' user %}">
           Eliminar perfil
       </a>
-          {% if niñera %}
-              <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'perfilniñera' user %}">
-                  Mi Perfil
-              </a>
-          {% else %}
-              <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'perfilcliente' user %}">
-                  Mi Perfil
-              </a>
-          {% endif %}
+      <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full" href="{% url 'profiles' user.id %}">
+          Mi Perfil
+      </a>
+          
+          
       {% endif %}
 
       {% if not perfil %}
