@@ -44,16 +44,34 @@
         <div class="self-center">
             <img src="../../static/img/loginview.png" alt="" class="h-96 m-auto">
         </div>
-
+        {% if user.is_authenticated and not niñ and not cli%}
+        <div class="flex justify-center">
+            <div class="grid grid-flow-col gap-x-20">
+                <div class="bg-green-300 h-16 w-52 m-auto border rounded-2xl hover:scale-125 hover:translate-y-1 hover:bg-green-400 transition-all ease-in-out delay-75">
+                    <a href="{% url 'reg-cliente' user %}" class="block mt-5 h-16">
+                        <h2 class="text-center">
+                            Encontrar una niñera!
+                        </h2>
+                    </a>
+                </div>
+                <div class="bg-green-300 h-16 w-52 m-auto border rounded-2xl hover:scale-125 hover:translate-y-1 hover:bg-green-400 transition-all ease-in-out delay-75">
+                    <a href="{% url 'reg-niñera' user %}" class="block mt-5 h-16">
+                        <h2 class="text-center">
+                            Quiero ser niñera!
+                        </h2>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% else %}
         <div class="bg-green-300 h-16 w-52 m-auto border rounded-2xl hover:scale-125 hover:translate-y-1 hover:bg-green-400 transition-all ease-in-out delay-75">
             <a href="{% url 'searcher' %}" class="block mt-5 h-16">
                 <h2 class="text-center">
-                    Encontra a tu niñera!
+                    Ir a busquedas!
                 </h2>
             </a>
-            
-
         </div>
+        {% endif %}  
     </main>
 
     <footer>

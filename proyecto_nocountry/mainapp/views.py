@@ -154,7 +154,7 @@ def register_niñera(request,user):
             form.perfil = user
             form.save()
             messages.success(request, message='Registro como niñera exitoso!')
-            return redirect('index')  # access granted
+            return redirect('welcome')  # access granted
            
             
         else:
@@ -272,8 +272,13 @@ def delete_perfil(request,user):
 #     })   
 
 
-def login_landing(request):
-    return render(request, 'mainapp/loginlanding.html', {})
+def login_landing(request, cliente=None, niñera=None):
+    if Cliente.objects.filter(perfil_id = request.user.id).exists():
+        cliente = Cliente.objects.get(perfil_id = request.user.id)
+    elif Niñera.objects.filter(perfil_id = request.user.id).exists():
+        niñera = Niñera.objects.get(perfil_id = request.user.id)
+    context = {'niñ':niñera,'cli':cliente}
+    return render(request, 'mainapp/loginlanding.html', context)
 
 
 # def show_anecdota(request,anecdota_id,username=None):
