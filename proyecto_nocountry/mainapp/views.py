@@ -81,10 +81,6 @@ def perfil_cliente(request,user):
     cliente = Cliente.objects.filter(perfil=request.user)
     mi_perfil= Cliente.objects.get(perfil=request.user)
 
-    Niñera.objects.filter(perfil=request.user)
-    mi_perfil= Niñera.objects.get(perfil=request.user)
-
-
     clientes = Cliente.objects.all()
     # mi_perfil = Cliente.objects.get(perfil_id=request.user.id)
 
@@ -257,8 +253,6 @@ def delete_perfil(request,user):
     return redirect('index')
 
 
-
-
 # def reserva_add(request,id):
 #     if request.user.is_authenticated:
 #         form = ReservationForm(request.POST)
@@ -276,7 +270,6 @@ def delete_perfil(request,user):
 #     return render(request, 'mainapp/reservas.html',{
 #         'form' : form,
 #     })   
-
 
 
 def login_landing(request):
