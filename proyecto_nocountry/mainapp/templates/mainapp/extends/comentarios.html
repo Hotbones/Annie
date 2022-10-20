@@ -1,25 +1,29 @@
 {% extends '../base.html' %}
 {% block content %}
 <div class="max-w-lg rounded-lg shadow-md shadow-black-600/50 m-auto">
-    <form action="" class="w-full p-4" method="post">
-      {% csrf_token %}
-      <div class="mb-2">
-        <label class="block text-center text-lg text-black">Agrega un comentario</label>
+  <form action="" class="w-full p-4" method="post">
+    {% csrf_token %}
+
+    <div class="mb-2">
+      <label class="block text-center text-lg text-black">Agrega un comentario</label>
+
         <textarea
-        type="text" name="body" id="body"
         class="w-full h-20 p-2 border rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
+        name="comment"
         placeholder="Escribe tu comentario"></textarea>
-      </div>
-      <div class="grid grid-flow-col justify-center gap-8">
-        <button type="submit" class="px-3 py-2 text-sm text-black-600 focus:outline-none border border-red-500 hover:text-red-100 hover:bg-red-600 transition ease-in rounded">
-          Comentar
-        </button>
-        <button
-          class="px-3 py-2 text-sm text-black-600 focus:outline-none border border-red-500 hover:text-red-100 hover:bg-red-600 transition ease-in rounded">
-          Cancelar
-        </button>
-      </div>
-    </form>
-</div>
+
+    </div>
+    <div class="grid grid-flow-col justify-center gap-8">
+      <button type="submit" class="px-3 py-2 text-sm text-black-600 focus:outline-none border border-red-500 hover:text-red-100 hover:bg-red-600 transition ease-in rounded">
+        Comentar
+      </button>
+      <button
+        class="px-3 py-2 text-sm text-black-600 focus:outline-none border border-red-500 hover:text-red-100 hover:bg-red-600 transition ease-in rounded">
+        Cancelar
+      </button>
+    </div>
+
+  </form>
+</div
 
 {% endblock %}
