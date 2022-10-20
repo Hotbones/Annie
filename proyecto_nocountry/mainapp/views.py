@@ -46,19 +46,32 @@ def perfil_niñera(request,user):
     return render(request, 'mainapp/perfilniñera.html', context)
 
 @login_required(login_url='logueo')
-def profiles(request,id,usuario=None):
+def profiles(request,id,superfil=None,puntaje=0):
     
     if Cliente.objects.filter(perfil_id = id).exists():
-        usuario = Cliente.objects.get(perfil_id = id)
+        superfil = Cliente.objects.get(perfil_id = id)
     elif Niñera.objects.filter(perfil_id = id).exists():
-        usuario = Niñera.objects.get(perfil_id = id)
-    # print(usuario.perfil_id) # usuario al que quiero ir
-    
-    # print(request.user) # usuario logueado
+        superfil = Niñera.objects.get(perfil_id = id)
 
-    
+    usuario = User.objects.get(id=id)
 
-    context = {'usuario':usuario}
+    if request.method == 'POST':
+        form_comentario = MensajeForm(request.POST)
+        
+        # if form_comentario.is_valid():
+        comentarista = request.user.username
+        puntaje=str(puntaje)
+        nuevo_comentario = request.POST['comment']
+        c = Mensaje(usuario=usuario, comentarista=comentarista, puntaje=puntaje, mensaje=nuevo_comentario)
+        c.save()
+        messages.success(request, message='Comentario publicado')
+
+    else:
+        print('no entro post')
+        form_comentario = MensajeForm()
+
+
+    context = {'usuario':usuario,'form_comentario':form_comentario,'superfil':superfil}
     return render(request, 'mainapp/profiles.html', context)
 
 @login_required(login_url='logueo')
@@ -244,35 +257,6 @@ def delete_perfil(request,user):
     return redirect('index')
 
 
-
-@login_required(login_url='logueo')
-def crear_mensaje(request,pk, puntaje=0):
-
-    usuario = User.objects.get(id=pk)
-
-    form = MensajeForm(instance=usuario)
-    if request.method == 'POST':
-        form = MensajeForm(request.POST, instance=usuario)
-        if form.is_valid():
-            comentarista = request.user.username
-            puntaje=str(puntaje)
-            nuevo_comentario = request.POST['name']
-            c = Mensaje(usuario=usuario, comentarista=comentarista, puntaje=puntaje, mensaje=nuevo_comentario)
-            print(c.mensaje)
-            c.save()
-
-            return redirect('index')
-
-        else:
-            print('form is invalid')
-
-    else:
-        print('no entro post')
-        form = MensajeForm()
-
-    context = {'form':form, 'usuario':usuario}
-
-    return render(request,'mainapp/extends/comentarios.html',context)
 
 # def reserva_add(request,id):
 #     if request.user.is_authenticated:
