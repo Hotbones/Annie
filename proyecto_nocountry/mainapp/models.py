@@ -90,6 +90,7 @@ class Mensaje(models.Model):
     class Meta:
         verbose_name = 'Mensaje'
         verbose_name_plural = 'Mensajes'
+        ordering = ['-created']
     
     def __str__(self):
         return self.mensaje[0:50]
