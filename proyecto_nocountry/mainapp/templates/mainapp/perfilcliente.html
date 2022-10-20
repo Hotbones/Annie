@@ -47,11 +47,15 @@
 
 <section id="comentarios" class="">
 
+
+    
+
     {% if superfil.perfil_id != request.user.id %}
 
         {% include './extends/comentarios.html' %}
 
     {% endif %}
+
 
     <div class="pb-20 mt-10">
         <h2 class="text-3xl text-center">

@@ -67,7 +67,6 @@ def profiles(request,id,superfil=None,puntaje=0):
         messages.success(request, message='Comentario publicado')
 
     else:
-        print('no entro post')
         form_comentario = MensajeForm()
 
 
@@ -304,4 +303,3 @@ def buscar(request):
         'searched' : searched,
         'buscar_cuidadoras' : buscar_cuidadoras})
     
-
