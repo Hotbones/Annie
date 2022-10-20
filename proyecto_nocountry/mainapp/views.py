@@ -153,7 +153,7 @@ def register_niñera(request,user):
             form.perfil = user
             form.save()
             messages.success(request, message='Registro como niñera exitoso!')
-            return redirect('index')  # access granted
+            return redirect('welcome')  # access granted
            
             
         else:
