@@ -258,6 +258,7 @@ def delete_perfil(request,user):
 
 
 
+
 # def reserva_add(request,id):
 #     if request.user.is_authenticated:
 #         form = ReservationForm(request.POST)
@@ -275,6 +276,7 @@ def delete_perfil(request,user):
 #     return render(request, 'mainapp/reservas.html',{
 #         'form' : form,
 #     })   
+
 
 
 def login_landing(request):
