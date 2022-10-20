@@ -63,51 +63,37 @@
                 </div>
         </section>
 
+        {% if superfil.perfil_id != request.user.id %}
+
+            {% include './extends/comentarios.html' %}
+ 
+        {% endif %}
+
         <section id="comentarios" class="">
 
-            <div class="my-8">
-                <a href="{% url 'add_coment' mi_perfil.pk %}"></a>
+            <div class="grid grid-cols-2">
+                {% if not usuario.comentarios.all  %}
+                    <p>No hay comentarios aún</p>
+                {% else %}
+                    {% for comentario in usuario.comentarios.all %}
+                    <div class="grid p-4 w-2/5 overflow-hidden m-auto rounded-2xl shadow-2xl shadow-slate-900 md:flex-row md:max-w-xl ">
+                        <div class="m-auto">
+                            <img src="../../static/img/profile1.png" class="w-full md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
+                        </div>
+                        <div class="flex flex-col alig p-4 leading-normal justify-center">
+                            <h2 class="text-3xl tracking-tighter text-center">{{ comentario.comentarista }}</h2>
+                            <p class="text-lg tracking-tight text-black text-center">{{ comentario.mensaje }}</p>
+                            <p class="font-normal text-black text-center">{{ comentario.created }}</p>
+                            
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+        
             </div>
-
-            <h2 class="text-3xl text-center mt-10">
-                Comentarios
-            </h2>
-            {% for niñera in niñeras %}
-            <div class="flex flex-row ml-64">
-                <div class="grid grid-cols-2">
-                    <div class="grid p-4 m-auto rounded-2xl shadow-2xl shadow-slate-900 md:flex-row md:max-w-xl ">
-                        <div class="m-auto">
-                            <img src="../../static/img/profile1.png" class="w-full md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
-                        </div>
-                        <div class="flex flex-col alig p-4 leading-normal justify-center">
-                            <h2 class="text-3xl tracking-tighter text-center">{{ niñera.nombre }}{{ niñera.apellido }}</h2>
-                            <h3 class="text-2xl text-center">{{ niñera.ciudad }}</h3>
-                            <p class="text-lg tracking-tight text-black text-center">Experiencia con bebés de recién nacidos hasta los 3 años.</p>
-                            <p class="font-normal text-black text-center">Me encantan los niños, son mi pasión. Tengo carnet B2 y auto propio. Me gusta cocinar y ayudar a los niños con su tarea.</p>
-                            <p class="text-right">{{ niñera.tarifa_por_hora }}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2">
-                    <div class="grid p-4 m-auto rounded-2xl shadow-2xl shadow-slate-900 md:flex-row md:max-w-xl ">
-                        <div class="m-auto">
-                            <img src="../../static/img/profile1.png" class="w-full md:h-auto md:w-48 md:rounded-none md:rounded-1-lg rounded-t-lg" alt="">
-                        </div>
-                        <div class="flex flex-col alig p-4 leading-normal justify-center">
-                            <h2 class="text-3xl tracking-tighter text-center">{{ niñera.nombre }}{{ niñera.apellido }}</h2>
-                            <h3 class="text-2xl text-center">{{ niñera.ciudad }}</h3>
-                            <p class="text-lg tracking-tight text-black text-center">Experiencia con bebés de recién nacidos hasta los 3 años.</p>
-                            <p class="font-normal text-black text-center">Me encantan los niños, son mi pasión. Tengo carnet B2 y auto propio. Me gusta cocinar y ayudar a los niños con su tarea.</p>
-                            <p class="text-right">{{ niñera.tarifa_por_hora }}</p>
-                        </div>
-
-                    </div>
-                    
-                </div>
                 
             </div>
-            {% endfor %}
+
         </section>
     </main>
 
