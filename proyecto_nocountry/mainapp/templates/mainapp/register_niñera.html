@@ -2,63 +2,116 @@
 {% load tailwind_tags %}
 {% block content %}
 
-<div class="flex flex-col items-center mt-11">
-    <h2 class="text-2xl text-center underline">REGISTRARME COMO NIÑERA</h2>
+<h2 class="text-2xl text-center underline">REGISTRARME COMO NIÑERA</h2>
+
+<div class="flex justify-center mt-11 ">
     <form action="" method="POST" class="">
         {% csrf_token %}
-        <div>{{ form.turnos.label_tag }}</div>
-        {% for field_turno in form.turnos %}
-        <div>
-            {{ field_turno }}
+        <div class="absolute">
+            <div class="relative left-60 top-7 flex flex-col text-sm font-medium text-green-900 shadow-xl border rounded-lg border-red-300 w-fit">
+                <h2 class="text-center border-b border-black "> {{ form.turnos.label_tag }} </h2>
+                {% for field_turno in form.turnos %}
+                {% if field_turno == form.turnos.2 %}
+                    <div class="border-none p-2 ">
+                        {{ field_turno }}
+                    </div>
+                {% else %}    
+                <div class="p-2 border-b border-black ">
+                    {{ field_turno }}                
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
-        {% endfor %}
-        <div>{{ form.habilidades.label_tag }}</div>
-        {% for field_habilidad in form.habilidades %}
-        <div>
-            {{ field_habilidad }}
+
+        <div class="absolute">
+            <div class="relative right-60 mt-3 flex flex-col text-sm font-medium text-green-900 shadow-xl border rounded-lg border-red-300 w-fit">
+                <h2 class="text-center border-b border-black "> 
+                    {{ form.habilidades.label_tag }}
+                </h2>
+            {% for field_habilidad in form.habilidades %}
+            {% if field_habilidad == form.habilidades.3 %}
+                <div class="border-none p-2">
+                    {{ field_habilidad }}
+                </div>
+                {% else %}
+                    <div class="p-2 border-b border-black">
+                        {{ field_habilidad }}
+                    </div>
+            {% endif %}
+            {% endfor %}
+            </div>
         </div>
-        {% endfor %}
-        <div>{{ form.edades.label_tag }}</div>
-        {% for field_edad in form.edades %}
-        <div>
-            {{ field_edad }}
+
+        <div class="translate-y-2">
+            <div class="mt-3 flex flex-col text-xs font-medium text-green-900 shadow-xl border rounded-lg border-red-300 w-fit">
+                <h2 class="text-center border-b border-black">   
+                    {{ form.edades.label_tag }}
+                </h2>
+                {% for field_edad in form.edades %}
+                {% if field_edad == form.edades.3 %}
+                    <div class="border-none p-2">
+                        {{ field_edad }}
+                    </div>
+                {% else %}
+                    <div class="p-2 border-b border-black">
+                        {{ field_edad }}
+                    </div>
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
-        {% endfor %}
-        <div>
-            {{form.nombre.label_tag}}
-            {{form.nombre}}
+    </form>  
+</div>
+
+<div class="grid justify-center mt-11 border-b">
+    <form action="" method="POST" class="">
+        <div class="flex justify-center items-center">
+            <h2 class="">
+                {{form.nombre.label_tag}}
+            </h2>
+                {{form.nombre}}
         </div>
-        <div class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm min-w-full sm:w-auto px-5 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-6">
+        
+        <div class="mt-2 flex justify-center items-center">
             {{form.apellido.label_tag}}
             {{form.apellido}}
         </div>
-        <div>
+        
+        <div class="mt-2 flex justify-center items-center translate-x-5">
             {{form.dni.label_tag}}
             {{form.dni}}
         </div>
-        <div>
+        
+        <div class="mt-2 flex justify-center items-center -translate-x-10">
             {{form.fecha_nacimiento.label_tag}}
             {{form.fecha_nacimiento}}
         </div>
-        <div>
+        
+        <div class="mt-2 flex justify-center items-center">
             {{form.ciudad.label_tag}}
             {{form.ciudad}}
         </div>
-        <div>
+        
+        <div class="mt-2 flex justify-center items-center -translate-x-1">
             {{form.telefono.label_tag}}
             {{form.telefono}}
         </div>
-        <div>
+        
+        <div class="mt-2 flex justify-center items-center -translate-x-7">
             {{form.tarifa_por_hora.label_tag}}
             {{form.tarifa_por_hora}}
         </div>
-        <div>
+        
+        <div class="mt-2 flex justify-center items-center">
             {{form.descripcion.label_tag}}
             {{form.descripcion}}
         </div>
-        <div>
+        
+        <div class="mt-2 flex justify-center items-center">
             {{form.foto_perfil}}
         </div>
+        
         <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-6 mb-6">
             Crear
         </button>
@@ -67,7 +120,7 @@
         <div class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-12">
             ¿Ya estás registrada? <a href="{% url 'logueo' %}" class="underline">Inicia Sesión</a>
         </div>
-    </form>  
+    </form>
 </div>
 {% endblock %}
 
