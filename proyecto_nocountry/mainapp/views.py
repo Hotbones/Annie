@@ -28,32 +28,16 @@ def searcher(request):
     return render(request, 'mainapp/searcher.html', {})
 
 @login_required(login_url='logueo')
-def perfil_niñera(request,user):
-
-    current_user = request.user #santi
-
-    if Cliente.objects.filter(perfil=request.user).exists(): 
-        mi_perfil= Cliente.objects.get(perfil=request.user)
-
-    elif Niñera.objects.filter(perfil=request.user).exists():
-        mi_perfil= Niñera.objects.get(perfil=request.user)
-    
-    
-    niñeras = Niñera.objects.all()
-    clientes = Cliente.objects.all()
-
-    context = {'clientes':clientes,'niñeras':niñeras, 'mi_perfil':mi_perfil, 'current_user':current_user}
-    return render(request, 'mainapp/perfilniñera.html', context)
-
-@login_required(login_url='logueo')
-def profiles(request,id,superfil=None,puntaje=0):
+def profiles(request,id,superfil=None,otro=None,puntaje=0):
     
     if Cliente.objects.filter(perfil_id = id).exists():
         superfil = Cliente.objects.get(perfil_id = id)
     elif Niñera.objects.filter(perfil_id = id).exists():
         superfil = Niñera.objects.get(perfil_id = id)
-
     usuario = User.objects.get(id=id)
+    
+    otro=User.objects.all()
+    print(otro)
 
     if request.method == 'POST':
         form_comentario = MensajeForm(request.POST)
@@ -70,22 +54,9 @@ def profiles(request,id,superfil=None,puntaje=0):
         form_comentario = MensajeForm()
 
 
-    context = {'usuario':usuario,'form_comentario':form_comentario,'superfil':superfil}
+    context = {'usuario':usuario,'form_comentario':form_comentario,'superfil':superfil, 'otro':otro}
     return render(request, 'mainapp/profiles.html', context)
 
-@login_required(login_url='logueo')
-def perfil_cliente(request,user):
-    current_user = request.user #santi
-
-    cliente = Cliente.objects.filter(perfil=request.user)
-    mi_perfil= Cliente.objects.get(perfil=request.user)
-
-    clientes = Cliente.objects.all()
-    # mi_perfil = Cliente.objects.get(perfil_id=request.user.id)
-
-        
-    context = {'clientes':clientes, 'mi_perfil':mi_perfil, 'current_user':current_user}
-    return render(request, 'mainapp/perfilcliente.html', context)
 
 def logueo(request):
     
