@@ -222,26 +222,6 @@ def delete_perfil(request,user):
     messages.success(request,'Perfil Eliminado Correctamente')
     return redirect('index')
 
-
-# def reserva_add(request,id):
-#     if request.user.is_authenticated:
-#         form = ReservationForm(request.POST)
-#         if form.is_valid():
-#             formulario = form.save(commit=False)
-#             user = User.objects.get(username=request.user.username)
-#             formulario.user_id = user
-
-#             id = Cliente.objects.get(id = id)
-#             formulario.sitter_publication =  id # refrencia al id de publicacion de sitter
-
-#             form.save()
-#             messages.success(request,'Reserva creada correctamente')
-#             return redirect('index')
-#     return render(request, 'mainapp/reservas.html',{
-#         'form' : form,
-#     })   
-
-
 def login_landing(request, cliente=None, niñera=None):
     if Cliente.objects.filter(perfil_id = request.user.id).exists():
         cliente = Cliente.objects.get(perfil_id = request.user.id)
@@ -249,19 +229,6 @@ def login_landing(request, cliente=None, niñera=None):
         niñera = Niñera.objects.get(perfil_id = request.user.id)
     context = {'niñ':niñera,'cli':cliente}
     return render(request, 'mainapp/loginlanding.html', context)
-
-
-# def show_anecdota(request,anecdota_id,username=None):
-#     if not request.user.is_authenticated:
-#         messages.error(request,'Tienes que iniciar sesion ')
-#         return redirect('homepage')
-#     current_user = request.user
-#     if username and username != current_user.username:
-#         user = User.objects.get(username=username)
-#     else:
-#         user = current_user
-#     anecdota =  Anecdota.objects.get(pk=anecdota_id)
-
 
 def buscar(request):
     if not request.user.is_authenticated:
